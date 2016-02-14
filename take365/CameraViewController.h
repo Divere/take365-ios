@@ -17,5 +17,6 @@
 @property IBOutlet UILabel *lblMonth;
 @property IBOutlet UILabel *lblDay;
 @property IBOutlet UILabel *lblYear;
+@property (weak, nonatomic) IBOutlet UIButton *btnMakeShot;
 
 @end

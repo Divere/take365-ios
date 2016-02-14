@@ -13,7 +13,9 @@
 @property (nonatomic) NSNumber<Optional> *delayDays;
 @property (nonatomic) int passedDays;
 @property (nonatomic) double percentsComplete;
-@property (nonatomic) NSNumber<Optional> *totalImages;
+@property (nonatomic) int totalImages;
+@property (nonatomic) int totalDays;
 @property (nonatomic) NSString *totalImagesTitle;
+@property (nonatomic) BOOL isOutdated;
 
 @end

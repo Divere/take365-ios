@@ -18,11 +18,11 @@
     [super viewDidLoad];
     
     NSDateFormatter *df = [NSDateFormatter new];
-    [df setLocale: [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"]];
+    [df setLocale: [[NSLocale alloc] initWithLocaleIdentifier:@"ru_RU"]];
     [df setDateFormat:@"yyyy-MM-dd"];
     NSDate *date = [df dateFromString:_Image.date];
     
-    [df setDateFormat:@"MMMM"];
+    [df setDateFormat:@"LLLL"];
     NSString *month = [df stringFromDate:date];
     
     NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:date];

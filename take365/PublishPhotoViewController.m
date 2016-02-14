@@ -17,7 +17,7 @@
 @implementation PublishPhotoViewController
 {
     ApiManager *api;
-    NSArray<StoryModel> *stories;
+    NSMutableArray<StoryModel> *stories;
     StoryModel *selectedStory;
 }
 
@@ -34,8 +34,8 @@
     [_pvStoryPicker setDelegate:self];
     
     NSDateFormatter *df = [NSDateFormatter new];
-    [df setLocale: [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"]];
-    [df setDateFormat:@"MMMM"];
+    [df setLocale: [[NSLocale alloc] initWithLocaleIdentifier:@"ru-RU"]];
+    [df setDateFormat:@"LLLL"];
     NSString *month = [df stringFromDate:[NSDate new]];
     
     NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:[NSDate date]];
@@ -46,12 +46,29 @@
     _lblMonth.text = [NSString stringWithFormat:@"%@ ", month];
     _lblDay.text = [NSString stringWithFormat:@"%d, ",[@(day) intValue]];
     
-    stories = api.Stories;
+    [self updateStories:api.Stories];
+}
+
+-(void)updateStories:(NSArray*)newStories{
+    stories = [NSMutableArray<StoryModel> new];
+    for (StoryModel *story in newStories) {
+        if(!story.progress.isOutdated){
+            [stories addObject:story];
+        }
+    }
+}
+
+-(UIInterfaceOrientationMask)supportedInterfaceOrientations{
+    return UIInterfaceOrientationMaskPortrait;
+}
+
+-(BOOL)shouldAutorotate{
+    return NO;
 }
 
 -(void)viewDidAppear:(BOOL)animated{
     [api getStoryListWithResultBlock:^(NSArray<StoryModel> *result, NSString *error) {
-        stories = result;
+        [self updateStories:result];
         [_pvStoryPicker reloadAllComponents];
     }];
 }
@@ -76,7 +93,6 @@
     NSAttributedString *attString = [[NSAttributedString alloc] initWithString:title attributes:@{NSForegroundColorAttributeName:[UIColor whiteColor]}];
     
     return attString;
-    
 }
 
 -(void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component{
@@ -95,7 +111,9 @@
 
 - (IBAction)btnPublish_Clicked:(id)sender {
     
-    selectedStory = stories[[@([_pvStoryPicker selectedRowInComponent:0]) intValue]];
+    if(stories.count > 0){
+        selectedStory = stories[[@([_pvStoryPicker selectedRowInComponent:0]) intValue]];
+    }
     
     NSData *image = UIImageJPEGRepresentation(_Image, 1.0f);
     
@@ -103,14 +121,23 @@
     [df setDateFormat:@"yyyy-MM-dd"];
     NSString *date = [df stringFromDate:[NSDate new]];
     
-    [[AppDelegate getInstance].api uploadImage:image ForStory:selectedStory.id ForDate:date WithProgressBlock:^(float progress) {
+    [[AppDelegate getInstance].api uploadImage:image ForStory:(selectedStory != NULL) ? selectedStory.id : 0 ForDate:date WithProgressBlock:^(float progress) {
         _pvUploadProgress.progress = progress;
         if(progress == 1.0f){
             [_btnPublish setTitle:@"обработка..." forState:UIControlStateDisabled];
         }
-    } WithResultBlock:^(BOOL success) {
-        if(success){
-            [self btnPublish_Done];
+    } WithResultBlock:^(UploadImageResult *result) {
+        if(result != NULL){
+            if(stories.count < 1){
+                [api getStoryListWithResultBlock:^(NSArray<StoryModel> *result, NSString *error) {
+                    [self updateStories:result];
+                    [_pvStoryPicker reloadAllComponents];
+                    selectedStory = stories[[@([_pvStoryPicker selectedRowInComponent:0]) intValue]];
+                    [self btnPublish_Done];
+                }];
+            }else{
+              [self btnPublish_Done];
+            }
         }else{
             
         }

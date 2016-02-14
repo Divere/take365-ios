@@ -86,7 +86,10 @@
         [cell.selectedBackgroundView setOpaque:YES];
         cell.selectedBackgroundView.backgroundColor = [[UIColor grayColor] colorWithAlphaComponent:0.5f];
         cell.lblStoryName.text = (model.title != NULL) ? model.title : @"Без названия";
-        cell.lblCompleted.text = [[NSString alloc] initWithFormat:@"%.2f%@", model.progress.percentsComplete,@"%"];
+        cell.lblCompleted.text = [[NSString alloc] initWithFormat:@"%d из %d (%.2f%@)", model.progress.totalImages, model.progress.totalDays, model.progress.percentsComplete, @"%"];
+        if(model.progress.percentsComplete == 100){
+            cell.lblCompleted.textColor = [UIColor greenColor];
+        }
         return cell;
     }
     else{
@@ -103,9 +106,9 @@
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     if([cell.reuseIdentifier isEqualToString:@"StoryCell"]){
         _SelectedStory = [stories objectAtIndex:_tableView.indexPathForSelectedRow.row];
-        if(indexPath.row == 1){
-            _SelectedStory.id = 162;
-        }
+//        if(indexPath.row == 1){
+//            _SelectedStory.id = 162;
+//        }
         [self performSegueWithIdentifier:@"SEGUE_SHOW_STORY" sender:self];
     }else if([cell.reuseIdentifier isEqualToString:@"CreateNewStoryCell"]){
         [self performSegueWithIdentifier:@"SEGUE_CREATE_STORY" sender:self];

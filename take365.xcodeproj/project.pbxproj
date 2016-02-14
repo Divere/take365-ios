@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		66102FFBCB36FE88633EE840 /* libPods-take365.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5CAF95F5A076EAC247C27B77 /* libPods-take365.a */; };
+		7A0336D51C6C8DE70022E42B /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A0336D41C6C8DE70022E42B /* RegisterViewController.m */; };
+		7A0336D81C6C91A00022E42B /* RegisterRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A0336D71C6C91A00022E42B /* RegisterRequest.m */; };
 		7A13D87A1BDE49CE00E1CB98 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A13D8791BDE49CE00E1CB98 /* main.m */; };
 		7A13D87D1BDE49CE00E1CB98 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A13D87C1BDE49CE00E1CB98 /* AppDelegate.m */; };
 		7A13D8831BDE49CE00E1CB98 /* CameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A13D8821BDE49CE00E1CB98 /* CameraViewController.m */; };
@@ -49,6 +51,10 @@
 		7A4342EA1C076C1900F74BE8 /* JSONModel+networking.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A4342DD1C076C1900F74BE8 /* JSONModel+networking.m */; };
 		7A4342EB1C076C1900F74BE8 /* JSONKeyMapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A4342E01C076C1900F74BE8 /* JSONKeyMapper.m */; };
 		7A4342EC1C076C1900F74BE8 /* JSONValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A4342E21C076C1900F74BE8 /* JSONValueTransformer.m */; };
+		7A7D11821C6DFD2E00150792 /* RegisterResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A7D11811C6DFD2E00150792 /* RegisterResponse.m */; };
+		7A7D11851C6DFD4100150792 /* RegisterResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A7D11841C6DFD4100150792 /* RegisterResult.m */; };
+		7A7D118C1C6E0D2F00150792 /* UploadImageResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A7D118B1C6E0D2F00150792 /* UploadImageResponse.m */; };
+		7A7D118F1C6E0EC200150792 /* UploadImageResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A7D118E1C6E0EC200150792 /* UploadImageResult.m */; };
 		7AADA2811C567DC20067B7C0 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AADA2801C567DC20067B7C0 /* CoreVideo.framework */; };
 		7AC2E7551C5A71BB0060DF4C /* ShowImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AC2E7541C5A71BB0060DF4C /* ShowImageViewController.m */; };
 		7AC63BED1C58F1E000EE678C /* PublishPhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AC63BEC1C58F1E000EE678C /* PublishPhotoViewController.m */; };
@@ -60,6 +66,10 @@
 /* Begin PBXFileReference section */
 		0CC67C817FC6934516620A1A /* Pods-take365.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-take365.debug.xcconfig"; path = "Pods/Target Support Files/Pods-take365/Pods-take365.debug.xcconfig"; sourceTree = "<group>"; };
 		5CAF95F5A076EAC247C27B77 /* libPods-take365.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-take365.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7A0336D31C6C8DE70022E42B /* RegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterViewController.h; sourceTree = "<group>"; };
+		7A0336D41C6C8DE70022E42B /* RegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterViewController.m; sourceTree = "<group>"; };
+		7A0336D61C6C91A00022E42B /* RegisterRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterRequest.h; sourceTree = "<group>"; };
+		7A0336D71C6C91A00022E42B /* RegisterRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterRequest.m; sourceTree = "<group>"; };
 		7A13D8751BDE49CE00E1CB98 /* take365.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = take365.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7A13D8791BDE49CE00E1CB98 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		7A13D87B1BDE49CE00E1CB98 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -140,6 +150,14 @@
 		7A4342E01C076C1900F74BE8 /* JSONKeyMapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKeyMapper.m; sourceTree = "<group>"; };
 		7A4342E11C076C1900F74BE8 /* JSONValueTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONValueTransformer.h; sourceTree = "<group>"; };
 		7A4342E21C076C1900F74BE8 /* JSONValueTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONValueTransformer.m; sourceTree = "<group>"; };
+		7A7D11801C6DFD2E00150792 /* RegisterResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterResponse.h; sourceTree = "<group>"; };
+		7A7D11811C6DFD2E00150792 /* RegisterResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterResponse.m; sourceTree = "<group>"; };
+		7A7D11831C6DFD4100150792 /* RegisterResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterResult.h; sourceTree = "<group>"; };
+		7A7D11841C6DFD4100150792 /* RegisterResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterResult.m; sourceTree = "<group>"; };
+		7A7D118A1C6E0D2F00150792 /* UploadImageResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UploadImageResponse.h; sourceTree = "<group>"; };
+		7A7D118B1C6E0D2F00150792 /* UploadImageResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UploadImageResponse.m; sourceTree = "<group>"; };
+		7A7D118D1C6E0EC200150792 /* UploadImageResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UploadImageResult.h; sourceTree = "<group>"; };
+		7A7D118E1C6E0EC200150792 /* UploadImageResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UploadImageResult.m; sourceTree = "<group>"; };
 		7AADA2801C567DC20067B7C0 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
 		7AC2E7531C5A71BB0060DF4C /* ShowImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowImageViewController.h; sourceTree = "<group>"; };
 		7AC2E7541C5A71BB0060DF4C /* ShowImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowImageViewController.m; sourceTree = "<group>"; };
@@ -250,6 +268,8 @@
 				7A39A30B1C0DC0D600A8A51C /* BaseAuthiticatedRequest.m */,
 				7A39A3101C0DC19700A8A51C /* WriteStoryRequest.h */,
 				7A39A3111C0DC19700A8A51C /* WriteStoryRequest.m */,
+				7A0336D61C6C91A00022E42B /* RegisterRequest.h */,
+				7A0336D71C6C91A00022E42B /* RegisterRequest.m */,
 			);
 			name = Request;
 			sourceTree = "<group>";
@@ -257,6 +277,8 @@
 		7A39A2F91C0DABEB00A8A51C /* Response */ = {
 			isa = PBXGroup;
 			children = (
+				7A7D11891C6E0D2300150792 /* UploadImageResponse */,
+				7A7D117F1C6DFCAB00150792 /* RegisterResponse */,
 				7A39A3331C0DE86C00A8A51C /* StoryResponse */,
 				7A39A31A1C0DD00100A8A51C /* StoryListResponse */,
 				7A39A2FD1C0DAC6500A8A51C /* LoginResponse */,
@@ -404,6 +426,8 @@
 				7AC2E7541C5A71BB0060DF4C /* ShowImageViewController.m */,
 				7A1FEB541C6104260020030A /* MoreViewController.h */,
 				7A1FEB551C6104260020030A /* MoreViewController.m */,
+				7A0336D31C6C8DE70022E42B /* RegisterViewController.h */,
+				7A0336D41C6C8DE70022E42B /* RegisterViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -424,6 +448,28 @@
 				7A13D89B1BDFD28000E1CB98 /* YHRoundBorderedButton.m */,
 			);
 			name = Views;
+			sourceTree = "<group>";
+		};
+		7A7D117F1C6DFCAB00150792 /* RegisterResponse */ = {
+			isa = PBXGroup;
+			children = (
+				7A7D11801C6DFD2E00150792 /* RegisterResponse.h */,
+				7A7D11811C6DFD2E00150792 /* RegisterResponse.m */,
+				7A7D11831C6DFD4100150792 /* RegisterResult.h */,
+				7A7D11841C6DFD4100150792 /* RegisterResult.m */,
+			);
+			name = RegisterResponse;
+			sourceTree = "<group>";
+		};
+		7A7D11891C6E0D2300150792 /* UploadImageResponse */ = {
+			isa = PBXGroup;
+			children = (
+				7A7D118A1C6E0D2F00150792 /* UploadImageResponse.h */,
+				7A7D118B1C6E0D2F00150792 /* UploadImageResponse.m */,
+				7A7D118D1C6E0EC200150792 /* UploadImageResult.h */,
+				7A7D118E1C6E0EC200150792 /* UploadImageResult.m */,
+			);
+			name = UploadImageResponse;
 			sourceTree = "<group>";
 		};
 		7C8B705F9F8160C2AD48B271 /* Pods */ = {
@@ -479,7 +525,7 @@
 				TargetAttributes = {
 					7A13D8741BDE49CE00E1CB98 = {
 						CreatedOnToolsVersion = 7.1;
-						DevelopmentTeam = 223N289ZYQ;
+						DevelopmentTeam = 64252YGWN9;
 					};
 				};
 			};
@@ -572,9 +618,11 @@
 				7A39A3151C0DC70800A8A51C /* SelectStoryViewController.m in Sources */,
 				7A39A2F61C0D92D300A8A51C /* ApiManager.m in Sources */,
 				7A39A33F1C0DE90800A8A51C /* StoryImageThumbModel.m in Sources */,
+				7A0336D51C6C8DE70022E42B /* RegisterViewController.m in Sources */,
 				7A13D89C1BDFD28000E1CB98 /* YHRoundBorderedButton.m in Sources */,
 				7A39A3321C0DE04E00A8A51C /* PhotoCollectionViewCell.m in Sources */,
 				7A39A3261C0DD1AB00A8A51C /* StoryProgressModel.m in Sources */,
+				7A7D11851C6DFD4100150792 /* RegisterResult.m in Sources */,
 				7A4342EB1C076C1900F74BE8 /* JSONKeyMapper.m in Sources */,
 				7A4342E31C076C1900F74BE8 /* JSONModel.m in Sources */,
 				7AC2E7551C5A71BB0060DF4C /* ShowImageViewController.m in Sources */,
@@ -586,11 +634,13 @@
 				7A39A3231C0DD15B00A8A51C /* AuthorModel.m in Sources */,
 				7AC63BF91C5A58C000EE678C /* MonthCollectionReusableView.m in Sources */,
 				7A39A30C1C0DC0D600A8A51C /* BaseAuthiticatedRequest.m in Sources */,
+				7A7D118F1C6E0EC200150792 /* UploadImageResult.m in Sources */,
 				7A1FEB561C6104260020030A /* MoreViewController.m in Sources */,
 				7A39A3061C0DAC9200A8A51C /* LoginErrors.m in Sources */,
 				7A39A32C1C0DD75800A8A51C /* StoryCellTableViewCell.m in Sources */,
 				7A39A31D1C0DD07100A8A51C /* StoryListResponse.m in Sources */,
 				7AC63BF31C5A475600EE678C /* NavigationViewController.m in Sources */,
+				7A7D11821C6DFD2E00150792 /* RegisterResponse.m in Sources */,
 				7A4342E41C076C1900F74BE8 /* JSONModelArray.m in Sources */,
 				7A4342E71C076C1900F74BE8 /* NSArray+JSONModel.m in Sources */,
 				7A39A3031C0DAC7E00A8A51C /* LoginResult.m in Sources */,
@@ -604,6 +654,8 @@
 				7A13D89F1BDFD30500E1CB98 /* PMBaseViewController.m in Sources */,
 				7A39A3361C0DE88200A8A51C /* StoryResponse.m in Sources */,
 				7A4342E51C076C1900F74BE8 /* JSONModelClassProperty.m in Sources */,
+				7A7D118C1C6E0D2F00150792 /* UploadImageResponse.m in Sources */,
+				7A0336D81C6C91A00022E42B /* RegisterRequest.m in Sources */,
 				7A39A3121C0DC19700A8A51C /* WriteStoryRequest.m in Sources */,
 				7A39A3391C0DE8B700A8A51C /* StoryResult.m in Sources */,
 				7A13D87A1BDE49CE00E1CB98 /* main.m in Sources */,
@@ -724,6 +776,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = take365/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.take365.take365;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -739,6 +792,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = take365/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.take365.take365;
 				PRODUCT_NAME = "$(TARGET_NAME)";

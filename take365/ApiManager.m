@@ -10,9 +10,27 @@
 #import "JSONModelLib.h"
 #import "AFNetworking.h"
 
-const NSString *URL = @"http://dev.take365.org";
+const NSString *URL = @"http://new.take365.org";
 
 @implementation ApiManager
+
+-(void)registerWithUsername:(NSString *)username Email:(NSString *)email Password:(NSString *)password AndResultBlock:(void (^)(RegisterResult *, NSString *))resultBlock{
+    RegisterRequest *r = [RegisterRequest new];
+    r.username = username;
+    r.email = email;
+    r.password = password;
+    
+    [JSONHTTPClient postJSONFromURLWithString:METHOD(@"api/user/register") bodyString:[r toJSONString] andHeaders:nil completion:^(id json, JSONModelError *err) {
+        
+        RegisterResponse *response = [[RegisterResponse alloc] initWithDictionary:json error:&err];
+        
+        if(response.result != NULL && resultBlock != NULL){
+            resultBlock(response.result, NULL);
+        }else if(response.errors != NULL && resultBlock != NULL){
+            resultBlock(NULL, [response.errors objectAtIndex:0][@"value"]);
+        }
+    }];
+}
 
 -(void)loginWithUsername:(NSString *)username AndPassword:(NSString *)password AndResultBlock:(void (^)(LoginResult* result, NSString *error))resultBlock{
     LoginRequest *request = [LoginRequest new];
@@ -52,7 +70,7 @@ const NSString *URL = @"http://dev.take365.org";
 }
 
 -(void)getStoryListWithResultBlock:(void (^)(NSArray<StoryModel> *, NSString *))resultBlock{
-    [JSONHTTPClient getJSONFromURLWithString:METHOD([NSString stringWithFormat:@"api/story/list?accessToken=%@&username=me&maxItems=100", _AccessToken]) completion:^(id json, JSONModelError *err) {
+    [JSONHTTPClient getJSONFromURLWithString:METHOD([NSString stringWithFormat:@"api/story/list?accessToken=%@&username=italiana&maxItems=100", _AccessToken]) completion:^(id json, JSONModelError *err) {
         NSError *deserializeError;
         StoryListResponse *response = [[StoryListResponse alloc] initWithDictionary:json error:&deserializeError];
         
@@ -94,7 +112,7 @@ const NSString *URL = @"http://dev.take365.org";
     }];
 }
 
--(void)uploadImage:(NSData *)image ForStory:(int)storyId ForDate:(NSString *)date WithProgressBlock:(void (^)(float))progressBlock WithResultBlock:(void (^)(BOOL))resultBlock{
+-(void)uploadImage:(NSData *)image ForStory:(int)storyId ForDate:(NSString *)date WithProgressBlock:(void (^)(float))progressBlock WithResultBlock:(void (^)(UploadImageResult *))resultBlock{
     NSMutableURLRequest *request = [[AFHTTPRequestSerializer serializer] multipartFormRequestWithMethod:@"POST" URLString:METHOD(@"api/media/upload") parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         [formData appendPartWithFormData:[@"image.jpg" dataUsingEncoding:NSUTF8StringEncoding] name:@"name"];
         [formData appendPartWithFormData:[[NSString stringWithFormat:@"%d", storyId] dataUsingEncoding:NSUTF8StringEncoding] name:@"targetId"];
@@ -127,9 +145,13 @@ const NSString *URL = @"http://dev.take365.org";
                           }
                       } else {
                           NSLog(@"%@ %@", response, responseObject);
+                          
+                          NSError *err;
+                          UploadImageResponse *response = [[UploadImageResponse alloc] initWithDictionary:responseObject error:&err];
+                          
                           if(resultBlock){
                               dispatch_async(dispatch_get_main_queue(), ^{
-                                  resultBlock(true);
+                                  resultBlock(response);
                               });
                           }
                       }

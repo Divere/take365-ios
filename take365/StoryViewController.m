@@ -134,10 +134,10 @@
     NSString *sectionTitle = sortedSectionsTitles[indexPath.section];
     
     NSDateFormatter *df = [NSDateFormatter new];
-    [df setLocale: [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"]];
+    [df setLocale: [[NSLocale alloc] initWithLocaleIdentifier:@"ru_RU"]];
     [df setDateFormat:@"yyyy-MM"];
     NSDate *date = [df dateFromString:sectionTitle];
-    [df setDateFormat:@"MMMM"];
+    [df setDateFormat:@"LLLL"];
     NSString *month = [df stringFromDate:date];
     
     NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:date];
@@ -160,7 +160,7 @@
     if(bigViewEnabled){
         return CGSizeMake(collectionView.frame.size.width, collectionView.frame.size.width);
     }else{
-        return CGSizeMake(100, 100);
+        return CGSizeMake(95, 95);
     }
     
 }

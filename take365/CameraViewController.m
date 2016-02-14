@@ -24,6 +24,9 @@
     AVCaptureVideoPreviewLayer *previewLayer;
     
     UIImage *image;
+    
+    UIDeviceOrientation currentOrientation;
+    CGFloat currentRotation;
 }
 
 - (void)viewDidLoad {
@@ -37,8 +40,8 @@
     [_topBarView bringSubviewToFront:_svDate];
     
     NSDateFormatter *df = [NSDateFormatter new];
-    [df setLocale: [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"]];
-    [df setDateFormat:@"MMMM"];
+    [df setLocale: [[NSLocale alloc] initWithLocaleIdentifier:@"ru_RU"]];
+    [df setDateFormat:@"LLLL"];
     NSString *month = [df stringFromDate:[NSDate new]];
     
     NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:[NSDate date]];
@@ -48,6 +51,51 @@
     _lblYear.text = [@(year) stringValue];
     _lblMonth.text = [NSString stringWithFormat:@"%@ ", month];
     _lblDay.text = [NSString stringWithFormat:@"%d, ",[@(day) intValue]];
+    
+    [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
+    [[NSNotificationCenter defaultCenter]
+     addObserver:self selector:@selector(orientationChanged:)
+     name:UIDeviceOrientationDidChangeNotification
+     object:[UIDevice currentDevice]];
+}
+
+- (void) orientationChanged:(NSNotification *)note
+{
+    UIDevice * device = note.object;
+    [self changeViewBasedOnOrientation:device.orientation];
+}
+
+-(void)changeViewBasedOnOrientation:(UIDeviceOrientation)orientation
+{
+    if(currentOrientation != UIDeviceOrientationPortraitUpsideDown && orientation != UIDeviceOrientationPortraitUpsideDown) {
+        switch(orientation)
+        {
+            case UIDeviceOrientationPortrait:
+            {
+                NSLog(@"Orientation changed to portrait");
+                currentRotation = -currentRotation;
+            }
+                break;
+                
+            case UIDeviceOrientationLandscapeLeft:
+            {
+                NSLog(@"Orientation changed to landscape");
+                currentRotation = M_PI_2;
+            }
+                break;
+                
+            case UIDeviceOrientationLandscapeRight:
+            {
+                NSLog(@"Orientation changed to landscape");
+                currentRotation = -M_PI_2;
+            }
+                break;
+        }
+        [UIView animateWithDuration:0.5f animations:^{
+            [_btnMakeShot setTransform:CGAffineTransformRotate(_btnMakeShot.transform, currentRotation)];
+        }];
+    }
+    currentOrientation = orientation;
 }
 
 - (void)applyBlurEffectToView:(UIView*)view{
@@ -69,9 +117,20 @@
     
     [stillImageOutput captureStillImageAsynchronouslyFromConnection:connection completionHandler:^(CMSampleBufferRef imageDataSampleBuffer, NSError *error) {
         
+        
         CGImageRef myImage = [self imageFromSampleBuffer:imageDataSampleBuffer];
         
-        image = [[UIImage alloc] initWithCGImage:myImage scale:1.0f orientation:UIImageOrientationRight];
+        switch (currentOrientation) {
+            case UIDeviceOrientationPortrait:
+                image = [[UIImage alloc] initWithCGImage:myImage scale:1.0f orientation:UIImageOrientationRight];
+                break;
+            case UIDeviceOrientationLandscapeLeft:
+                image = [[UIImage alloc] initWithCGImage:myImage];
+                break;
+            case UIDeviceOrientationLandscapeRight:
+                image = [[UIImage alloc] initWithCGImage:myImage scale:1.0f orientation:UIImageOrientationDown];
+                break;
+        }
         
         [self performSegueWithIdentifier:@"SEGUE_PUBLISH_PHOTO" sender:self];
     }];
@@ -133,6 +192,11 @@
 
 -(void)viewDidAppear:(BOOL)animated{
 
+    currentOrientation = [UIDevice currentDevice].orientation;
+    if(currentOrientation != UIDeviceOrientationPortrait && currentOrientation != UIDeviceOrientationPortraitUpsideDown){
+        [self changeViewBasedOnOrientation:currentOrientation];
+    }
+    
     if(session == NULL){
         session = [AVCaptureSession new];
         [session setSessionPreset:AVCaptureSessionPresetPhoto];

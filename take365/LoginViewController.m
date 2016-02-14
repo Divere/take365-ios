@@ -22,9 +22,15 @@
     [super viewDidLoad];
     
     api = [AppDelegate getInstance].api;
+    //self.title = @"Вход";
+    //self.navigationController.title = @"Вход";
+    [[self navigationController] setNavigationBarHidden:YES animated:NO];
 }
 
 -(void)viewDidAppear:(BOOL)animated{
+    
+    [[self navigationController] setNavigationBarHidden:YES animated:YES];
+    
     NSString *accessToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"accessToken"];
     if(accessToken != NULL){
         api.AccessToken = accessToken;

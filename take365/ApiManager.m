@@ -70,7 +70,7 @@ const NSString *URL = @"http://new.take365.org";
 }
 
 -(void)getStoryListWithResultBlock:(void (^)(NSArray<StoryModel> *, NSString *))resultBlock{
-    [JSONHTTPClient getJSONFromURLWithString:METHOD([NSString stringWithFormat:@"api/story/list?accessToken=%@&username=italiana&maxItems=100", _AccessToken]) completion:^(id json, JSONModelError *err) {
+    [JSONHTTPClient getJSONFromURLWithString:METHOD([NSString stringWithFormat:@"api/story/list?accessToken=%@&username=me&maxItems=100", _AccessToken]) completion:^(id json, JSONModelError *err) {
         NSError *deserializeError;
         StoryListResponse *response = [[StoryListResponse alloc] initWithDictionary:json error:&deserializeError];
         

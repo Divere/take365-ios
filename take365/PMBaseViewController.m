@@ -69,19 +69,19 @@
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
     [self applyBorderLessStyleForTextField:textField WithColor:[UIColor redColor]];
-    //[self animateTextField: textField up: YES];
+    [self animateTextField: textField up: YES];
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
     [self applyBorderLessStyleForTextField:textField WithColor:[UIColor blackColor]];
-    //[self animateTextFieldDown];
+    [self animateTextFieldDown];
 }
 
 - (void) animateTextField: (UITextField*) textField up: (BOOL) up
 {
     double ypos = [textField convertPoint:textField.frame.origin toView:nil].y;
-    double delta = self.view.frame.size.height - 270 - textField.frame.size.height*2 - ypos;
+    double delta = self.view.frame.size.height + 35 - textField.frame.size.height*2 - ypos;
     
     if(delta < 0)
     {

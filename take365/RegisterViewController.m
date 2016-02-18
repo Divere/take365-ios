@@ -37,6 +37,7 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     switch (indexPath.section) {
         case 3:
+            tableView.allowsSelection = NO;
             [[AppDelegate getInstance].api registerWithUsername:_tfLogin.text Email:_tfEmail.text Password:_tfPassword.text AndResultBlock:^(RegisterResult *result, NSString *error) {
                 if(error == NULL){
                     [[AppDelegate getInstance].api loginWithUsername:_tfLogin.text AndPassword:_tfPassword.text AndResultBlock:^(LoginResult *result, NSString *error) {
@@ -49,11 +50,15 @@
                             [uav show];
                         }
                     }];
-            }else{
-                UIAlertView *uav = [[UIAlertView new] initWithTitle:@"Ошибка регистрации" message:error delegate:nil cancelButtonTitle:@"Закрыть" otherButtonTitles:nil, nil];
-                [uav show];
-            }
-             }];
+                }else{
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        tableView.allowsSelection = YES;
+                    });
+                    
+                    UIAlertView *uav = [[UIAlertView new] initWithTitle:@"Ошибка регистрации" message:error delegate:nil cancelButtonTitle:@"Закрыть" otherButtonTitles:nil, nil];
+                    [uav show];
+                }
+            }];
             break;
     }
 }

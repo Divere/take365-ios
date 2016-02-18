@@ -55,6 +55,7 @@
 		7A7D11851C6DFD4100150792 /* RegisterResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A7D11841C6DFD4100150792 /* RegisterResult.m */; };
 		7A7D118C1C6E0D2F00150792 /* UploadImageResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A7D118B1C6E0D2F00150792 /* UploadImageResponse.m */; };
 		7A7D118F1C6E0EC200150792 /* UploadImageResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A7D118E1C6E0EC200150792 /* UploadImageResult.m */; };
+		7AA7B51C1C75DB40003609CC /* NoHistorySegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AA7B51B1C75DB40003609CC /* NoHistorySegue.m */; };
 		7AADA2811C567DC20067B7C0 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AADA2801C567DC20067B7C0 /* CoreVideo.framework */; };
 		7AC2E7551C5A71BB0060DF4C /* ShowImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AC2E7541C5A71BB0060DF4C /* ShowImageViewController.m */; };
 		7AC63BED1C58F1E000EE678C /* PublishPhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AC63BEC1C58F1E000EE678C /* PublishPhotoViewController.m */; };
@@ -158,6 +159,8 @@
 		7A7D118B1C6E0D2F00150792 /* UploadImageResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UploadImageResponse.m; sourceTree = "<group>"; };
 		7A7D118D1C6E0EC200150792 /* UploadImageResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UploadImageResult.h; sourceTree = "<group>"; };
 		7A7D118E1C6E0EC200150792 /* UploadImageResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UploadImageResult.m; sourceTree = "<group>"; };
+		7AA7B51A1C75DB40003609CC /* NoHistorySegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoHistorySegue.h; sourceTree = "<group>"; };
+		7AA7B51B1C75DB40003609CC /* NoHistorySegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoHistorySegue.m; sourceTree = "<group>"; };
 		7AADA2801C567DC20067B7C0 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
 		7AC2E7531C5A71BB0060DF4C /* ShowImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowImageViewController.h; sourceTree = "<group>"; };
 		7AC2E7541C5A71BB0060DF4C /* ShowImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowImageViewController.m; sourceTree = "<group>"; };
@@ -335,6 +338,7 @@
 		7A4342C81C076C1900F74BE8 /* Engine */ = {
 			isa = PBXGroup;
 			children = (
+				7AA7B5191C75DACD003609CC /* Extensions */,
 				7A39A2F21C0D92A800A8A51C /* Network */,
 				7A4342C91C076C1900F74BE8 /* JSONModel */,
 				7AC63BEE1C591F7200EE678C /* UIImage+fixOrientation.h */,
@@ -470,6 +474,15 @@
 				7A7D118E1C6E0EC200150792 /* UploadImageResult.m */,
 			);
 			name = UploadImageResponse;
+			sourceTree = "<group>";
+		};
+		7AA7B5191C75DACD003609CC /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				7AA7B51A1C75DB40003609CC /* NoHistorySegue.h */,
+				7AA7B51B1C75DB40003609CC /* NoHistorySegue.m */,
+			);
+			name = Extensions;
 			sourceTree = "<group>";
 		};
 		7C8B705F9F8160C2AD48B271 /* Pods */ = {
@@ -637,6 +650,7 @@
 				7A7D118F1C6E0EC200150792 /* UploadImageResult.m in Sources */,
 				7A1FEB561C6104260020030A /* MoreViewController.m in Sources */,
 				7A39A3061C0DAC9200A8A51C /* LoginErrors.m in Sources */,
+				7AA7B51C1C75DB40003609CC /* NoHistorySegue.m in Sources */,
 				7A39A32C1C0DD75800A8A51C /* StoryCellTableViewCell.m in Sources */,
 				7A39A31D1C0DD07100A8A51C /* StoryListResponse.m in Sources */,
 				7AC63BF31C5A475600EE678C /* NavigationViewController.m in Sources */,

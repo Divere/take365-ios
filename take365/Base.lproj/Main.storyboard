@@ -147,7 +147,7 @@
                         <outlet property="scPrivacyLevel" destination="Jfw-Gy-Y3z" id="KrR-5Z-UGn"/>
                         <outlet property="tfDescription" destination="MYH-X9-QD3" id="nZw-Ex-fAK"/>
                         <outlet property="tfTitle" destination="oPy-rb-eCy" id="87k-DY-CTx"/>
-                        <segue destination="mTN-Q8-emx" kind="showDetail" identifier="SEGUE_SHOW_NEW_STORY" action="showViewController:sender:" id="IOs-IT-AGM"/>
+                        <segue destination="mTN-Q8-emx" kind="showDetail" identifier="SEGUE_SHOW_NEW_STORY" customClass="NoHistorySegue" action="showViewController:sender:" id="IOs-IT-AGM"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xgk-MT-9ol" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1167,6 +1167,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="ghz-4O-dac"/>
-        <segue reference="L1l-c1-OLN"/>
+        <segue reference="IOs-IT-AGM"/>
     </inferredMetricsTieBreakers>
 </document>

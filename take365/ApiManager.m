@@ -10,7 +10,7 @@
 #import "JSONModelLib.h"
 #import "AFNetworking.h"
 
-const NSString *URL = @"http://new.take365.org";
+const NSString *URL = @"https://take365.org";
 
 @implementation ApiManager
 

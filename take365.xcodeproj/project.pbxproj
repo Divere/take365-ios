@@ -51,6 +51,7 @@
 		7A4342EA1C076C1900F74BE8 /* JSONModel+networking.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A4342DD1C076C1900F74BE8 /* JSONModel+networking.m */; };
 		7A4342EB1C076C1900F74BE8 /* JSONKeyMapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A4342E01C076C1900F74BE8 /* JSONKeyMapper.m */; };
 		7A4342EC1C076C1900F74BE8 /* JSONValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A4342E21C076C1900F74BE8 /* JSONValueTransformer.m */; };
+		7A55F60A1D21747E009A3D32 /* BaseResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A55F6091D21747E009A3D32 /* BaseResponse.m */; };
 		7A7D11821C6DFD2E00150792 /* RegisterResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A7D11811C6DFD2E00150792 /* RegisterResponse.m */; };
 		7A7D11851C6DFD4100150792 /* RegisterResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A7D11841C6DFD4100150792 /* RegisterResult.m */; };
 		7A7D118C1C6E0D2F00150792 /* UploadImageResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A7D118B1C6E0D2F00150792 /* UploadImageResponse.m */; };
@@ -62,6 +63,8 @@
 		7AC63BF01C591F7200EE678C /* UIImage+fixOrientation.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AC63BEF1C591F7200EE678C /* UIImage+fixOrientation.m */; };
 		7AC63BF31C5A475600EE678C /* NavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AC63BF21C5A475600EE678C /* NavigationViewController.m */; };
 		7AC63BF91C5A58C000EE678C /* MonthCollectionReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AC63BF81C5A58C000EE678C /* MonthCollectionReusableView.m */; };
+		7AD74E5C1D228196005E5A23 /* ApiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AD74E5B1D228196005E5A23 /* ApiViewController.m */; };
+		7AD74E5F1D2281A7005E5A23 /* ApiTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AD74E5E1D2281A7005E5A23 /* ApiTableViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -151,6 +154,8 @@
 		7A4342E01C076C1900F74BE8 /* JSONKeyMapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKeyMapper.m; sourceTree = "<group>"; };
 		7A4342E11C076C1900F74BE8 /* JSONValueTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONValueTransformer.h; sourceTree = "<group>"; };
 		7A4342E21C076C1900F74BE8 /* JSONValueTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONValueTransformer.m; sourceTree = "<group>"; };
+		7A55F6081D21747E009A3D32 /* BaseResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseResponse.h; sourceTree = "<group>"; };
+		7A55F6091D21747E009A3D32 /* BaseResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseResponse.m; sourceTree = "<group>"; };
 		7A7D11801C6DFD2E00150792 /* RegisterResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterResponse.h; sourceTree = "<group>"; };
 		7A7D11811C6DFD2E00150792 /* RegisterResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterResponse.m; sourceTree = "<group>"; };
 		7A7D11831C6DFD4100150792 /* RegisterResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterResult.h; sourceTree = "<group>"; };
@@ -172,6 +177,10 @@
 		7AC63BF21C5A475600EE678C /* NavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigationViewController.m; sourceTree = "<group>"; };
 		7AC63BF71C5A58C000EE678C /* MonthCollectionReusableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MonthCollectionReusableView.h; sourceTree = "<group>"; };
 		7AC63BF81C5A58C000EE678C /* MonthCollectionReusableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MonthCollectionReusableView.m; sourceTree = "<group>"; };
+		7AD74E5A1D228196005E5A23 /* ApiViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApiViewController.h; sourceTree = "<group>"; };
+		7AD74E5B1D228196005E5A23 /* ApiViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApiViewController.m; sourceTree = "<group>"; };
+		7AD74E5D1D2281A7005E5A23 /* ApiTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApiTableViewController.h; sourceTree = "<group>"; };
+		7AD74E5E1D2281A7005E5A23 /* ApiTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApiTableViewController.m; sourceTree = "<group>"; };
 		C62FC40A2BD5599802D6B63B /* Pods-take365.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-take365.release.xcconfig"; path = "Pods/Target Support Files/Pods-take365/Pods-take365.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -285,6 +294,8 @@
 				7A39A3331C0DE86C00A8A51C /* StoryResponse */,
 				7A39A31A1C0DD00100A8A51C /* StoryListResponse */,
 				7A39A2FD1C0DAC6500A8A51C /* LoginResponse */,
+				7A55F6081D21747E009A3D32 /* BaseResponse.h */,
+				7A55F6091D21747E009A3D32 /* BaseResponse.m */,
 			);
 			name = Response;
 			sourceTree = "<group>";
@@ -432,6 +443,10 @@
 				7A1FEB551C6104260020030A /* MoreViewController.m */,
 				7A0336D31C6C8DE70022E42B /* RegisterViewController.h */,
 				7A0336D41C6C8DE70022E42B /* RegisterViewController.m */,
+				7AD74E5A1D228196005E5A23 /* ApiViewController.h */,
+				7AD74E5B1D228196005E5A23 /* ApiViewController.m */,
+				7AD74E5D1D2281A7005E5A23 /* ApiTableViewController.h */,
+				7AD74E5E1D2281A7005E5A23 /* ApiTableViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -646,6 +661,7 @@
 				7A39A3421C0DE99000A8A51C /* StoryImageImagesModel.m in Sources */,
 				7A39A3231C0DD15B00A8A51C /* AuthorModel.m in Sources */,
 				7AC63BF91C5A58C000EE678C /* MonthCollectionReusableView.m in Sources */,
+				7AD74E5F1D2281A7005E5A23 /* ApiTableViewController.m in Sources */,
 				7A39A30C1C0DC0D600A8A51C /* BaseAuthiticatedRequest.m in Sources */,
 				7A7D118F1C6E0EC200150792 /* UploadImageResult.m in Sources */,
 				7A1FEB561C6104260020030A /* MoreViewController.m in Sources */,
@@ -661,6 +677,7 @@
 				7A2566A41C53C2A800D28DCA /* CreateStoryViewController.m in Sources */,
 				7AC63BED1C58F1E000EE678C /* PublishPhotoViewController.m in Sources */,
 				7A13D87D1BDE49CE00E1CB98 /* AppDelegate.m in Sources */,
+				7A55F60A1D21747E009A3D32 /* BaseResponse.m in Sources */,
 				7A4342EA1C076C1900F74BE8 /* JSONModel+networking.m in Sources */,
 				7A4342E61C076C1900F74BE8 /* JSONModelError.m in Sources */,
 				7A4342E81C076C1900F74BE8 /* JSONAPI.m in Sources */,
@@ -672,6 +689,7 @@
 				7A0336D81C6C91A00022E42B /* RegisterRequest.m in Sources */,
 				7A39A3121C0DC19700A8A51C /* WriteStoryRequest.m in Sources */,
 				7A39A3391C0DE8B700A8A51C /* StoryResult.m in Sources */,
+				7AD74E5C1D228196005E5A23 /* ApiViewController.m in Sources */,
 				7A13D87A1BDE49CE00E1CB98 /* main.m in Sources */,
 				7A13D8991BDFCF3F00E1CB98 /* LoginViewController.m in Sources */,
 				7A39A2FC1C0DABF900A8A51C /* LoginRequest.m in Sources */,

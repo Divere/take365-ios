@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "StoryModel.h"
+#import "ApiViewController.h"
 
-@interface SelectStoryViewController : UIViewController<UITableViewDataSource, UITableViewDelegate>
+@interface SelectStoryViewController : ApiViewController<UITableViewDataSource, UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 

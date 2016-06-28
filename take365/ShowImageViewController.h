@@ -8,9 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "StoryImageImagesModel.h"
+#import "PMBaseViewController.h"
 
-
-@interface ShowImageViewController : UIViewController
+@interface ShowImageViewController : PMBaseViewController
 
 @property (nonatomic) StoryImageImagesModel *Image;
 

@@ -17,9 +17,6 @@
 @end
 
 @implementation SelectStoryViewController
-{
-    ApiManager *api;
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -31,14 +28,14 @@
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@" + " style:UIBarButtonItemStyleDone target:self action:@selector(newStory)];
     
-    api = [AppDelegate getInstance].api;
-    if(api.Stories != NULL){
-        stories = api.Stories;
+    self.TakeApi = [AppDelegate getInstance].api;
+    if(self.TakeApi.Stories != NULL){
+        stories = self.TakeApi.Stories;
     }
 }
 
 -(void)viewDidAppear:(BOOL)animated{
-    [api getStoryListWithResultBlock:^(NSArray<StoryModel> *result, NSString *error) {
+    [self.TakeApi getStoryListWithResultBlock:^(NSArray<StoryModel> *result, NSString *error) {
         if(error == nil){
             stories = result;
             [_tableView reloadData];

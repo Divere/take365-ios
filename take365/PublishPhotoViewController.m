@@ -16,7 +16,6 @@
 
 @implementation PublishPhotoViewController
 {
-    ApiManager *api;
     NSMutableArray<StoryModel> *stories;
     StoryModel *selectedStory;
 }
@@ -25,8 +24,6 @@
     [super viewDidLoad];
     
     [self.view sendSubviewToBack:_uivBackground];
-    
-    api = [AppDelegate getInstance].api;
     
     _uivImage.image = _Image;
     // Do any additional setup after loading the view.
@@ -46,7 +43,7 @@
     _lblMonth.text = [NSString stringWithFormat:@"%@ ", month];
     _lblDay.text = [NSString stringWithFormat:@"%d, ",[@(day) intValue]];
     
-    [self updateStories:api.Stories];
+    [self updateStories:self.TakeApi.Stories];
 }
 
 -(void)updateStories:(NSArray*)newStories{
@@ -67,7 +64,7 @@
 }
 
 -(void)viewDidAppear:(BOOL)animated{
-    [api getStoryListWithResultBlock:^(NSArray<StoryModel> *result, NSString *error) {
+    [self.TakeApi getStoryListWithResultBlock:^(NSArray<StoryModel> *result, NSString *error) {
         [self updateStories:result];
         [_pvStoryPicker reloadAllComponents];
     }];
@@ -121,7 +118,7 @@
     [df setDateFormat:@"yyyy-MM-dd"];
     NSString *date = [df stringFromDate:[NSDate new]];
     
-    [[AppDelegate getInstance].api uploadImage:image ForStory:(selectedStory != NULL) ? selectedStory.id : 0 ForDate:date WithProgressBlock:^(float progress) {
+    [self.TakeApi uploadImage:image ForStory:(selectedStory != NULL) ? selectedStory.id : 0 ForDate:date WithProgressBlock:^(float progress) {
         _pvUploadProgress.progress = progress;
         if(progress == 1.0f){
             [_btnPublish setTitle:@"обработка..." forState:UIControlStateDisabled];
@@ -129,7 +126,7 @@
     } WithResultBlock:^(UploadImageResult *result) {
         if(result != NULL){
             if(stories.count < 1){
-                [api getStoryListWithResultBlock:^(NSArray<StoryModel> *result, NSString *error) {
+                [self.TakeApi getStoryListWithResultBlock:^(NSArray<StoryModel> *result, NSString *error) {
                     [self updateStories:result];
                     [_pvStoryPicker reloadAllComponents];
                     selectedStory = stories[[@([_pvStoryPicker selectedRowInComponent:0]) intValue]];

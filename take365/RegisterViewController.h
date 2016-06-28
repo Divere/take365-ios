@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ApiTableViewController.h"
 
-@interface RegisterViewController : UITableViewController
+@interface RegisterViewController : ApiTableViewController
 
 @property (weak, nonatomic) IBOutlet UITextField *tfLogin;
 @property (weak, nonatomic) IBOutlet UITextField *tfEmail;

@@ -38,9 +38,9 @@
     switch (indexPath.section) {
         case 3:
             tableView.allowsSelection = NO;
-            [[AppDelegate getInstance].api registerWithUsername:_tfLogin.text Email:_tfEmail.text Password:_tfPassword.text AndResultBlock:^(RegisterResult *result, NSString *error) {
+            [self.TakeApi registerWithUsername:_tfLogin.text Email:_tfEmail.text Password:_tfPassword.text AndResultBlock:^(RegisterResult *result, NSString *error) {
                 if(error == NULL){
-                    [[AppDelegate getInstance].api loginWithUsername:_tfLogin.text AndPassword:_tfPassword.text AndResultBlock:^(LoginResult *result, NSString *error) {
+                    [self.TakeApi loginWithUsername:_tfLogin.text AndPassword:_tfPassword.text AndResultBlock:^(LoginResult *result, NSString *error) {
                         if(error == NULL){
                             [[NSUserDefaults standardUserDefaults] setObject:result.token forKey:@"accessToken"];
                             [[NSUserDefaults standardUserDefaults] synchronize];

@@ -22,6 +22,10 @@ const NSString *URL = @"https://take365.org";
     
     [JSONHTTPClient postJSONFromURLWithString:METHOD(@"api/user/register") bodyString:[r toJSONString] andHeaders:nil completion:^(id json, JSONModelError *err) {
         
+        if(![self handleBaseResponse:json]){
+            return;
+        }
+        
         RegisterResponse *response = [[RegisterResponse alloc] initWithDictionary:json error:&err];
         
         if(response.result != NULL && resultBlock != NULL){
@@ -39,6 +43,10 @@ const NSString *URL = @"https://take365.org";
     
     [JSONHTTPClient postJSONFromURLWithString:METHOD(@"api/auth/login") bodyString:[request toJSONString] andHeaders:nil completion:^(id json, JSONModelError *err) {
         
+        if(![self handleBaseResponse:json]){
+            return;
+        }
+        
         LoginResponse *response = [[LoginResponse alloc] initWithDictionary:json error:&err];
         
         if(response.result != NULL){
@@ -54,6 +62,11 @@ const NSString *URL = @"https://take365.org";
 
 -(void)getStoryWithId:(int)storyId WithResultBlock:(void (^)(StoryResult *result, NSString *error))resultBlock{
     [JSONHTTPClient getJSONFromURLWithString:METHOD([NSString stringWithFormat:@"api/story/%d?accessToken=%@", storyId, _AccessToken]) completion:^(id json, JSONModelError *err) {
+        
+        if(![self handleBaseResponse:json]){
+            return;
+        }
+        
         NSError *deserializeError;
         StoryResponse *response = [[StoryResponse alloc] initWithDictionary:json error:&deserializeError];
         
@@ -71,6 +84,11 @@ const NSString *URL = @"https://take365.org";
 
 -(void)getStoryListWithResultBlock:(void (^)(NSArray<StoryModel> *, NSString *))resultBlock{
     [JSONHTTPClient getJSONFromURLWithString:METHOD([NSString stringWithFormat:@"api/story/list?accessToken=%@&username=me&maxItems=100", _AccessToken]) completion:^(id json, JSONModelError *err) {
+        
+        if(![self handleBaseResponse:json]){
+            return;
+        }
+        
         NSError *deserializeError;
         StoryListResponse *response = [[StoryListResponse alloc] initWithDictionary:json error:&deserializeError];
         
@@ -96,20 +114,24 @@ const NSString *URL = @"https://take365.org";
     r.accessToken = _AccessToken;
     
     [JSONHTTPClient postJSONFromURLWithString:METHOD(@"api/story/write") bodyString:[r toJSONString] andHeaders:NULL completion:^(id json, JSONModelError *err)
-    {
-        NSError *error;
-        StoryResponse *response = [[StoryResponse alloc] initWithDictionary:json error:&error];
-        
-        if(response.result != nil){
-            if(resultBlock != NULL){
-                resultBlock(response.result, NULL);
-            }
-        }else{
-            if(resultBlock){
-                resultBlock(NULL, [response.errors objectAtIndex:0][@"value"]);
-            }
-        }
-    }];
+     {
+         if(![self handleBaseResponse:json]){
+             return;
+         }
+         
+         NSError *error;
+         StoryResponse *response = [[StoryResponse alloc] initWithDictionary:json error:&error];
+         
+         if(response.result != nil){
+             if(resultBlock != NULL){
+                 resultBlock(response.result, NULL);
+             }
+         }else{
+             if(resultBlock){
+                 resultBlock(NULL, [response.errors objectAtIndex:0][@"value"]);
+             }
+         }
+     }];
 }
 
 -(void)uploadImage:(NSData *)image ForStory:(int)storyId ForDate:(NSString *)date WithProgressBlock:(void (^)(float))progressBlock WithResultBlock:(void (^)(UploadImageResult *))resultBlock{
@@ -158,6 +180,23 @@ const NSString *URL = @"https://take365.org";
                   }];
     
     [uploadTask resume];
+}
+
+-(BOOL)handleBaseResponse:(id)json{
+    NSError *deserializeError;
+    
+    BaseResponse *baseResponse = [[BaseResponse alloc] initWithDictionary:json error:&deserializeError];
+    if(baseResponse.errors != NULL){
+        NSString *error = [baseResponse.errors objectAtIndex:0][@"code"];
+        if([error isEqualToString:@"AUTH_BAD_TOKEN"]){
+            if(_EventInvalidAuthToken){
+                _EventInvalidAuthToken();
+            }
+            return false;
+        }
+    }
+    
+    return true;
 }
 
 NSString* METHOD(NSString* method)

@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PMBaseViewController.h"
 
-@interface PublishPhotoViewController : UIViewController <UIPickerViewDataSource, UIPickerViewDelegate>
+@interface PublishPhotoViewController : PMBaseViewController <UIPickerViewDataSource, UIPickerViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UILabel *lblYear;
 @property (weak, nonatomic) IBOutlet UILabel *lblMonth;

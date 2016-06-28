@@ -22,6 +22,7 @@ static AppDelegate *instance;
     // Override point for customization after application launch.
     
     _api = [ApiManager new];
+    
     instance = self;
     
     return YES;

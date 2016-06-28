@@ -12,7 +12,6 @@
 
 @property IBOutlet UIView *topBarView;
 @property IBOutlet UIView *bottmBarView;
-@property IBOutlet UILabel *lblTake;
 @property IBOutlet UIStackView *svDate;
 @property IBOutlet UILabel *lblMonth;
 @property IBOutlet UILabel *lblDay;

@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
+#import "BaseResponse.h"
 #import "RegisterRequest.h"
 #import "RegisterResponse.h"
 #import "UploadImageResponse.h"
@@ -27,6 +28,8 @@ typedef enum : NSUInteger {
 @property (nonatomic) NSString *AccessToken;
 
 @property (nonatomic) NSArray<StoryModel> *Stories;
+
+@property (strong, nonatomic) void (^EventInvalidAuthToken)();
 
 -(void)registerWithUsername:(NSString *)username Email:(NSString *)email Password:(NSString *)password AndResultBlock:(void (^)(RegisterResult *result, NSString *error))resultBlock;
 -(void)loginWithUsername:(NSString *)username AndPassword:(NSString *)password AndResultBlock:(void (^)(LoginResult *result, NSString *error))resultBlock;

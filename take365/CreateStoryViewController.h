@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ApiTableViewController.h"
 
-@interface CreateStoryViewController : UITableViewController
+@interface CreateStoryViewController : ApiTableViewController
 
 @property (weak, nonatomic) IBOutlet UITextField *tfTitle;
 @property (weak, nonatomic) IBOutlet UITextField *tfDescription;

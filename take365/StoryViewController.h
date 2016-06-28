@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "ApiManager.h"
+#import "ApiViewController.h"
 
-@interface StoryViewController : UIViewController
+@interface StoryViewController : ApiViewController
 
 @property (nonatomic) StoryModel *Story;
 

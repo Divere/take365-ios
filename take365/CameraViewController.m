@@ -36,7 +36,7 @@
     [self applyBlurEffectToView:_topBarView];
     [self applyBlurEffectToView:_bottmBarView];
     
-    [_topBarView bringSubviewToFront:_lblTake];
+    //[_topBarView bringSubviewToFront:_lblTake];
     [_topBarView bringSubviewToFront:_svDate];
     
     NSDateFormatter *df = [NSDateFormatter new];

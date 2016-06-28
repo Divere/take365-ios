@@ -47,7 +47,7 @@
     [_uivPhotos setDataSource:self];
     [_uivPhotos setDelegate:self];
     
-    [[AppDelegate getInstance].api getStoryWithId:_Story.id WithResultBlock:^(StoryResult *result, NSString *error) {
+    [self.TakeApi getStoryWithId:_Story.id WithResultBlock:^(StoryResult *result, NSString *error) {
         if(error == NULL){
             storyInfo = result;
             

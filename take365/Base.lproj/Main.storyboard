@@ -1,10 +1,48 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="t8d-kj-bvL">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="t8d-kj-bvL">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
+        <!--Лента-->
+        <scene sceneID="QBr-W3-Xa4">
+            <objects>
+                <viewController id="0Sp-8e-hSw" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="LC9-oW-KTk"/>
+                        <viewControllerLayoutGuide type="bottom" id="PJ8-Bw-X4k"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="FUG-j1-lXx">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Лента" id="Rw1-pX-C9e"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nLI-Zw-bx9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="738" y="-1461"/>
+        </scene>
+        <!--Профиль-->
+        <scene sceneID="D1k-is-bgr">
+            <objects>
+                <viewController id="Qns-X8-OEA" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Qhq-Zb-G0H"/>
+                        <viewControllerLayoutGuide type="bottom" id="iXf-pu-ra4"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="eL9-mv-YFL">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Профиль" id="gpM-WG-rfq"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vko-i7-Dxe" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="740" y="-753"/>
+        </scene>
         <!--Мои истории-->
         <scene sceneID="1aq-CX-Cnf">
             <objects>
@@ -20,7 +58,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="38H-tx-6di" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="750" y="-421"/>
+            <point key="canvasLocation" x="740" y="14"/>
         </scene>
         <!--Создать историю-->
         <scene sceneID="p1Z-Vr-POu">
@@ -152,7 +190,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xgk-MT-9ol" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2309" y="-1200"/>
+            <point key="canvasLocation" x="2261" y="30"/>
         </scene>
         <!--Select Story View Controller-->
         <scene sceneID="4r8-xQ-5Af">
@@ -284,7 +322,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oe7-2k-3fG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1512" y="-421"/>
+            <point key="canvasLocation" x="1502" y="14"/>
         </scene>
         <!--Publish Photo View Controller-->
         <scene sceneID="MRt-pi-gz5">
@@ -402,7 +440,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KE8-t6-PvK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1512" y="286"/>
+            <point key="canvasLocation" x="1502" y="825"/>
         </scene>
         <!--Камера-->
         <scene sceneID="wg7-f3-ORb">
@@ -505,7 +543,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="750" y="286"/>
+            <point key="canvasLocation" x="740" y="825"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="xcA-UH-6Fa">
@@ -692,7 +730,9 @@
                     <connections>
                         <segue destination="J4S-oO-4K6" kind="relationship" relationship="viewControllers" id="8k8-6m-jiQ"/>
                         <segue destination="8rJ-Kc-sve" kind="relationship" relationship="viewControllers" id="lzU-1b-eKA"/>
-                        <segue destination="yrE-23-Hxl" kind="relationship" relationship="viewControllers" id="Gi6-wX-Jcv"/>
+                        <segue destination="Qns-X8-OEA" kind="relationship" relationship="viewControllers" id="cvn-I9-P3f"/>
+                        <segue destination="0Sp-8e-hSw" kind="relationship" relationship="viewControllers" id="2oC-fa-vmV"/>
+                        <segue destination="yrE-23-Hxl" kind="relationship" relationship="viewControllers" id="yw9-Ix-aNB"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HuB-VB-40B" sceneMemberID="firstResponder"/>
@@ -943,7 +983,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Olx-vS-7cU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2309" y="-421"/>
+            <point key="canvasLocation" x="2237" y="825"/>
         </scene>
         <!--Show Image View Controller-->
         <scene sceneID="3bj-ed-KHb">
@@ -1029,7 +1069,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="C2O-yf-Ele" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3100" y="-421"/>
+            <point key="canvasLocation" x="3062" y="270"/>
         </scene>
         <!--Регистрация-->
         <scene sceneID="CIq-xm-OO6">
@@ -1166,7 +1206,7 @@
         <image name="Снимок экрана 2015-10-27 в 10.42.25" width="1400" height="1540"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="IOs-IT-AGM"/>
         <segue reference="Il5-m1-GpT"/>
+        <segue reference="IOs-IT-AGM"/>
     </inferredMetricsTieBreakers>
 </document>

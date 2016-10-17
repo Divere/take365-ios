@@ -9,7 +9,9 @@
 #import "StoryViewController.h"
 #import "AppDelegate.h"
 #import "PhotoCollectionViewCell.h"
+#import "CalendarCollectionViewCell.h"
 #import "MonthCollectionReusableView.h"
+#import "StoryDay.h"
 
 @interface StoryViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UIScrollViewDelegate, UICollectionViewDelegateFlowLayout>
 
@@ -35,6 +37,9 @@
     NSMutableArray<NSIndexPath*> *visibleImages;
     
     BOOL bigViewEnabled;
+    
+    NSMutableDictionary *imagesByDays;
+    NSMutableArray *days;
 }
 
 - (void)viewDidLoad {
@@ -43,17 +48,37 @@
     imageCache = [NSMutableDictionary new];
     sections = [NSMutableDictionary new];
     visibleImages = [NSMutableArray new];
+    imagesByDays = [NSMutableDictionary new];
+    days = [NSMutableArray new];
     
     [_uivPhotos setDataSource:self];
     [_uivPhotos setDelegate:self];
     
+
     [self.TakeApi getStoryWithId:_Story.id WithResultBlock:^(StoryResult *result, NSString *error) {
         if(error == NULL){
             storyInfo = result;
             
             for (StoryImageImagesModel *image in result.images) {
+                [imagesByDays setObject:image forKey:image.date];
+            }
+            
+            for (int i=0; i<storyInfo.progress.passedDays; i++) {
+                NSDate *currentDate = [NSDate new];
+                currentDate = [currentDate dateByAddingTimeInterval:-i*24*60*60];
+            
+                NSDateFormatter *df = [NSDateFormatter new];
+                [df setDateFormat:@"yyyy-MM-dd"];
+            
+                StoryDay *storyDay = [StoryDay new];
+                storyDay.day = [df stringFromDate:currentDate];
+                storyDay.image = [imagesByDays objectForKey:storyDay.day];
+                [days addObject:storyDay];
+            }
+            
+            for (StoryDay *storyDay in days) {
                 
-                NSArray *sectionTitleComponents = [image.date componentsSeparatedByString:@"-"];
+                NSArray *sectionTitleComponents = [storyDay.day componentsSeparatedByString:@"-"];
                 NSString *sectionTitle = [NSString stringWithFormat:@"%@-%@", sectionTitleComponents[0], sectionTitleComponents[1]];
                 
                 NSMutableArray *sectionContent = [sections objectForKey:sectionTitle];
@@ -63,7 +88,7 @@
                     [sections setObject:sectionContent forKey:sectionTitle];
                 }
                 
-                [sectionContent addObject:image];
+                [sectionContent addObject:storyDay];
             }
             
             sortedSectionsTitles = [[sections allKeys] sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
@@ -167,6 +192,18 @@
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     
+    NSString *key = sortedSectionsTitles[indexPath.section];
+    NSMutableArray *sectionImages = [sections objectForKey:key];
+    StoryDay *storyDay = sectionImages[indexPath.row];
+    
+    if(storyDay.image == NULL){
+        CalendarCollectionViewCell *calendarCell = [_uivPhotos dequeueReusableCellWithReuseIdentifier:@"CalendarCollectionViewCell" forIndexPath:indexPath];
+        NSString *dayText = [storyDay.day componentsSeparatedByString:@"-"][2];
+        calendarCell.lblDay.text = dayText;
+        calendarCell.lblDay.hidden = false;
+        return calendarCell;
+    }
+    
     PhotoCollectionViewCell *cell = NULL;
     
     if(bigViewEnabled){
@@ -181,7 +218,7 @@
         
         NSString *key = sortedSectionsTitles[indexPath.section];
         NSMutableArray *sectionImages = [sections objectForKey:key];
-        StoryImageImagesModel *imageInfo = sectionImages[indexPath.row];
+        StoryDay *storyDay = sectionImages[indexPath.row];
         
         UIImage *image = [imageCache objectForKey:[NSString stringWithFormat:@"%ld-%ld", (long)indexPath.section, (long)indexPath.row]];
         if(image == nil){
@@ -192,9 +229,9 @@
             });
             if(!isScrollingFast){
                 if(!bigViewEnabled){
-                    image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:imageInfo.thumb.url]]];
+                    image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:storyDay.image.thumb.url]]];
                 }else{
-                    image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:imageInfo.thumbLarge.url]]];
+                    image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:storyDay.image.thumbLarge.url]]];
                 }
                 
                 if(image != NULL){
@@ -214,9 +251,9 @@
                 cell.aiLoading.hidden = false;
             }else{
                 PhotoCollectionViewCell *cell = (PhotoCollectionViewCell*)[_uivPhotos cellForItemAtIndexPath:cellPath];
-                cell.Image = imageInfo;
+                cell.Image = storyDay.image;
                 [cell.ivPhoto setImage:image];
-                cell.lblDay.text = [imageInfo.date componentsSeparatedByString:@"-"][2];
+                cell.lblDay.text = [storyDay.image.date componentsSeparatedByString:@"-"][2];
                 [cell.ivPhoto setHidden:false];
                 [cell.aiLoading setHidden:true];
                 cell.lblDay.hidden = false;

@@ -35,7 +35,7 @@ typedef enum : NSUInteger {
 -(void)loginWithUsername:(NSString *)username AndPassword:(NSString *)password AndResultBlock:(void (^)(LoginResult *result, NSString *error))resultBlock;
 -(void)getStoryWithId:(int)storyId WithResultBlock:(void (^)(StoryResult *result, NSString *error))resultBlock;
 -(void)getStoryListWithResultBlock:(void (^)(NSArray<StoryModel> *result, NSString *error))resultBlock;
--(void)createStoryWithTitle:(NSString*)title PrivateLevel:(StoryPrivateLevel)privateLevel Description:(NSString*)description AndResultBlock:(void (^)(StoryModel *story, NSString *error))resultBlock;
+-(void)createStoryWithTitle:(NSString*)title PrivateLevel:(StoryPrivateLevel)privateLevel Description:(NSString*)description AndResultBlock:(void (^)(StoryResult *story, NSString *error))resultBlock;
 -(void)uploadImage:(NSData*)image ForStory:(int)storyId ForDate:(NSString*)date WithProgressBlock:(void (^)(float progress))progressBlock WithResultBlock:(void (^)(UploadImageResult *result))resultBlock;
 
 @end

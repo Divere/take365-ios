@@ -12,5 +12,7 @@
 
 @property (nonatomic) NSString *url;
 @property (nonatomic) NSString *username;
+@property (nonatomic) NSString<Optional> *userpic;
+@property (nonatomic) NSString<Optional> *userpicLarge;
 
 @end

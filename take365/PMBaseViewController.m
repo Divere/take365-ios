@@ -22,6 +22,17 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
+                                   initWithTarget:self
+                                   action:@selector(dismissKeyboard)];
+    
+    [self.view addGestureRecognizer:tap];
+    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor redColor]}];
+}
+
+-(void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
     maTextFields = [NSMutableArray new];
     
     for(NSString *prop in [self allPropertyNames])
@@ -36,17 +47,6 @@
             [maTextFields addObject:tf];
         }
     }
-    
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
-                                   initWithTarget:self
-                                   action:@selector(dismissKeyboard)];
-    
-    
-    [self.view addGestureRecognizer:tap];
-    
-    //self.navigationController.navigationBar.barTintColor = [UIColor blackColor];
-    self.navigationController.navigationBar.tintColor = [UIColor blackColor];
-    [self.navigationController.navigationBar setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor redColor]}];
 }
 
 - (void)didReceiveMemoryWarning {

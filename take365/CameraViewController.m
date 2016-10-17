@@ -27,17 +27,17 @@
     
     UIDeviceOrientation currentOrientation;
     CGFloat currentRotation;
+    
+    bool blurApplied;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
-    [self applyBlurEffectToView:_topBarView];
-    [self applyBlurEffectToView:_bottmBarView];
-    
     //[_topBarView bringSubviewToFront:_lblTake];
     [_topBarView bringSubviewToFront:_svDate];
+
     
     NSDateFormatter *df = [NSDateFormatter new];
     [df setLocale: [[NSLocale alloc] initWithLocaleIdentifier:@"ru_RU"]];
@@ -192,6 +192,12 @@
 
 -(void)viewDidAppear:(BOOL)animated{
 
+    if(!blurApplied){
+        [self applyBlurEffectToView:_topBarView];
+        [self applyBlurEffectToView:_bottmBarView];
+        blurApplied = true;
+    }
+    
     currentOrientation = [UIDevice currentDevice].orientation;
     if(currentOrientation != UIDeviceOrientationPortrait && currentOrientation != UIDeviceOrientationPortraitUpsideDown){
         [self changeViewBasedOnOrientation:currentOrientation];

@@ -105,7 +105,7 @@ const NSString *URL = @"https://take365.org";
     }];
 }
 
--(void)createStoryWithTitle:(NSString*)title PrivateLevel:(StoryPrivateLevel)privateLevel Description:(NSString*)description AndResultBlock:(void (^)(StoryModel *story, NSString *error))resultBlock{
+-(void)createStoryWithTitle:(NSString*)title PrivateLevel:(StoryPrivateLevel)privateLevel Description:(NSString*)description AndResultBlock:(void (^)(StoryResult *story, NSString *error))resultBlock{
     
     WriteStoryRequest *r = [WriteStoryRequest new];
     r.title = title;
@@ -121,6 +121,10 @@ const NSString *URL = @"https://take365.org";
          
          NSError *error;
          StoryResponse *response = [[StoryResponse alloc] initWithDictionary:json error:&error];
+         
+         if(error){
+             NSLog(@"%@", error);
+         }
          
          if(response.result != nil){
              if(resultBlock != NULL){
@@ -187,13 +191,15 @@ const NSString *URL = @"https://take365.org";
     
     BaseResponse *baseResponse = [[BaseResponse alloc] initWithDictionary:json error:&deserializeError];
     if(baseResponse.errors != NULL){
-        NSString *error = [baseResponse.errors objectAtIndex:0][@"code"];
-        if([error isEqualToString:@"AUTH_BAD_TOKEN"]){
-            if(_EventInvalidAuthToken){
-                _EventInvalidAuthToken();
+        if([[baseResponse.errors objectAtIndex:0] isKindOfClass:[NSDictionary class]]){
+            NSString *error = [baseResponse.errors objectAtIndex:0][@"code"];
+            if([error isEqualToString:@"AUTH_BAD_TOKEN"]){
+                if(_EventInvalidAuthToken){
+                    _EventInvalidAuthToken();
+                }
             }
-            return false;
         }
+        return false;
     }
     
     return true;

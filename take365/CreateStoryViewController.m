@@ -16,14 +16,18 @@
 @implementation CreateStoryViewController
 {
     UIColor *greenColor;
-    StoryModel *createdStory;
+    StoryResult *createdStory;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [_tfTitle becomeFirstResponder];
     greenColor = [_scPrivacyLevel.tintColor copy];
+}
+
+-(void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [_tfTitle becomeFirstResponder];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -44,7 +48,7 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    [self.TakeApi createStoryWithTitle:_tfTitle.text PrivateLevel:(StoryPrivateLevel)_scPrivacyLevel.selectedSegmentIndex Description:_tfDescription.text AndResultBlock:^(StoryModel *result, NSString *error) {
+    [self.TakeApi createStoryWithTitle:_tfTitle.text PrivateLevel:(StoryPrivateLevel)_scPrivacyLevel.selectedSegmentIndex Description:_tfDescription.text AndResultBlock:^(StoryResult *result, NSString *error) {
         if(error == NULL){
             createdStory = result;
             [self performSegueWithIdentifier:@"SEGUE_SHOW_NEW_STORY" sender:self];

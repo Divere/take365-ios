@@ -2,15 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
+      "filename" : "o-CALENDAR-facebook-2.jpg",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
+      "filename" : "o-CALENDAR-facebook.jpg",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "o-CALENDAR-facebook.jpg",
+      "filename" : "o-CALENDAR-facebook-1.jpg",
       "scale" : "3x"
     }
   ],

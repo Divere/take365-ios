@@ -10,6 +10,7 @@
 
 @interface LoginResult : JSONModel
 
+@property (nonatomic) int id;
 @property (nonatomic) NSString *token;
 @property (nonatomic) long tokenExpires;
 @property (nonatomic) NSString *username;

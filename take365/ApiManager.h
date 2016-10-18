@@ -25,6 +25,7 @@ typedef enum : NSUInteger {
 
 @interface ApiManager : NSObject
 
+@property (nonatomic) int CurrentUserId;
 @property (nonatomic) NSString *AccessToken;
 
 @property (nonatomic) NSArray<StoryModel> *Stories;

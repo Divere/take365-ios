@@ -23,23 +23,23 @@
     PhotoCollectionViewCell *selectedCell;
     float stockHeight;
     float stockWidth;
+    
     NSMutableDictionary *imageCache;
     NSMutableDictionary *sections;
     NSArray *sortedSectionsTitles;
-    
-    NSThread *loadingThread;
-    NSMutableArray *itemsForLoading;
     
     CGPoint lastOffset;
     NSTimeInterval lastOffsetCapture;
     BOOL isScrollingFast;
     
-    NSMutableArray<NSIndexPath*> *visibleImages;
+    NSMutableDictionary *visibleImages;
     
     BOOL bigViewEnabled;
     
     NSMutableDictionary *imagesByDays;
     NSMutableArray *days;
+    
+    BOOL isContributingStory;
 }
 
 - (void)viewDidLoad {
@@ -47,17 +47,26 @@
     
     imageCache = [NSMutableDictionary new];
     sections = [NSMutableDictionary new];
-    visibleImages = [NSMutableArray new];
+    visibleImages = [NSMutableDictionary new];
     imagesByDays = [NSMutableDictionary new];
     days = [NSMutableArray new];
     
+    UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout*)_uivPhotos.collectionViewLayout;
+    layout.sectionHeadersPinToVisibleBounds = true;
     [_uivPhotos setDataSource:self];
     [_uivPhotos setDelegate:self];
     
-
+    
     [self.TakeApi getStoryWithId:_Story.id WithResultBlock:^(StoryResult *result, NSString *error) {
         if(error == NULL){
             storyInfo = result;
+            
+            for (AuthorModel *author in storyInfo.authors) {
+                if(author.id == self.TakeApi.CurrentUserId){
+                    isContributingStory = true;
+                    break;
+                }
+            }
             
             for (StoryImageImagesModel *image in result.images) {
                 [imagesByDays setObject:image forKey:image.date];
@@ -66,18 +75,22 @@
             for (int i=0; i<storyInfo.progress.passedDays; i++) {
                 NSDate *currentDate = [NSDate new];
                 currentDate = [currentDate dateByAddingTimeInterval:-i*24*60*60];
-            
+                
                 NSDateFormatter *df = [NSDateFormatter new];
                 [df setDateFormat:@"yyyy-MM-dd"];
-            
+                
                 StoryDay *storyDay = [StoryDay new];
                 storyDay.day = [df stringFromDate:currentDate];
                 storyDay.image = [imagesByDays objectForKey:storyDay.day];
+                
+                if(storyDay.image == NULL && !isContributingStory){
+                    continue;
+                }
+                
                 [days addObject:storyDay];
             }
             
             for (StoryDay *storyDay in days) {
-                
                 NSArray *sectionTitleComponents = [storyDay.day componentsSeparatedByString:@"-"];
                 NSString *sectionTitle = [NSString stringWithFormat:@"%@-%@", sectionTitleComponents[0], sectionTitleComponents[1]];
                 
@@ -192,6 +205,8 @@
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     
+    [visibleImages setObject:indexPath forKey:[NSString stringWithFormat:@"%ld-%ld", (long)indexPath.section, (long)indexPath.row]];
+    
     NSString *key = sortedSectionsTitles[indexPath.section];
     NSMutableArray *sectionImages = [sections objectForKey:key];
     StoryDay *storyDay = sectionImages[indexPath.row];
@@ -212,65 +227,59 @@
         cell = [_uivPhotos dequeueReusableCellWithReuseIdentifier:@"PhotoCollectionViewCell" forIndexPath:indexPath];
     }
     
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        
-        NSIndexPath *cellPath = [indexPath copy];
-        
-        NSString *key = sortedSectionsTitles[indexPath.section];
-        NSMutableArray *sectionImages = [sections objectForKey:key];
-        StoryDay *storyDay = sectionImages[indexPath.row];
-        
-        UIImage *image = [imageCache objectForKey:[NSString stringWithFormat:@"%ld-%ld", (long)indexPath.section, (long)indexPath.row]];
-        if(image == nil){
-            dispatch_async(dispatch_get_main_queue(), ^{
-                PhotoCollectionViewCell *cell = (PhotoCollectionViewCell*)[_uivPhotos cellForItemAtIndexPath:cellPath];
-                [cell.ivPhoto setHidden:true];
-                [cell.aiLoading setHidden:false];
-            });
+    UIImage *image = [imageCache objectForKey:[NSString stringWithFormat:@"%ld-%ld", (long)indexPath.section, (long)indexPath.row]];
+    
+    if(!isScrollingFast && image == nil){
+        [cell.ivPhoto setHidden:true];
+        [cell.aiLoading setHidden:false];
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+            
+            NSIndexPath *cellPath = [indexPath copy];
+            
+            UIImage *downloadedImage = NULL;
+            
             if(!isScrollingFast){
                 if(!bigViewEnabled){
-                    image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:storyDay.image.thumb.url]]];
+                    downloadedImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:storyDay.image.thumb.url]]];
                 }else{
-                    image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:storyDay.image.thumbLarge.url]]];
+                    downloadedImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:storyDay.image.thumbLarge.url]]];
                 }
                 
-                if(image != NULL){
-                    [imageCache setObject:image forKey:[NSString stringWithFormat:@"%ld-%ld", (long)indexPath.section, (long)indexPath.row]];
+                if(downloadedImage != NULL){
+                    [imageCache setObject:downloadedImage forKey:[NSString stringWithFormat:@"%ld-%ld", (long)cellPath.section, (long)cellPath.row]];
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [_uivPhotos reloadItemsAtIndexPaths:@[cellPath]];
+                    });
                 }
             }
-        }
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            
-            if(isScrollingFast && image == NULL){
-                [visibleImages addObject:indexPath];
-                cell.Image = NULL;
-                [cell.ivPhoto setImage:NULL];
-                cell.lblDay.hidden = true;
-                cell.ivPhoto.hidden = true;
-                cell.aiLoading.hidden = false;
-            }else{
-                PhotoCollectionViewCell *cell = (PhotoCollectionViewCell*)[_uivPhotos cellForItemAtIndexPath:cellPath];
-                cell.Image = storyDay.image;
-                [cell.ivPhoto setImage:image];
-                cell.lblDay.text = [storyDay.image.date componentsSeparatedByString:@"-"][2];
-                [cell.ivPhoto setHidden:false];
-                [cell.aiLoading setHidden:true];
-                cell.lblDay.hidden = false;
-            }
         });
-    });
+    }
+    
+    if(isScrollingFast && image == NULL){
+        cell.Image = NULL;
+        [cell.ivPhoto setImage:NULL];
+        cell.lblDay.hidden = true;
+        cell.ivPhoto.hidden = true;
+        cell.aiLoading.hidden = false;
+    }else{
+        cell.Image = storyDay.image;
+        [cell.ivPhoto setImage:image];
+        cell.lblDay.text = [storyDay.image.date componentsSeparatedByString:@"-"][2];
+        [cell.ivPhoto setHidden:false];
+        [cell.aiLoading setHidden:true];
+        cell.lblDay.hidden = false;
+    }
     
     return cell;
 }
 
 -(void)collectionView:(UICollectionView *)collectionView didEndDisplayingCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath{
-    [visibleImages removeObject:indexPath];
+    [visibleImages removeObjectForKey:[NSString stringWithFormat:@"%ld-%ld", (long)indexPath.section, (long)indexPath.row]];
 }
 
 -(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
     isScrollingFast = false;
-    [_uivPhotos reloadItemsAtIndexPaths:visibleImages];
+    [_uivPhotos reloadItemsAtIndexPaths:[visibleImages allValues]];
 }
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{

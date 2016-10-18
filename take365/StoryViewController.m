@@ -13,14 +13,14 @@
 #import "MonthCollectionReusableView.h"
 #import "StoryDay.h"
 
-@interface StoryViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UIScrollViewDelegate, UICollectionViewDelegateFlowLayout>
+@interface StoryViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UIScrollViewDelegate, UICollectionViewDelegateFlowLayout, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 @end
 
 @implementation StoryViewController
 {
     StoryResult *storyInfo;
-    PhotoCollectionViewCell *selectedCell;
+    UICollectionViewCell *selectedCell;
     float stockHeight;
     float stockWidth;
     
@@ -214,6 +214,7 @@
     if(storyDay.image == NULL){
         CalendarCollectionViewCell *calendarCell = [_uivPhotos dequeueReusableCellWithReuseIdentifier:@"CalendarCollectionViewCell" forIndexPath:indexPath];
         NSString *dayText = [storyDay.day componentsSeparatedByString:@"-"][2];
+        calendarCell.StoryDay = storyDay;
         calendarCell.lblDay.text = dayText;
         calendarCell.lblDay.hidden = false;
         return calendarCell;
@@ -256,13 +257,13 @@
     }
     
     if(isScrollingFast && image == NULL){
-        cell.Image = NULL;
+        cell.StoryDay = NULL;
         [cell.ivPhoto setImage:NULL];
         cell.lblDay.hidden = true;
         cell.ivPhoto.hidden = true;
         cell.aiLoading.hidden = false;
     }else{
-        cell.Image = storyDay.image;
+        cell.StoryDay = storyDay;
         [cell.ivPhoto setImage:image];
         cell.lblDay.text = [storyDay.image.date componentsSeparatedByString:@"-"][2];
         [cell.ivPhoto setHidden:false];
@@ -283,10 +284,47 @@
 }
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    
     [collectionView deselectItemAtIndexPath:indexPath animated:YES];
-    selectedCell = (PhotoCollectionViewCell*)[_uivPhotos cellForItemAtIndexPath:indexPath];
-    [self performSegueWithIdentifier:@"SEGUE_SHOW_IMAGE" sender:self];
+    
+    selectedCell = [_uivPhotos cellForItemAtIndexPath:indexPath];
+    
+    if([selectedCell isKindOfClass:[PhotoCollectionViewCell class]]){
+        PhotoCollectionViewCell *cell = (PhotoCollectionViewCell*)selectedCell;
+        if(cell.StoryDay){
+            return [self performSegueWithIdentifier:@"SEGUE_SHOW_IMAGE" sender:self];
+        }
+    }
+    
+    if([selectedCell isKindOfClass:[CalendarCollectionViewCell class]]){
+        UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+        picker.delegate = self;
+        picker.allowsEditing = NO;
+        picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        
+        [self presentViewController:picker animated:YES completion:NULL];
+    }
+}
+
+-(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
+    CalendarCollectionViewCell *cell = (CalendarCollectionViewCell*)cell;
+//    [self.TakeApi uploadImage:image ForStory:storyInfo.id ForDate:cell.StoryDay.day WithProgressBlock:^(float progress) {
+//        NSLog(@"Progress: %f", progress);
+//    } WithResultBlock:^(UploadImageResult *result) {
+//        if(result != NULL){
+//            if(stories.count < 1){
+//                [self.TakeApi getStoryListWithResultBlock:^(NSArray<StoryModel> *result, NSString *error) {
+//                    [self updateStories:result];
+//                    [_pvStoryPicker reloadAllComponents];
+//                    selectedStory = stories[[@([_pvStoryPicker selectedRowInComponent:0]) intValue]];
+//                    [self btnPublish_Done];
+//                }];
+//            }else{
+//                [self btnPublish_Done];
+//            }
+//        }else{
+//            
+//        }
+//    }];
 }
 
 

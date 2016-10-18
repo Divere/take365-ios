@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "StoryImageImagesModel.h"
+#import "StoryDay.h"
 
 @interface CalendarCollectionViewCell : UICollectionViewCell
 
+@property (nonatomic) StoryDay *StoryDay;
 @property (weak, nonatomic) IBOutlet UILabel *lblDay;
 
 @end

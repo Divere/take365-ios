@@ -164,6 +164,7 @@ const NSString *URL = @"https://take365.org";
                   completionHandler:^(NSURLResponse * _Nonnull response, id  _Nullable responseObject, NSError * _Nullable error) {
                       if (error) {
                           NSLog(@"Error: %@", error);
+                          NSLog(@"%@", responseObject);
                           if(resultBlock){
                               dispatch_async(dispatch_get_main_queue(), ^{
                                   resultBlock(false);
@@ -177,7 +178,7 @@ const NSString *URL = @"https://take365.org";
                           
                           if(resultBlock){
                               dispatch_async(dispatch_get_main_queue(), ^{
-                                  resultBlock(response);
+                                  resultBlock(response.result);
                               });
                           }
                       }

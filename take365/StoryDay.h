@@ -12,6 +12,7 @@
 @interface StoryDay : NSObject
 
 @property (nonatomic) NSString *day;
+@property (nonatomic) float uploadProgress;
 @property (nonatomic) StoryImageImagesModel *image;
 
 @end

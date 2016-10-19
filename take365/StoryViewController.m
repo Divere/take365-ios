@@ -21,6 +21,7 @@
 {
     StoryResult *storyInfo;
     UICollectionViewCell *selectedCell;
+    NSIndexPath *selectedIndexPath;
     float stockHeight;
     float stockWidth;
     
@@ -46,16 +47,36 @@
     [super viewDidLoad];
     
     imageCache = [NSMutableDictionary new];
-    sections = [NSMutableDictionary new];
     visibleImages = [NSMutableDictionary new];
-    imagesByDays = [NSMutableDictionary new];
-    days = [NSMutableArray new];
     
     UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout*)_uivPhotos.collectionViewLayout;
     layout.sectionHeadersPinToVisibleBounds = true;
     [_uivPhotos setDataSource:self];
     [_uivPhotos setDelegate:self];
     
+    self.title = _Story.title;
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"вид" style:UIBarButtonItemStyleDone target:self action:@selector(changeView)];
+    
+    [self refreshStoryData];
+}
+
+-(void)changeView{
+    bigViewEnabled = !bigViewEnabled;
+    [imageCache removeAllObjects];
+    [_uivPhotos reloadData];
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+- (void) refreshStoryData
+{
+    sections = [NSMutableDictionary new];
+    imagesByDays = [NSMutableDictionary new];
+    days = [NSMutableArray new];
     
     [self.TakeApi getStoryWithId:_Story.id WithResultBlock:^(StoryResult *result, NSString *error) {
         if(error == NULL){
@@ -123,21 +144,6 @@
             [_uivPhotos reloadData];
         }
     }];
-    
-    self.title = _Story.title;
-    
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"вид" style:UIBarButtonItemStyleDone target:self action:@selector(changeView)];
-}
-
--(void)changeView{
-    bigViewEnabled = !bigViewEnabled;
-    [imageCache removeAllObjects];
-    [_uivPhotos reloadData];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (void) scrollViewDidScroll:(UIScrollView *)scrollView {
@@ -217,6 +223,7 @@
         calendarCell.StoryDay = storyDay;
         calendarCell.lblDay.text = dayText;
         calendarCell.lblDay.hidden = false;
+        [calendarCell.pbUploadProgress setProgress:storyDay.uploadProgress];
         return calendarCell;
     }
     
@@ -286,6 +293,7 @@
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     [collectionView deselectItemAtIndexPath:indexPath animated:YES];
     
+    selectedIndexPath = indexPath;
     selectedCell = [_uivPhotos cellForItemAtIndexPath:indexPath];
     
     if([selectedCell isKindOfClass:[PhotoCollectionViewCell class]]){
@@ -305,26 +313,33 @@
     }
 }
 
+
+
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
-    CalendarCollectionViewCell *cell = (CalendarCollectionViewCell*)cell;
-//    [self.TakeApi uploadImage:image ForStory:storyInfo.id ForDate:cell.StoryDay.day WithProgressBlock:^(float progress) {
-//        NSLog(@"Progress: %f", progress);
-//    } WithResultBlock:^(UploadImageResult *result) {
-//        if(result != NULL){
-//            if(stories.count < 1){
-//                [self.TakeApi getStoryListWithResultBlock:^(NSArray<StoryModel> *result, NSString *error) {
-//                    [self updateStories:result];
-//                    [_pvStoryPicker reloadAllComponents];
-//                    selectedStory = stories[[@([_pvStoryPicker selectedRowInComponent:0]) intValue]];
-//                    [self btnPublish_Done];
-//                }];
-//            }else{
-//                [self btnPublish_Done];
-//            }
-//        }else{
-//            
-//        }
-//    }];
+    [picker dismissViewControllerAnimated:YES completion:NULL];
+    CalendarCollectionViewCell *cell = (CalendarCollectionViewCell*)selectedCell;
+    
+    UIImage *pickedImage = [info objectForKey:@"UIImagePickerControllerOriginalImage"];
+    NSData *image = UIImageJPEGRepresentation(pickedImage, 1.0f);
+    
+    NSIndexPath *selectedIndexPathCopy = [selectedIndexPath copy];
+    
+    [self.TakeApi uploadImage:image ForStory:storyInfo.id ForDate:cell.StoryDay.day WithProgressBlock:^(float progress) {
+        CalendarCollectionViewCell *uploadingCell = (CalendarCollectionViewCell*)[_uivPhotos cellForItemAtIndexPath:selectedIndexPathCopy];
+        if(uploadingCell){
+            uploadingCell.StoryDay.uploadProgress = progress;
+            [uploadingCell.pbUploadProgress setProgress:progress];
+        }
+    } WithResultBlock:^(UploadImageResult *result) {
+        if(result != NULL){
+            //[_uivPhotos reloadItemsAtIndexPaths:@[[_uivPhotos indexPathForCell:cell]]];
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self refreshStoryData];
+            });
+        }else{
+            
+        }
+    }];
 }
 
 
@@ -333,7 +348,8 @@
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if([segue.identifier isEqualToString:@"SEGUE_SHOW_IMAGE"]){
-        [segue.destinationViewController setValue:selectedCell.Image forKey:@"Image"];
+        PhotoCollectionViewCell *cell = (PhotoCollectionViewCell*)selectedCell;
+        [segue.destinationViewController setValue:cell.StoryDay.image forKey:@"Image"];
     }
 }
 

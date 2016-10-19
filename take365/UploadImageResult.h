@@ -10,7 +10,6 @@
 
 @interface UploadImageResult : JSONModel
 
-@property (nonatomic) int storyId;
 @property (nonatomic) int id;
 
 @end

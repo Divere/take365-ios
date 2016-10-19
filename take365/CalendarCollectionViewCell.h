@@ -13,5 +13,6 @@
 
 @property (nonatomic) StoryDay *StoryDay;
 @property (weak, nonatomic) IBOutlet UILabel *lblDay;
+@property (weak, nonatomic) IBOutlet UIProgressView *pbUploadProgress;
 
 @end

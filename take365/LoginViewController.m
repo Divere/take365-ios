@@ -33,11 +33,13 @@
     [[self navigationController] setNavigationBarHidden:YES animated:YES];
     
     NSString *accessToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"accessToken"];
-    NSNumber *currentUserId = [[NSUserDefaults standardUserDefaults] objectForKey:@"currentUserId"];
     if(accessToken != NULL){
         api.AccessToken = accessToken;
-        api.CurrentUserId = [currentUserId intValue];
-        [self performSegueWithIdentifier:@"SEGUE_LOGIN_COMPLETED" sender:self];
+        [api loginWithAccessTokenAndResultBlock:^(LoginResult *result, NSString *error) {
+            if(!error){
+                 [self performSegueWithIdentifier:@"SEGUE_LOGIN_COMPLETED" sender:self];
+            }
+        }];
     }
 }
 
@@ -50,7 +52,6 @@
     
     [[AppDelegate getInstance].api loginWithUsername:_tfLogin.text AndPassword:_tfPassword.text AndResultBlock:^(LoginResult *result, NSString *error) {
         if(error == NULL){
-            [[NSUserDefaults standardUserDefaults] setObject:[[NSNumber alloc] initWithInt:result.id] forKey:@"currentUserId"];
             [[NSUserDefaults standardUserDefaults] setObject:result.token forKey:@"accessToken"];
             [[NSUserDefaults standardUserDefaults] synchronize];
             [self performSegueWithIdentifier:@"SEGUE_LOGIN_COMPLETED" sender:self];

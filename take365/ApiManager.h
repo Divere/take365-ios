@@ -25,7 +25,7 @@ typedef enum : NSUInteger {
 
 @interface ApiManager : NSObject
 
-@property (nonatomic) int CurrentUserId;
+@property (nonatomic) LoginResult *CurrentUser;
 @property (nonatomic) NSString *AccessToken;
 
 @property (nonatomic) NSArray<StoryModel> *Stories;
@@ -34,6 +34,7 @@ typedef enum : NSUInteger {
 
 -(void)registerWithUsername:(NSString *)username Email:(NSString *)email Password:(NSString *)password AndResultBlock:(void (^)(RegisterResult *result, NSString *error))resultBlock;
 -(void)loginWithUsername:(NSString *)username AndPassword:(NSString *)password AndResultBlock:(void (^)(LoginResult *result, NSString *error))resultBlock;
+-(void)loginWithAccessTokenAndResultBlock:(void (^)(LoginResult *result, NSString *error))resultBlock;
 -(void)getStoryWithId:(int)storyId WithResultBlock:(void (^)(StoryResult *result, NSString *error))resultBlock;
 -(void)getStoryListWithResultBlock:(void (^)(NSArray<StoryModel> *result, NSString *error))resultBlock;
 -(void)createStoryWithTitle:(NSString*)title PrivateLevel:(StoryPrivateLevel)privateLevel Description:(NSString*)description AndResultBlock:(void (^)(StoryResult *story, NSString *error))resultBlock;

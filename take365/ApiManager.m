@@ -10,7 +10,7 @@
 #import "JSONModelLib.h"
 #import "AFNetworking.h"
 
-const NSString *URL = @"https://take365.org";
+const NSString *URL = @"http://dev.take365.org";
 
 @implementation ApiManager
 
@@ -36,6 +36,24 @@ const NSString *URL = @"https://take365.org";
     }];
 }
 
+- (void)handleAuthResponse:(id)json err_p:(JSONModelError **)err_p resultBlock:(void (^)(LoginResult *, NSString *))resultBlock {
+  if(![self handleBaseResponse:json]){
+            return;
+        }
+        
+        LoginResponse *response = [[LoginResponse alloc] initWithDictionary:json error:&(*err_p)];
+        
+        if(response.result != NULL){
+            _AccessToken = response.result.token;
+            _CurrentUser = response.result;
+            if(resultBlock != NULL){
+                resultBlock(response.result, NULL);
+            }
+        }else if(response.errors != NULL){
+            resultBlock(NULL, [response.errors objectAtIndex:0][@"value"]);
+        }
+}
+
 -(void)loginWithUsername:(NSString *)username AndPassword:(NSString *)password AndResultBlock:(void (^)(LoginResult* result, NSString *error))resultBlock{
     LoginRequest *request = [LoginRequest new];
     request.username = username;
@@ -43,20 +61,14 @@ const NSString *URL = @"https://take365.org";
     
     [JSONHTTPClient postJSONFromURLWithString:METHOD(@"api/auth/login") bodyString:[request toJSONString] andHeaders:nil completion:^(id json, JSONModelError *err) {
         
-        if(![self handleBaseResponse:json]){
-            return;
-        }
+        [self handleAuthResponse:json err_p:&err resultBlock:resultBlock];
+    }];
+}
+
+-(void)loginWithAccessTokenAndResultBlock:(void (^)(LoginResult *result, NSString *error))resultBlock {
+    [JSONHTTPClient getJSONFromURLWithString:METHOD([NSString stringWithFormat:@"api/auth/check-token?accessToken=%@", _AccessToken]) completion:^(id json, JSONModelError *err) {
         
-        LoginResponse *response = [[LoginResponse alloc] initWithDictionary:json error:&err];
-        
-        if(response.result != NULL){
-            _AccessToken = response.result.token;
-            if(resultBlock != NULL){
-                resultBlock(response.result, NULL);
-            }
-        }else if(response.errors != NULL){
-            resultBlock(NULL, [response.errors objectAtIndex:0][@"value"]);
-        }
+        [self handleAuthResponse:json err_p:&err resultBlock:resultBlock];
     }];
 }
 

@@ -83,7 +83,7 @@
             storyInfo = result;
             
             for (AuthorModel *author in storyInfo.authors) {
-                if(author.id == self.TakeApi.CurrentUserId){
+                if(author.id == self.TakeApi.CurrentUser.id){
                     isContributingStory = true;
                     break;
                 }

@@ -15,4 +15,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *lblDay;
 @property (weak, nonatomic) IBOutlet UIProgressView *pbUploadProgress;
 
+- (void)changeSelectedColor:(BOOL)selected;
+
 @end

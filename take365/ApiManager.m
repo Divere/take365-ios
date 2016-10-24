@@ -10,7 +10,7 @@
 #import "JSONModelLib.h"
 #import "AFNetworking.h"
 
-const NSString *URL = @"http://dev.take365.org";
+const NSString *URL = @"https://take365.org";
 
 @implementation ApiManager
 
@@ -44,7 +44,9 @@ const NSString *URL = @"http://dev.take365.org";
         LoginResponse *response = [[LoginResponse alloc] initWithDictionary:json error:&(*err_p)];
         
         if(response.result != NULL){
-            _AccessToken = response.result.token;
+            if(response.result.token != NULL){
+                _AccessToken = response.result.token;
+            }
             _CurrentUser = response.result;
             if(resultBlock != NULL){
                 resultBlock(response.result, NULL);
@@ -66,7 +68,7 @@ const NSString *URL = @"http://dev.take365.org";
 }
 
 -(void)loginWithAccessTokenAndResultBlock:(void (^)(LoginResult *result, NSString *error))resultBlock {
-    [JSONHTTPClient getJSONFromURLWithString:METHOD([NSString stringWithFormat:@"api/auth/check-token?accessToken=%@", _AccessToken]) completion:^(id json, JSONModelError *err) {
+    [JSONHTTPClient getJSONFromURLWithString:METHOD([NSString stringWithFormat:@"api/auth/reuse-token?accessToken=%@", _AccessToken]) completion:^(id json, JSONModelError *err) {
         
         [self handleAuthResponse:json err_p:&err resultBlock:resultBlock];
     }];

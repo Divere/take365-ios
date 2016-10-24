@@ -17,5 +17,7 @@
 @property (nonatomic) int totalDays;
 @property (nonatomic) NSString *totalImagesTitle;
 @property (nonatomic) BOOL isOutdated;
+@property (nonatomic) NSString *dateStart;
+@property (nonatomic) NSString *dateEnd;
 
 @end

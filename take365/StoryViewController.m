@@ -57,7 +57,10 @@
     self.title = _Story.title;
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"вид" style:UIBarButtonItemStyleDone target:self action:@selector(changeView)];
-    
+}
+
+-(void)viewDidAppear:(BOOL)animated
+{
     [self refreshStoryData];
 }
 
@@ -79,70 +82,77 @@
     days = [NSMutableArray new];
     
     [self.TakeApi getStoryWithId:_Story.id WithResultBlock:^(StoryResult *result, NSString *error) {
-        if(error == NULL){
-            storyInfo = result;
-            
-            for (AuthorModel *author in storyInfo.authors) {
-                if(author.id == self.TakeApi.CurrentUser.id){
-                    isContributingStory = true;
-                    break;
-                }
-            }
-            
-            for (StoryImageImagesModel *image in result.images) {
-                [imagesByDays setObject:image forKey:image.date];
-            }
-            
-            for (int i=0; i<storyInfo.progress.passedDays; i++) {
-                NSDate *currentDate = [NSDate new];
-                currentDate = [currentDate dateByAddingTimeInterval:-i*24*60*60];
-                
-                NSDateFormatter *df = [NSDateFormatter new];
-                [df setDateFormat:@"yyyy-MM-dd"];
-                
-                StoryDay *storyDay = [StoryDay new];
-                storyDay.day = [df stringFromDate:currentDate];
-                storyDay.image = [imagesByDays objectForKey:storyDay.day];
-                
-                if(storyDay.image == NULL && !isContributingStory){
-                    continue;
-                }
-                
-                [days addObject:storyDay];
-            }
-            
-            for (StoryDay *storyDay in days) {
-                NSArray *sectionTitleComponents = [storyDay.day componentsSeparatedByString:@"-"];
-                NSString *sectionTitle = [NSString stringWithFormat:@"%@-%@", sectionTitleComponents[0], sectionTitleComponents[1]];
-                
-                NSMutableArray *sectionContent = [sections objectForKey:sectionTitle];
-                
-                if(sectionContent == NULL){
-                    sectionContent = [NSMutableArray new];
-                    [sections setObject:sectionContent forKey:sectionTitle];
-                }
-                
-                [sectionContent addObject:storyDay];
-            }
-            
-            sortedSectionsTitles = [[sections allKeys] sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
-                NSString *key1 = obj1;
-                NSString *key2 = obj2;
-                
-                NSDateFormatter *df = [NSDateFormatter new];
-                [df setDateFormat:@"yyyy-MM"];
-                NSDate *date1 = [df dateFromString:key1];
-                NSDate *date2 = [df dateFromString:key2];
-                
-                if(date1 > date2){
-                    return false;
-                }else{
-                    return true;
-                }
-            }];
-            
-            [_uivPhotos reloadData];
+        if(error != NULL){
+            return;
         }
+        
+        storyInfo = result;
+        
+        for (AuthorModel *author in storyInfo.authors) {
+            if(author.id == self.TakeApi.CurrentUser.id){
+                isContributingStory = true;
+                break;
+            }
+        }
+        
+        for (StoryImageImagesModel *image in result.images) {
+            [imagesByDays setObject:image forKey:image.date];
+        }
+        
+        NSDateFormatter *df = [NSDateFormatter new];
+        [df setDateFormat:@"yyyy-MM-dd"];
+        
+        NSDate *dateStart = [df dateFromString:storyInfo.progress.dateStart];
+        NSDate *dateEnd = [df dateFromString:storyInfo.progress.dateEnd];
+        
+        for (int i=0; i<storyInfo.progress.passedDays + 1; i++) {
+            NSDate *currentDate = [dateStart dateByAddingTimeInterval:i*24*60*60];
+            if([currentDate compare:dateEnd] == NSOrderedDescending){
+                break;
+            }
+            
+            StoryDay *storyDay = [StoryDay new];
+            storyDay.day = [df stringFromDate:currentDate];
+            storyDay.image = [imagesByDays objectForKey:storyDay.day];
+            
+            if(storyDay.image == NULL && !isContributingStory){
+                continue;
+            }
+            
+            [days insertObject:storyDay atIndex:0];
+        }
+        
+        for (StoryDay *storyDay in days) {
+            NSArray *sectionTitleComponents = [storyDay.day componentsSeparatedByString:@"-"];
+            NSString *sectionTitle = [NSString stringWithFormat:@"%@-%@", sectionTitleComponents[0], sectionTitleComponents[1]];
+            
+            NSMutableArray *sectionContent = [sections objectForKey:sectionTitle];
+            
+            if(sectionContent == NULL){
+                sectionContent = [NSMutableArray new];
+                [sections setObject:sectionContent forKey:sectionTitle];
+            }
+            
+            [sectionContent addObject:storyDay];
+        }
+        
+        sortedSectionsTitles = [[sections allKeys] sortedArrayUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2) {
+            NSString *key1 = obj1;
+            NSString *key2 = obj2;
+            
+            NSDateFormatter *df = [NSDateFormatter new];
+            [df setDateFormat:@"yyyy-MM"];
+            NSDate *date1 = [df dateFromString:key1];
+            NSDate *date2 = [df dateFromString:key2];
+            
+            if([date1 compare:date2] == NSOrderedDescending){
+                return false;
+            }else{
+                return true;
+            }
+        }];
+        
+        [_uivPhotos reloadData];
     }];
 }
 
@@ -291,7 +301,7 @@
 }
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    [collectionView deselectItemAtIndexPath:indexPath animated:YES];
+    //[collectionView deselectItemAtIndexPath:indexPath animated:YES];
     
     selectedIndexPath = indexPath;
     selectedCell = [_uivPhotos cellForItemAtIndexPath:indexPath];
@@ -304,6 +314,8 @@
     }
     
     if([selectedCell isKindOfClass:[CalendarCollectionViewCell class]]){
+        CalendarCollectionViewCell *cell = (CalendarCollectionViewCell*)selectedCell;
+        [cell changeSelectedColor:YES];
         UIImagePickerController *picker = [[UIImagePickerController alloc] init];
         picker.delegate = self;
         picker.allowsEditing = NO;
@@ -318,6 +330,7 @@
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
     [picker dismissViewControllerAnimated:YES completion:NULL];
     CalendarCollectionViewCell *cell = (CalendarCollectionViewCell*)selectedCell;
+    [cell changeSelectedColor:NO];
     
     UIImage *pickedImage = [info objectForKey:@"UIImagePickerControllerOriginalImage"];
     NSData *image = UIImageJPEGRepresentation(pickedImage, 1.0f);
@@ -342,6 +355,12 @@
     }];
 }
 
+-(void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+    [picker dismissViewControllerAnimated:YES completion:NULL];
+    CalendarCollectionViewCell *cell = (CalendarCollectionViewCell*)selectedCell;
+    [cell changeSelectedColor:NO];
+}
 
 #pragma mark - Navigation
 

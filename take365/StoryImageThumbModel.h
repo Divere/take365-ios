@@ -6,9 +6,9 @@
 //  Copyright © 2015 take365. All rights reserved.
 //
 
-#import "JSONModel.h"
+#import "Model.h"
 
-@interface StoryImageThumbModel : JSONModel
+@interface StoryImageThumbModel : Model
 
 @property (nonatomic) int height;
 @property (nonatomic) NSString *url;

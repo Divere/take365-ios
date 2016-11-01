@@ -24,7 +24,7 @@
 @property (nonatomic) NSArray<StoryImageImagesModel> *images;
 @property (nonatomic) StoryProgressModel *progress;
 @property (nonatomic) int status;
-@property (nonatomic) NSString<Optional> *title;
+@property (nonatomic) NSString *title;
 @property (nonatomic) NSString *url;
 
 @end

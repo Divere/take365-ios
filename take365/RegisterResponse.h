@@ -6,13 +6,13 @@
 //  Copyright © 2016 take365. All rights reserved.
 //
 
-#import "JSONModel.h"
+#import "Model.h"
 #import "RegisterResult.h"
 
 
-@interface RegisterResponse : JSONModel
+@interface RegisterResponse : Model
 
-@property (nonatomic) RegisterResult<Optional> *result;
-@property (nonatomic) NSMutableArray<Optional> *errors;
+@property (nonatomic) RegisterResult *result;
+@property (nonatomic) NSMutableArray *errors;
 
 @end

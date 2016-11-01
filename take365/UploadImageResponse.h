@@ -6,12 +6,12 @@
 //  Copyright © 2016 take365. All rights reserved.
 //
 
-#import "JSONModel.h"
+#import "Model.h"
 #import "UploadImageResult.h"
 
-@interface UploadImageResponse : JSONModel
+@interface UploadImageResponse : Model
 
-@property (nonatomic) UploadImageResult<Optional> *result;
-@property (nonatomic) NSMutableArray<Optional> *errors;
+@property (nonatomic) UploadImageResult *result;
+@property (nonatomic) NSMutableArray *errors;
 
 @end

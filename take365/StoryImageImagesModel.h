@@ -6,15 +6,15 @@
 //  Copyright © 2015 take365. All rights reserved.
 //
 
-#import "JSONModel.h"
+#import "Model.h"
 #import "StoryImageThumbModel.h"
 
-@interface StoryImageImagesModel : JSONModel
+@interface StoryImageImagesModel : Model
 
 @property (nonatomic) NSString *date;
 @property (nonatomic) int id;
 @property (nonatomic) StoryImageThumbModel *thumb;
 @property (nonatomic) StoryImageThumbModel *thumbLarge;
-@property (nonatomic) NSString<Optional> *title;
+@property (nonatomic) NSString *title;
 
 @end

@@ -6,12 +6,12 @@
 //  Copyright © 2015 take365. All rights reserved.
 //
 
-#import "JSONModel.h"
+#import "Model.h"
 #import "StoryResult.h"
 
-@interface StoryResponse : JSONModel
+@interface StoryResponse : Model
 
-@property (nonatomic) StoryResult<Optional> *result;
-@property (nonatomic) NSArray<Optional> *errors;
+@property (nonatomic) StoryResult *result;
+@property (nonatomic) NSArray *errors;
 
 @end

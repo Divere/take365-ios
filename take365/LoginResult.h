@@ -6,13 +6,13 @@
 //  Copyright © 2015 take365. All rights reserved.
 //
 
-#import "JSONModel.h"
+#import "Model.h"
 
-@interface LoginResult : JSONModel
+@interface LoginResult : Model
 
 @property (nonatomic) int id;
-@property (nonatomic) NSString<Optional> *token;
-@property (nonatomic) NSNumber<Optional> *tokenExpires;
+@property (nonatomic) NSString *token;
+@property (nonatomic) NSNumber *tokenExpires;
 @property (nonatomic) NSString *username;
 
 @end

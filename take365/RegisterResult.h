@@ -6,8 +6,8 @@
 //  Copyright © 2016 take365. All rights reserved.
 //
 
-#import "JSONModel.h"
+#import "Model.h"
 
-@interface RegisterResult : JSONModel
+@interface RegisterResult : Model
 
 @end

@@ -10,6 +10,8 @@
 		0D428646D4B7630C1C6D9290 /* libPods-take365.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AF3343DD837D04D6CE8AF9F2 /* libPods-take365.a */; };
 		4D6A3F811DB56F42001F0666 /* CalendarCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D6A3F801DB56F42001F0666 /* CalendarCollectionViewCell.m */; };
 		4D6C023B1DB5678200D8D735 /* StoryDay.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D6C023A1DB5678200D8D735 /* StoryDay.m */; };
+		4DA1F3211DC943EC00E3EE6A /* Model.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DA1F3201DC943EC00E3EE6A /* Model.m */; };
+		4DFAFD8C1DBF480000AE88BF /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DFAFD8B1DBF480000AE88BF /* SearchViewController.m */; };
 		7A0336D51C6C8DE70022E42B /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A0336D41C6C8DE70022E42B /* RegisterViewController.m */; };
 		7A0336D81C6C91A00022E42B /* RegisterRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A0336D71C6C91A00022E42B /* RegisterRequest.m */; };
 		7A13D87A1BDE49CE00E1CB98 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A13D8791BDE49CE00E1CB98 /* main.m */; };
@@ -75,6 +77,10 @@
 		4D6A3F801DB56F42001F0666 /* CalendarCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarCollectionViewCell.m; sourceTree = "<group>"; };
 		4D6C02391DB5678200D8D735 /* StoryDay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoryDay.h; sourceTree = "<group>"; };
 		4D6C023A1DB5678200D8D735 /* StoryDay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoryDay.m; sourceTree = "<group>"; };
+		4DA1F31F1DC943EC00E3EE6A /* Model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Model.h; sourceTree = "<group>"; };
+		4DA1F3201DC943EC00E3EE6A /* Model.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Model.m; sourceTree = "<group>"; };
+		4DFAFD8A1DBF480000AE88BF /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
+		4DFAFD8B1DBF480000AE88BF /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
 		590675EBCAE1AD34A88D8607 /* Pods-take365.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-take365.release.xcconfig"; path = "Pods/Target Support Files/Pods-take365/Pods-take365.release.xcconfig"; sourceTree = "<group>"; };
 		7A0336D31C6C8DE70022E42B /* RegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterViewController.h; sourceTree = "<group>"; };
 		7A0336D41C6C8DE70022E42B /* RegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterViewController.m; sourceTree = "<group>"; };
@@ -292,6 +298,8 @@
 				7A39A33E1C0DE90800A8A51C /* StoryImageThumbModel.m */,
 				7A39A3401C0DE99000A8A51C /* StoryImageImagesModel.h */,
 				7A39A3411C0DE99000A8A51C /* StoryImageImagesModel.m */,
+				4DA1F31F1DC943EC00E3EE6A /* Model.h */,
+				4DA1F3201DC943EC00E3EE6A /* Model.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -474,6 +482,8 @@
 				7AD74E5B1D228196005E5A23 /* ApiViewController.m */,
 				7AD74E5D1D2281A7005E5A23 /* ApiTableViewController.h */,
 				7AD74E5E1D2281A7005E5A23 /* ApiTableViewController.m */,
+				4DFAFD8A1DBF480000AE88BF /* SearchViewController.h */,
+				4DFAFD8B1DBF480000AE88BF /* SearchViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -670,6 +680,7 @@
 				7A39A3261C0DD1AB00A8A51C /* StoryProgressModel.m in Sources */,
 				7A7D11851C6DFD4100150792 /* RegisterResult.m in Sources */,
 				7A4342EB1C076C1900F74BE8 /* JSONKeyMapper.m in Sources */,
+				4DA1F3211DC943EC00E3EE6A /* Model.m in Sources */,
 				7A4342E31C076C1900F74BE8 /* JSONModel.m in Sources */,
 				7AC2E7551C5A71BB0060DF4C /* ShowImageViewController.m in Sources */,
 				7A39A3001C0DAC7000A8A51C /* LoginResponse.m in Sources */,
@@ -711,6 +722,7 @@
 				7A39A3391C0DE8B700A8A51C /* StoryResult.m in Sources */,
 				7AD74E5C1D228196005E5A23 /* ApiViewController.m in Sources */,
 				7A13D87A1BDE49CE00E1CB98 /* main.m in Sources */,
+				4DFAFD8C1DBF480000AE88BF /* SearchViewController.m in Sources */,
 				7A13D8991BDFCF3F00E1CB98 /* LoginViewController.m in Sources */,
 				7A39A2FC1C0DABF900A8A51C /* LoginRequest.m in Sources */,
 			);

@@ -6,11 +6,11 @@
 //  Copyright © 2015 take365. All rights reserved.
 //
 
-#import "JSONModel.h"
+#import "Model.h"
 
-@interface StoryProgressModel : JSONModel
+@interface StoryProgressModel : Model
 
-@property (nonatomic) NSNumber<Optional> *delayDays;
+@property (nonatomic) NSNumber *delayDays;
 @property (nonatomic) int passedDays;
 @property (nonatomic) double percentsComplete;
 @property (nonatomic) int totalImages;

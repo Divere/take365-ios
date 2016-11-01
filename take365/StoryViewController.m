@@ -104,10 +104,11 @@
         
         NSDate *dateStart = [df dateFromString:storyInfo.progress.dateStart];
         NSDate *dateEnd = [df dateFromString:storyInfo.progress.dateEnd];
+        NSDate *today = [NSDate new];
         
-        for (int i=0; i<storyInfo.progress.passedDays + 1; i++) {
+        for (int i=0; i<storyInfo.progress.passedDays + 2; i++) {
             NSDate *currentDate = [dateStart dateByAddingTimeInterval:i*24*60*60];
-            if([currentDate compare:dateEnd] == NSOrderedDescending){
+            if([currentDate compare:dateEnd] == NSOrderedDescending || [currentDate compare:today] == NSOrderedDescending){
                 break;
             }
             

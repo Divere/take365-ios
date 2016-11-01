@@ -6,13 +6,13 @@
 //  Copyright © 2015 take365. All rights reserved.
 //
 
-#import "JSONModel.h"
+#import "Model.h"
 #import "LoginResult.h"
 #import "LoginErrors.h"
 
-@interface LoginResponse : JSONModel
+@interface LoginResponse : Model
 
-@property (nonatomic) LoginResult<Optional> *result;
-@property (nonatomic) NSMutableArray<Optional> *errors;
+@property (nonatomic) LoginResult *result;
+@property (nonatomic) NSMutableArray *errors;
 
 @end

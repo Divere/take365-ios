@@ -6,9 +6,9 @@
 //  Copyright © 2015 take365. All rights reserved.
 //
 
-#import "JSONModel.h"
+#import "Model.h"
 
-@interface LoginErrors : JSONModel
+@interface LoginErrors : Model
 
 @property (nonatomic) NSString *field;
 @property (nonatomic) NSString *value;

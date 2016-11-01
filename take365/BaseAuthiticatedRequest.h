@@ -6,9 +6,9 @@
 //  Copyright © 2015 take365. All rights reserved.
 //
 
-#import "JSONModel.h"
+#import "Model.h"
 
-@interface BaseAuthiticatedRequest : JSONModel
+@interface BaseAuthiticatedRequest : Model
 
 @property (nonatomic) NSString *accessToken;
 

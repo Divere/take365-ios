@@ -11,6 +11,7 @@
 		4D6C023B1DB5678200D8D735 /* StoryDay.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D6C023A1DB5678200D8D735 /* StoryDay.m */; };
 		4DA1F3211DC943EC00E3EE6A /* Model.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DA1F3201DC943EC00E3EE6A /* Model.m */; };
 		4DB7EF2C1DD23A5E004F983B /* StoryItemCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DB7EF2B1DD23A5E004F983B /* StoryItemCollectionViewCell.m */; };
+		4DB7EF2F1DD2541D004F983B /* NSDate+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DB7EF2E1DD2541D004F983B /* NSDate+Extensions.m */; };
 		4DFAFD8C1DBF480000AE88BF /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DFAFD8B1DBF480000AE88BF /* SearchViewController.m */; };
 		7A0336D51C6C8DE70022E42B /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A0336D41C6C8DE70022E42B /* RegisterViewController.m */; };
 		7A0336D81C6C91A00022E42B /* RegisterRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A0336D71C6C91A00022E42B /* RegisterRequest.m */; };
@@ -71,6 +72,8 @@
 		4DA1F3201DC943EC00E3EE6A /* Model.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Model.m; sourceTree = "<group>"; };
 		4DB7EF2A1DD23A5E004F983B /* StoryItemCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoryItemCollectionViewCell.h; sourceTree = "<group>"; };
 		4DB7EF2B1DD23A5E004F983B /* StoryItemCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoryItemCollectionViewCell.m; sourceTree = "<group>"; };
+		4DB7EF2D1DD2541D004F983B /* NSDate+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+Extensions.h"; sourceTree = "<group>"; };
+		4DB7EF2E1DD2541D004F983B /* NSDate+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Extensions.m"; sourceTree = "<group>"; };
 		4DFAFD8A1DBF480000AE88BF /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
 		4DFAFD8B1DBF480000AE88BF /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
 		590675EBCAE1AD34A88D8607 /* Pods-take365.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-take365.release.xcconfig"; path = "Pods/Target Support Files/Pods-take365/Pods-take365.release.xcconfig"; sourceTree = "<group>"; };
@@ -441,6 +444,8 @@
 			children = (
 				7AA7B51A1C75DB40003609CC /* NoHistorySegue.h */,
 				7AA7B51B1C75DB40003609CC /* NoHistorySegue.m */,
+				4DB7EF2D1DD2541D004F983B /* NSDate+Extensions.h */,
+				4DB7EF2E1DD2541D004F983B /* NSDate+Extensions.m */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -577,6 +582,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4DB7EF2F1DD2541D004F983B /* NSDate+Extensions.m in Sources */,
 				7A39A3151C0DC70800A8A51C /* StoriesListViewController.m in Sources */,
 				4DB7EF2C1DD23A5E004F983B /* StoryItemCollectionViewCell.m in Sources */,
 				7A39A2F61C0D92D300A8A51C /* ApiManager.m in Sources */,

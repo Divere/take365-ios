@@ -12,6 +12,7 @@
 #import "CalendarCollectionViewCell.h"
 #import "MonthCollectionReusableView.h"
 #import "StoryDay.h"
+#import "NSDate+Extensions.h"
 
 @import KCFloatingActionButton;
 
@@ -123,14 +124,27 @@
         
         NSDateFormatter *df = [NSDateFormatter new];
         [df setDateFormat:@"yyyy-MM-dd"];
+    
         
-        NSDate *dateStart = [df dateFromString:storyInfo.progress.dateStart];
-        NSDate *dateEnd = [df dateFromString:storyInfo.progress.dateEnd];
-        NSDate *today = [NSDate new];
+        NSDate *dateStart = [[df dateFromString:storyInfo.progress.dateStart] setZeroTime];
+        NSDate *dateEnd = [[df dateFromString:storyInfo.progress.dateEnd] setZeroTime];
+        NSDate *today = [NSDate getToday];
+        
+        StoryDay *firstDay = [StoryDay new];
+        firstDay.day = [df stringFromDate:dateStart];
+        firstDay.image = [imagesByDays objectForKey:firstDay.day];
+        
+        if(firstDay.image != NULL || isContributingStory) {
+            [days insertObject:firstDay atIndex:0];
+            [daysByDates setObject:firstDay forKey:[df stringFromDate:dateStart]];
+        }
+        
+        NSDate *currentDate = dateStart;
         
         for (int i=0; i<storyInfo.progress.passedDays + 2; i++) {
-            NSDate *currentDate = [dateStart dateByAddingTimeInterval:i*24*60*60];
+            currentDate = [currentDate dateByAddingTimeInterval:86400];
             if([currentDate compare:dateEnd] == NSOrderedDescending || [currentDate compare:today] == NSOrderedDescending){
+                NSLog(@"Breaking on %@", currentDate);
                 break;
             }
             
@@ -363,7 +377,13 @@
         }
     } WithResultBlock:^(UploadImageResult *result) {
         if(result != NULL){
-            //[_uivPhotos reloadItemsAtIndexPaths:@[[_uivPhotos indexPathForCell:cell]]];
+            StoryItemCollectionViewCell *uploadingCell = (StoryItemCollectionViewCell*)[_uivPhotos cellForItemAtIndexPath:selectedIndexPathCopy];
+            if(uploadingCell){
+                uploadingCell.StoryDay.uploadProgress = 0;
+                [uploadingCell.pbUploadProgress setProgress:0];
+            }
+            NSString *key = [NSString stringWithFormat:@"%ld-%ld", (long)selectedIndexPathCopy.section, (long)selectedIndexPathCopy.row];
+            [imageCache removeObjectForKey:key];
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self refreshStoryData];
             });

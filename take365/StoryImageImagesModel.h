@@ -15,6 +15,8 @@
 @property (nonatomic) int id;
 @property (nonatomic) StoryImageThumbModel *thumb;
 @property (nonatomic) StoryImageThumbModel *thumbLarge;
+@property (nonatomic) StoryImageThumbModel *image;
+@property (nonatomic) StoryImageThumbModel *imageLarge;
 @property (nonatomic) NSString *title;
 
 @end

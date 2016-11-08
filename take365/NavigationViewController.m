@@ -7,7 +7,7 @@
 //
 
 #import "NavigationViewController.h"
-#import "SelectStoryViewController.h"
+#import "StoriesListViewController.h"
 #import "StoryViewController.h"
 
 static NavigationViewController *instance;
@@ -40,7 +40,7 @@ static NavigationViewController *instance;
 -(void)navigateToStory:(StoryModel *)story{
     [self setSelectedIndex:0];
     UINavigationController *nav = self.viewControllers[0];
-    SelectStoryViewController *ssvc = nav.viewControllers[0];
+    StoriesListViewController *ssvc = nav.viewControllers[0];
     ssvc.SelectedStory = story;
     [ssvc performSegueWithIdentifier:@"SEGUE_SHOW_STORY" sender:nav];
 }

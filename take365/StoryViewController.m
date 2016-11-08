@@ -13,6 +13,8 @@
 #import "MonthCollectionReusableView.h"
 #import "StoryDay.h"
 
+@import KCFloatingActionButton;
+
 @interface StoryViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UIScrollViewDelegate, UICollectionViewDelegateFlowLayout, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 @end
@@ -56,7 +58,15 @@
     
     self.title = _Story.title;
     
+    
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"вид" style:UIBarButtonItemStyleDone target:self action:@selector(changeView)];
+    
+    KCFloatingActionButton *fab = [[KCFloatingActionButton alloc] init];
+    fab.buttonImage = [UIImage imageNamed:@"Camera"];
+    fab.tintColor = [UIColor whiteColor];
+    fab.buttonColor = [UIColor redColor];
+    fab.itemImageColor = [UIColor whiteColor];
+    [self.view addSubview:fab];
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -261,7 +271,7 @@
                 if(!bigViewEnabled){
                     downloadedImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:storyDay.image.thumb.url]]];
                 }else{
-                    downloadedImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:storyDay.image.thumbLarge.url]]];
+                    downloadedImage = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:storyDay.image.image.url]]];
                 }
                 
                 if(downloadedImage != NULL){

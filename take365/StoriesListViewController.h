@@ -10,7 +10,7 @@
 #import "StoryModel.h"
 #import "ApiViewController.h"
 
-@interface SelectStoryViewController : ApiViewController<UITableViewDataSource, UITableViewDelegate>
+@interface StoriesListViewController : ApiViewController<UITableViewDataSource, UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 

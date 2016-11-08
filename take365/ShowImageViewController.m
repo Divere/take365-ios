@@ -41,7 +41,7 @@
 
 -(void)viewDidAppear:(BOOL)animated{
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:_Image.thumbLarge.url]]];
+        UIImage *image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:_Image.image.url]]];
         dispatch_async(dispatch_get_main_queue(), ^{
             [_aiLoading stopAnimating];
             _uiImage.image = image;

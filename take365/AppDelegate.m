@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-#import "Engine/JSONModel/JSONModelLib.h"
+#import "JSONModelLib.h"
 
 @interface AppDelegate ()
 

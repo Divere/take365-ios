@@ -216,13 +216,13 @@
         }
         
         previewLayer =  [[AVCaptureVideoPreviewLayer alloc] initWithSession:session];
-        [previewLayer setVideoGravity:AVLayerVideoGravityResizeAspectFill];
+        [previewLayer setVideoGravity:AVLayerVideoGravityResizeAspect];
         
         CALayer *rootLayer = [[self view] layer];
         [rootLayer setMasksToBounds:YES];
         
         CGRect frame = self.view.frame;
-        
+        frame.origin.y = -85;
         [previewLayer setFrame:frame];
         [rootLayer insertSublayer:previewLayer atIndex:0];
         

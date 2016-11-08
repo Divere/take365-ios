@@ -20,7 +20,7 @@ const NSString *URL = @"https://take365.org";
     r.email = email;
     r.password = password;
     
-    [JSONHTTPClient postJSONFromURLWithString:METHOD(@"api/user/register") bodyString:[r toJSONString] andHeaders:nil completion:^(id json, JSONModelError *err) {
+    [JSONHTTPClient postJSONFromURLWithString:METHOD(@"api/user/register") bodyString:[r toJSONString] completion:^(id json, JSONModelError *err) {
         
         if(![self handleBaseResponse:json]){
             return;
@@ -61,7 +61,7 @@ const NSString *URL = @"https://take365.org";
     request.username = username;
     request.password = password;
     
-    [JSONHTTPClient postJSONFromURLWithString:METHOD(@"api/auth/login") bodyString:[request toJSONString] andHeaders:nil completion:^(id json, JSONModelError *err) {
+    [JSONHTTPClient postJSONFromURLWithString:METHOD(@"api/auth/login") bodyString:[request toJSONString] completion:^(id json, JSONModelError *err) {
         
         [self handleAuthResponse:json err_p:&err resultBlock:resultBlock];
     }];
@@ -127,7 +127,7 @@ const NSString *URL = @"https://take365.org";
     r.descr = description;
     r.accessToken = _AccessToken;
     
-    [JSONHTTPClient postJSONFromURLWithString:METHOD(@"api/story/write") bodyString:[r toJSONString] andHeaders:NULL completion:^(id json, JSONModelError *err)
+    [JSONHTTPClient postJSONFromURLWithString:METHOD(@"api/story/write") bodyString:[r toJSONString] completion:^(id json, JSONModelError *err)
      {
          if(![self handleBaseResponse:json]){
              return;

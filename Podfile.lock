@@ -14,13 +14,19 @@ PODS:
   - AFNetworking/Serialization (3.0.4)
   - AFNetworking/UIKit (3.0.4):
     - AFNetworking/NSURLSession
+  - JSONModel (1.2.0)
+  - KCFloatingActionButton (2.1.1)
 
 DEPENDENCIES:
   - AFNetworking
+  - JSONModel (~> 1.2.0)
+  - KCFloatingActionButton (~> 2.1.0)
 
 SPEC CHECKSUMS:
   AFNetworking: a0075feb321559dc78d9d85b55d11caa19eabb93
+  JSONModel: 12523685c4b623553ccf844bbbf7007624317b2c
+  KCFloatingActionButton: 084cfe9d16b741be33393c99757f5967296c7645
 
-PODFILE CHECKSUM: 5be2707a12a18fe85f93714a42a249a9cd8751f3
+PODFILE CHECKSUM: d0077e2f30f62dd06edd294accbee373fb763e8b
 
-COCOAPODS: 1.1.0.rc.3
+COCOAPODS: 1.1.1

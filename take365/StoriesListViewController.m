@@ -6,17 +6,19 @@
 //  Copyright © 2015 take365. All rights reserved.
 //
 
-#import "SelectStoryViewController.h"
+#import "StoriesListViewController.h"
 #import "StoryCellTableViewCell.h"
 #import "AppDelegate.h"
 
-@interface SelectStoryViewController ()
+@import KCFloatingActionButton;
+
+@interface StoriesListViewController () <KCFloatingActionButtonDelegate>
 {
     NSArray<StoryModel> *stories;
 }
 @end
 
-@implementation SelectStoryViewController
+@implementation StoriesListViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -26,12 +28,27 @@
     self.title = @"Мои истории";
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@" + " style:UIBarButtonItemStyleDone target:self action:@selector(newStory)];
+//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@" + " style:UIBarButtonItemStyleDone target:self action:@selector(newStory)];
+    
+//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemOrganize target:self action:@selector(newStory)];
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Profile"] style:UIBarButtonItemStylePlain target:self action:@selector(openProfileSettings)];
+    
+    KCFloatingActionButton *fab = [[KCFloatingActionButton alloc] init];
+    fab.buttonColor = [UIColor redColor];
+    fab.plusColor = [UIColor whiteColor];
+    fab.fabDelegate = self;
+    [self.view addSubview:fab];
     
     self.TakeApi = [AppDelegate getInstance].api;
     if(self.TakeApi.Stories != NULL){
         stories = self.TakeApi.Stories;
     }
+}
+
+
+-(void)emptyKCFABSelected:(KCFloatingActionButton *)fab {
+    [self newStory];
 }
 
 -(void)viewDidAppear:(BOOL)animated{
@@ -41,6 +58,10 @@
             [_tableView reloadData];
         }
     }];
+}
+
+-(void)openProfileSettings {
+    [self performSegueWithIdentifier:@"SEGUE_PROFILE" sender:self];
 }
 
 -(void)newStory{

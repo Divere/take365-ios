@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 #import "BaseResponse.h"
 #import "RegisterRequest.h"
@@ -29,6 +30,7 @@ typedef enum : NSUInteger {
 @property (nonatomic) NSString *AccessToken;
 
 @property (nonatomic) NSArray<StoryModel> *Stories;
+@property (nonatomic) UIImage *imageForUpload;
 
 @property (strong, nonatomic) void (^EventInvalidAuthToken)();
 

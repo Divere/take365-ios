@@ -7,15 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ApiViewController.h"
 
-@interface CameraViewController : UIViewController
+@interface CameraViewController : ApiViewController
 
-@property IBOutlet UIView *topBarView;
-@property IBOutlet UIView *bottmBarView;
 @property IBOutlet UIStackView *svDate;
 @property IBOutlet UILabel *lblMonth;
 @property IBOutlet UILabel *lblDay;
 @property IBOutlet UILabel *lblYear;
+@property (weak, nonatomic) IBOutlet UIImageView *uivPhotoView;
 @property (weak, nonatomic) IBOutlet UIButton *btnMakeShot;
+@property (weak, nonatomic) IBOutlet UIButton *btnCancel;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *btnMakeShotWidthConstraint;
+
 
 @end

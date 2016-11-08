@@ -15,7 +15,7 @@
 
 @import KCFloatingActionButton;
 
-@interface StoryViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UIScrollViewDelegate, UICollectionViewDelegateFlowLayout, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@interface StoryViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UIScrollViewDelegate, UICollectionViewDelegateFlowLayout, UIImagePickerControllerDelegate, UINavigationControllerDelegate, KCFloatingActionButtonDelegate>
 
 @end
 
@@ -31,18 +31,18 @@
     NSMutableDictionary *sections;
     NSArray *sortedSectionsTitles;
     
-    CGPoint lastOffset;
-    NSTimeInterval lastOffsetCapture;
-    BOOL isScrollingFast;
     
     NSMutableDictionary *visibleImages;
-    
-    BOOL bigViewEnabled;
-    
     NSMutableDictionary *imagesByDays;
     NSMutableArray *days;
+    NSMutableDictionary *daysByDates;
     
+    BOOL isScrollingFast;
+    BOOL bigViewEnabled;
     BOOL isContributingStory;
+    
+    CGPoint lastOffset;
+    NSTimeInterval lastOffsetCapture;
 }
 
 - (void)viewDidLoad {
@@ -58,20 +58,31 @@
     
     self.title = _Story.title;
     
-    
+
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"вид" style:UIBarButtonItemStyleDone target:self action:@selector(changeView)];
     
     KCFloatingActionButton *fab = [[KCFloatingActionButton alloc] init];
     fab.buttonImage = [UIImage imageNamed:@"Camera"];
-    fab.tintColor = [UIColor whiteColor];
     fab.buttonColor = [UIColor redColor];
-    fab.itemImageColor = [UIColor whiteColor];
+    fab.fabDelegate = self;
     [self.view addSubview:fab];
+}
+
+-(void)emptyKCFABSelected:(KCFloatingActionButton *)fab {
+    [self performSegueWithIdentifier:@"SEGUE_CAPTURE_PHOTO" sender:self];
 }
 
 -(void)viewDidAppear:(BOOL)animated
 {
     [self refreshStoryData];
+    if(self.TakeApi.imageForUpload != NULL) {
+        NSDateFormatter *df = [NSDateFormatter new];
+        [df setDateFormat:@"yyyy-MM-dd"];
+        NSDate *today = [NSDate new];
+        
+        [self uploadImage:self.TakeApi.imageForUpload forDate:[df stringFromDate:today] selectedIndexPathCopy:[NSIndexPath indexPathForRow:0 inSection:0]];
+        self.TakeApi.imageForUpload = NULL;
+    }
 }
 
 -(void)changeView{
@@ -90,6 +101,7 @@
     sections = [NSMutableDictionary new];
     imagesByDays = [NSMutableDictionary new];
     days = [NSMutableArray new];
+    daysByDates = [NSMutableDictionary new];
     
     [self.TakeApi getStoryWithId:_Story.id WithResultBlock:^(StoryResult *result, NSString *error) {
         if(error != NULL){
@@ -131,6 +143,7 @@
             }
             
             [days insertObject:storyDay atIndex:0];
+            [daysByDates setObject:storyDay forKey:[df stringFromDate:currentDate]];
         }
         
         for (StoryDay *storyDay in days) {
@@ -338,18 +351,12 @@
 
 
 
--(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
-    [picker dismissViewControllerAnimated:YES completion:NULL];
-    CalendarCollectionViewCell *cell = (CalendarCollectionViewCell*)selectedCell;
-    [cell changeSelectedColor:NO];
+- (void)uploadImage:(UIImage *)pickedImage forDate:(NSString *)date selectedIndexPathCopy:(NSIndexPath *)selectedIndexPathCopy {
     
-    UIImage *pickedImage = [info objectForKey:@"UIImagePickerControllerOriginalImage"];
     NSData *image = UIImageJPEGRepresentation(pickedImage, 1.0f);
     
-    NSIndexPath *selectedIndexPathCopy = [selectedIndexPath copy];
-    
-    [self.TakeApi uploadImage:image ForStory:storyInfo.id ForDate:cell.StoryDay.day WithProgressBlock:^(float progress) {
-        CalendarCollectionViewCell *uploadingCell = (CalendarCollectionViewCell*)[_uivPhotos cellForItemAtIndexPath:selectedIndexPathCopy];
+    [self.TakeApi uploadImage:image ForStory:storyInfo.id ForDate:date WithProgressBlock:^(float progress) {
+        StoryItemCollectionViewCell *uploadingCell = (StoryItemCollectionViewCell*)[_uivPhotos cellForItemAtIndexPath:selectedIndexPathCopy];
         if(uploadingCell){
             uploadingCell.StoryDay.uploadProgress = progress;
             [uploadingCell.pbUploadProgress setProgress:progress];
@@ -364,6 +371,17 @@
             
         }
     }];
+}
+
+-(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
+    [picker dismissViewControllerAnimated:YES completion:NULL];
+    CalendarCollectionViewCell *cell = (CalendarCollectionViewCell*)selectedCell;
+    [cell changeSelectedColor:NO];
+    
+    NSIndexPath *selectedIndexPathCopy = [selectedIndexPath copy];
+    
+    UIImage *pickedImage = [info objectForKey:@"UIImagePickerControllerOriginalImage"];
+    [self uploadImage:pickedImage forDate:cell.StoryDay.day selectedIndexPathCopy:selectedIndexPathCopy];
 }
 
 -(void)imagePickerControllerDidCancel:(UIImagePickerController *)picker

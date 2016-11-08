@@ -11,7 +11,7 @@
 #import <CoreVideo/CoreVideo.h>
 #import <CoreVideo/CVPixelBufferPool.h>
 #import "UIImage+fixOrientation.h"
-
+#import "AppDelegate.h"
 
 @interface CameraViewController ()
 
@@ -22,6 +22,7 @@
     AVCaptureSession *session;
     AVCaptureStillImageOutput *stillImageOutput;
     AVCaptureVideoPreviewLayer *previewLayer;
+    CALayer *rootLayer;
     
     UIImage *image;
     
@@ -34,10 +35,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-    
-    //[_topBarView bringSubviewToFront:_lblTake];
-    [_topBarView bringSubviewToFront:_svDate];
-
     
     NSDateFormatter *df = [NSDateFormatter new];
     [df setLocale: [[NSLocale alloc] initWithLocaleIdentifier:@"ru_RU"]];
@@ -107,7 +104,29 @@
     [view sendSubviewToBack:blurEffectView];
 }
 
+- (IBAction)btnCancel_Click:(id)sender {
+    if(image == NULL) {
+        self.TakeApi.imageForUpload = NULL;
+        [self dismissViewControllerAnimated:YES completion:NULL];
+    }
+    
+    image = NULL;
+    self.uivPhotoView.image = NULL;
+    [rootLayer insertSublayer:previewLayer atIndex:0];
+    
+    [self.btnMakeShot setTitle:@"take" forState:UIControlStateNormal];
+    self.btnMakeShotWidthConstraint.constant = 76;
+    [UIView animateWithDuration:0.5f animations:^{
+        [self.view layoutIfNeeded];
+    }];
+}
+
 - (IBAction)btnCapture_Clicked:(id)sender {
+    
+    if(image != NULL) {
+        self.TakeApi.imageForUpload = image;
+        [self dismissViewControllerAnimated:YES completion:NULL];
+    }
     
     AVCaptureConnection *connection = [stillImageOutput connectionWithMediaType:AVMediaTypeVideo];
     AVCaptureVideoPreviewLayer *pl = (AVCaptureVideoPreviewLayer *)previewLayer;
@@ -132,7 +151,17 @@
                 break;
         }
         
-        [self performSegueWithIdentifier:@"SEGUE_PUBLISH_PHOTO" sender:self];
+        NSArray *sublayers = rootLayer.sublayers;
+        for (CALayer *layer in sublayers) {
+            [layer removeFromSuperlayer];
+        }
+        
+        self.uivPhotoView.image = image;
+        [self.btnMakeShot setTitle:@"продолжить" forState:UIControlStateNormal];
+        self.btnMakeShotWidthConstraint.constant = 100;
+        [UIView animateWithDuration:0.5f animations:^{
+            [self.view layoutIfNeeded];
+        }];
     }];
 }
 
@@ -187,16 +216,9 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 -(void)viewDidAppear:(BOOL)animated{
-
-    if(!blurApplied){
-        [self applyBlurEffectToView:_topBarView];
-        [self applyBlurEffectToView:_bottmBarView];
-        blurApplied = true;
-    }
     
     currentOrientation = [UIDevice currentDevice].orientation;
     if(currentOrientation != UIDeviceOrientationPortrait && currentOrientation != UIDeviceOrientationPortraitUpsideDown){
@@ -218,11 +240,10 @@
         previewLayer =  [[AVCaptureVideoPreviewLayer alloc] initWithSession:session];
         [previewLayer setVideoGravity:AVLayerVideoGravityResizeAspect];
         
-        CALayer *rootLayer = [[self view] layer];
+        rootLayer = [[self uivPhotoView] layer];
         [rootLayer setMasksToBounds:YES];
         
-        CGRect frame = self.view.frame;
-        frame.origin.y = -85;
+        CGRect frame = self.uivPhotoView.bounds;
         [previewLayer setFrame:frame];
         [rootLayer insertSublayer:previewLayer atIndex:0];
         

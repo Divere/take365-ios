@@ -7,11 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "StoryDay.h"
+#import "StoryItemCollectionViewCell.h"
 
-@interface PhotoCollectionViewCell : UICollectionViewCell
-
-@property (nonatomic) StoryDay *StoryDay;
+@interface PhotoCollectionViewCell : StoryItemCollectionViewCell
 
 @property (weak, nonatomic) IBOutlet UIImageView *ivPhoto;
 @property (nonatomic) BOOL isSelected;

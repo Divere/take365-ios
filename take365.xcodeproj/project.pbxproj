@@ -10,6 +10,7 @@
 		4D6A3F811DB56F42001F0666 /* CalendarCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D6A3F801DB56F42001F0666 /* CalendarCollectionViewCell.m */; };
 		4D6C023B1DB5678200D8D735 /* StoryDay.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D6C023A1DB5678200D8D735 /* StoryDay.m */; };
 		4DA1F3211DC943EC00E3EE6A /* Model.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DA1F3201DC943EC00E3EE6A /* Model.m */; };
+		4DB7EF2C1DD23A5E004F983B /* StoryItemCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DB7EF2B1DD23A5E004F983B /* StoryItemCollectionViewCell.m */; };
 		4DFAFD8C1DBF480000AE88BF /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DFAFD8B1DBF480000AE88BF /* SearchViewController.m */; };
 		7A0336D51C6C8DE70022E42B /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A0336D41C6C8DE70022E42B /* RegisterViewController.m */; };
 		7A0336D81C6C91A00022E42B /* RegisterRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A0336D71C6C91A00022E42B /* RegisterRequest.m */; };
@@ -52,7 +53,6 @@
 		7AA7B51C1C75DB40003609CC /* NoHistorySegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AA7B51B1C75DB40003609CC /* NoHistorySegue.m */; };
 		7AADA2811C567DC20067B7C0 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AADA2801C567DC20067B7C0 /* CoreVideo.framework */; };
 		7AC2E7551C5A71BB0060DF4C /* ShowImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AC2E7541C5A71BB0060DF4C /* ShowImageViewController.m */; };
-		7AC63BED1C58F1E000EE678C /* PublishPhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AC63BEC1C58F1E000EE678C /* PublishPhotoViewController.m */; };
 		7AC63BF01C591F7200EE678C /* UIImage+fixOrientation.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AC63BEF1C591F7200EE678C /* UIImage+fixOrientation.m */; };
 		7AC63BF31C5A475600EE678C /* NavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AC63BF21C5A475600EE678C /* NavigationViewController.m */; };
 		7AC63BF91C5A58C000EE678C /* MonthCollectionReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AC63BF81C5A58C000EE678C /* MonthCollectionReusableView.m */; };
@@ -69,6 +69,8 @@
 		4D6C023A1DB5678200D8D735 /* StoryDay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoryDay.m; sourceTree = "<group>"; };
 		4DA1F31F1DC943EC00E3EE6A /* Model.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Model.h; sourceTree = "<group>"; };
 		4DA1F3201DC943EC00E3EE6A /* Model.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Model.m; sourceTree = "<group>"; };
+		4DB7EF2A1DD23A5E004F983B /* StoryItemCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoryItemCollectionViewCell.h; sourceTree = "<group>"; };
+		4DB7EF2B1DD23A5E004F983B /* StoryItemCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoryItemCollectionViewCell.m; sourceTree = "<group>"; };
 		4DFAFD8A1DBF480000AE88BF /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
 		4DFAFD8B1DBF480000AE88BF /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
 		590675EBCAE1AD34A88D8607 /* Pods-take365.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-take365.release.xcconfig"; path = "Pods/Target Support Files/Pods-take365/Pods-take365.release.xcconfig"; sourceTree = "<group>"; };
@@ -151,8 +153,6 @@
 		7AADA2801C567DC20067B7C0 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
 		7AC2E7531C5A71BB0060DF4C /* ShowImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowImageViewController.h; sourceTree = "<group>"; };
 		7AC2E7541C5A71BB0060DF4C /* ShowImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowImageViewController.m; sourceTree = "<group>"; };
-		7AC63BEB1C58F1E000EE678C /* PublishPhotoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublishPhotoViewController.h; sourceTree = "<group>"; };
-		7AC63BEC1C58F1E000EE678C /* PublishPhotoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublishPhotoViewController.m; sourceTree = "<group>"; };
 		7AC63BEE1C591F7200EE678C /* UIImage+fixOrientation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+fixOrientation.h"; sourceTree = "<group>"; };
 		7AC63BEF1C591F7200EE678C /* UIImage+fixOrientation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+fixOrientation.m"; sourceTree = "<group>"; };
 		7AC63BF11C5A475600EE678C /* NavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationViewController.h; sourceTree = "<group>"; };
@@ -326,6 +326,8 @@
 				7A39A3311C0DE04E00A8A51C /* PhotoCollectionViewCell.m */,
 				7AC63BF71C5A58C000EE678C /* MonthCollectionReusableView.h */,
 				7AC63BF81C5A58C000EE678C /* MonthCollectionReusableView.m */,
+				4DB7EF2A1DD23A5E004F983B /* StoryItemCollectionViewCell.h */,
+				4DB7EF2B1DD23A5E004F983B /* StoryItemCollectionViewCell.m */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -376,8 +378,6 @@
 				7A39A32E1C0DDFF900A8A51C /* StoryViewController.m */,
 				7A2566A21C53C2A800D28DCA /* CreateStoryViewController.h */,
 				7A2566A31C53C2A800D28DCA /* CreateStoryViewController.m */,
-				7AC63BEB1C58F1E000EE678C /* PublishPhotoViewController.h */,
-				7AC63BEC1C58F1E000EE678C /* PublishPhotoViewController.m */,
 				7AC63BF11C5A475600EE678C /* NavigationViewController.h */,
 				7AC63BF21C5A475600EE678C /* NavigationViewController.m */,
 				7AC2E7531C5A71BB0060DF4C /* ShowImageViewController.h */,
@@ -578,6 +578,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7A39A3151C0DC70800A8A51C /* StoriesListViewController.m in Sources */,
+				4DB7EF2C1DD23A5E004F983B /* StoryItemCollectionViewCell.m in Sources */,
 				7A39A2F61C0D92D300A8A51C /* ApiManager.m in Sources */,
 				7A39A33F1C0DE90800A8A51C /* StoryImageThumbModel.m in Sources */,
 				7A0336D51C6C8DE70022E42B /* RegisterViewController.m in Sources */,
@@ -607,7 +608,6 @@
 				7A7D11821C6DFD2E00150792 /* RegisterResponse.m in Sources */,
 				7A39A3031C0DAC7E00A8A51C /* LoginResult.m in Sources */,
 				7A2566A41C53C2A800D28DCA /* CreateStoryViewController.m in Sources */,
-				7AC63BED1C58F1E000EE678C /* PublishPhotoViewController.m in Sources */,
 				7A13D87D1BDE49CE00E1CB98 /* AppDelegate.m in Sources */,
 				7A55F60A1D21747E009A3D32 /* BaseResponse.m in Sources */,
 				7A39A32F1C0DDFF900A8A51C /* StoryViewController.m in Sources */,

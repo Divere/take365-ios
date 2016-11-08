@@ -10,6 +10,8 @@
 
 @interface NSDate (Extensions)
 
+- (NSString*)toyyyyMMString;
+- (NSString *)toyyyyMMddString;
 - (NSDate*)setZeroTime;
 + (NSDate*)getToday;
 

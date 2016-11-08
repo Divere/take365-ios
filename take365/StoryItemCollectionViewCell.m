@@ -10,4 +10,15 @@
 
 @implementation StoryItemCollectionViewCell
 
+-(void)changeSelectedColor:(BOOL)selected
+{
+    if(selected){
+        UIView *backgroundView = [UIView new];
+        backgroundView.backgroundColor = [UIColor lightGrayColor];
+        self.backgroundView = backgroundView;
+    }else{
+        self.backgroundView = NULL;
+    }
+}
+
 @end

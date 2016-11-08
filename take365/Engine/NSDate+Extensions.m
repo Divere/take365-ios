@@ -38,4 +38,18 @@
     return [calendar dateFromComponents:components];
 }
 
+- (NSString*)toyyyyMMString {
+    NSDateFormatter *df = [NSDateFormatter new];
+    [df setDateFormat:@"yyyy-MM"];
+    
+    return [df stringFromDate:self];
+}
+
+-(NSString *)toyyyyMMddString {
+    NSDateFormatter *df = [NSDateFormatter new];
+    [df setDateFormat:@"yyyy-MM-dd"];
+    
+    return [df stringFromDate:self];
+}
+
 @end

@@ -14,4 +14,6 @@
 @property (nonatomic) StoryDay *StoryDay;
 @property (weak, nonatomic) IBOutlet UIProgressView *pbUploadProgress;
 
+- (void)changeSelectedColor:(BOOL)selected;
+
 @end

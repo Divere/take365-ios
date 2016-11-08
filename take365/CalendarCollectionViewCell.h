@@ -13,6 +13,4 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *lblDay;
 
-- (void)changeSelectedColor:(BOOL)selected;
-
 @end

@@ -768,15 +768,21 @@
                                                         <constraint firstAttribute="height" constant="40" id="tuc-hJ-FgQ"/>
                                                     </constraints>
                                                 </view>
+                                                <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progressViewStyle="bar" translatesAutoresizingMaskIntoConstraints="NO" id="Ucd-dD-1H2">
+                                                    <rect key="frame" x="28" y="225" width="244" height="2.5"/>
+                                                </progressView>
                                             </subviews>
                                         </view>
                                         <constraints>
                                             <constraint firstAttribute="bottomMargin" secondItem="eeG-gc-Oih" secondAttribute="bottom" constant="10" id="1fC-oN-D0D"/>
+                                            <constraint firstItem="eeG-gc-Oih" firstAttribute="top" secondItem="Ucd-dD-1H2" secondAttribute="bottom" constant="15" id="3ad-jh-kNT"/>
                                             <constraint firstItem="UW1-xD-USb" firstAttribute="centerY" secondItem="usF-wf-aYD" secondAttribute="centerY" id="KKi-NT-iTQ"/>
                                             <constraint firstItem="eeG-gc-Oih" firstAttribute="trailing" secondItem="usF-wf-aYD" secondAttribute="trailingMargin" constant="-10" id="Ny0-nb-nqi"/>
                                             <constraint firstItem="WRi-aP-ga8" firstAttribute="leading" secondItem="eeG-gc-Oih" secondAttribute="trailing" constant="10" id="RJZ-R3-JIf"/>
+                                            <constraint firstItem="Ucd-dD-1H2" firstAttribute="leading" secondItem="usF-wf-aYD" secondAttribute="leadingMargin" constant="20" id="Rtd-Hn-cZO"/>
                                             <constraint firstAttribute="bottomMargin" secondItem="WRi-aP-ga8" secondAttribute="bottom" id="dRL-Qs-f6g"/>
                                             <constraint firstAttribute="trailingMargin" secondItem="WRi-aP-ga8" secondAttribute="trailing" id="jTl-0o-Pbd"/>
+                                            <constraint firstAttribute="trailingMargin" secondItem="Ucd-dD-1H2" secondAttribute="trailing" constant="20" id="kbt-JC-lCT"/>
                                             <constraint firstItem="WRi-aP-ga8" firstAttribute="top" secondItem="usF-wf-aYD" secondAttribute="topMargin" id="oee-VI-zRu"/>
                                             <constraint firstItem="WRi-aP-ga8" firstAttribute="leading" secondItem="usF-wf-aYD" secondAttribute="leadingMargin" id="puD-76-JLj"/>
                                             <constraint firstItem="UW1-xD-USb" firstAttribute="centerX" secondItem="usF-wf-aYD" secondAttribute="centerX" id="xQI-VU-JNz"/>
@@ -791,6 +797,7 @@
                                             <outlet property="aiLoading" destination="UW1-xD-USb" id="5Lr-c2-4Sp"/>
                                             <outlet property="ivPhoto" destination="WRi-aP-ga8" id="lkS-gP-tH1"/>
                                             <outlet property="lblDay" destination="nYS-xM-bxy" id="LTq-6w-uVc"/>
+                                            <outlet property="pbUploadProgress" destination="Ucd-dD-1H2" id="qwe-od-5XD"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -859,7 +866,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Olx-vS-7cU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="740" y="824"/>
+            <point key="canvasLocation" x="740" y="823.53823088455783"/>
         </scene>
         <!--Show Image View Controller-->
         <scene sceneID="3bj-ed-KHb">

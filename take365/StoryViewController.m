@@ -13,10 +13,11 @@
 #import "MonthCollectionReusableView.h"
 #import "StoryDay.h"
 #import "NSDate+Extensions.h"
+#import "NSString+Extensions.h"
 
 @import KCFloatingActionButton;
 
-@interface StoryViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UIScrollViewDelegate, UICollectionViewDelegateFlowLayout, UIImagePickerControllerDelegate, UINavigationControllerDelegate, KCFloatingActionButtonDelegate>
+@interface StoryViewController () <UICollectionViewDataSource, UICollectionViewDelegate, UIScrollViewDelegate, UICollectionViewDelegateFlowLayout, UIImagePickerControllerDelegate, UINavigationControllerDelegate, KCFloatingActionButtonDelegate, UIGestureRecognizerDelegate, UIActionSheetDelegate>
 
 @end
 
@@ -31,7 +32,6 @@
     NSMutableDictionary *imageCache;
     NSMutableDictionary *sections;
     NSArray *sortedSectionsTitles;
-    
     
     NSMutableDictionary *visibleImages;
     NSMutableDictionary *imagesByDays;
@@ -59,7 +59,6 @@
     
     self.title = _Story.title;
     
-
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"вид" style:UIBarButtonItemStyleDone target:self action:@selector(changeView)];
     
     KCFloatingActionButton *fab = [[KCFloatingActionButton alloc] init];
@@ -67,24 +66,45 @@
     fab.buttonColor = [UIColor redColor];
     fab.fabDelegate = self;
     [self.view addSubview:fab];
-}
-
--(void)emptyKCFABSelected:(KCFloatingActionButton *)fab {
-    [self performSegueWithIdentifier:@"SEGUE_CAPTURE_PHOTO" sender:self];
+    
+    UILongPressGestureRecognizer *lpgr = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
+    lpgr.delegate = self;
+    lpgr.delaysTouchesBegan = YES;
+    [self.uivPhotos addGestureRecognizer:lpgr];
+    [self refreshStoryData];
 }
 
 -(void)viewDidAppear:(BOOL)animated
 {
-    [self refreshStoryData];
+    //[self refreshStoryData];
     if(self.TakeApi.imageForUpload != NULL) {
-        NSDateFormatter *df = [NSDateFormatter new];
-        [df setDateFormat:@"yyyy-MM-dd"];
-        NSDate *today = [NSDate new];
-        
-        [self uploadImage:self.TakeApi.imageForUpload forDate:[df stringFromDate:today] selectedIndexPathCopy:[NSIndexPath indexPathForRow:0 inSection:0]];
+        [self uploadImage:self.TakeApi.imageForUpload forDate:[[NSDate new] toyyyyMMddString] selectedIndexPathCopy:[NSIndexPath indexPathForRow:0 inSection:0]];
         self.TakeApi.imageForUpload = NULL;
     }
 }
+
+-(void)emptyKCFABSelected:(KCFloatingActionButton *)fab {
+    NSDate *today = [[NSDate new] setZeroTime];
+    NSString *todayString = [today toyyyyMMddString];
+    if([imagesByDays objectForKey:todayString] != NULL) {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Фотография уже существует" message:@"Данное действие заменит уже существующую фотографию" preferredStyle:UIAlertControllerStyleAlert];
+        
+        [alert addAction:[UIAlertAction actionWithTitle:@"Продолжить" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [alert dismissViewControllerAnimated:YES completion:NULL];
+            [self performSegueWithIdentifier:@"SEGUE_CAPTURE_PHOTO" sender:self];
+        }]];
+         
+         [alert addAction:[UIAlertAction actionWithTitle:@"Отмена" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+            [alert dismissViewControllerAnimated:YES completion:NULL];
+        }]];
+        
+        [self presentViewController:alert animated:YES completion:NULL];
+        return;
+    }
+    
+    [self performSegueWithIdentifier:@"SEGUE_CAPTURE_PHOTO" sender:self];
+}
+
 
 -(void)changeView{
     bigViewEnabled = !bigViewEnabled;
@@ -92,12 +112,7 @@
     [_uivPhotos reloadData];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-- (void) refreshStoryData
+- (void)refreshStoryData
 {
     sections = [NSMutableDictionary new];
     imagesByDays = [NSMutableDictionary new];
@@ -122,21 +137,17 @@
             [imagesByDays setObject:image forKey:image.date];
         }
         
-        NSDateFormatter *df = [NSDateFormatter new];
-        [df setDateFormat:@"yyyy-MM-dd"];
-    
-        
-        NSDate *dateStart = [[df dateFromString:storyInfo.progress.dateStart] setZeroTime];
-        NSDate *dateEnd = [[df dateFromString:storyInfo.progress.dateEnd] setZeroTime];
-        NSDate *today = [NSDate getToday];
+        NSDate *dateStart = [[storyInfo.progress.dateStart dateFromyyyyMMddString] setZeroTime];
+        NSDate *dateEnd = [[storyInfo.progress.dateEnd dateFromyyyyMMddString] setZeroTime];
+        NSDate *today = [[NSDate new] setZeroTime];
         
         StoryDay *firstDay = [StoryDay new];
-        firstDay.day = [df stringFromDate:dateStart];
+        firstDay.day = [dateStart toyyyyMMddString];
         firstDay.image = [imagesByDays objectForKey:firstDay.day];
         
         if(firstDay.image != NULL || isContributingStory) {
             [days insertObject:firstDay atIndex:0];
-            [daysByDates setObject:firstDay forKey:[df stringFromDate:dateStart]];
+            [daysByDates setObject:firstDay forKey:[dateStart toyyyyMMddString]];
         }
         
         NSDate *currentDate = dateStart;
@@ -149,7 +160,7 @@
             }
             
             StoryDay *storyDay = [StoryDay new];
-            storyDay.day = [df stringFromDate:currentDate];
+            storyDay.day = [currentDate toyyyyMMddString];
             storyDay.image = [imagesByDays objectForKey:storyDay.day];
             
             if(storyDay.image == NULL && !isContributingStory){
@@ -157,7 +168,7 @@
             }
             
             [days insertObject:storyDay atIndex:0];
-            [daysByDates setObject:storyDay forKey:[df stringFromDate:currentDate]];
+            [daysByDates setObject:storyDay forKey:[currentDate toyyyyMMddString]];
         }
         
         for (StoryDay *storyDay in days) {
@@ -178,10 +189,8 @@
             NSString *key1 = obj1;
             NSString *key2 = obj2;
             
-            NSDateFormatter *df = [NSDateFormatter new];
-            [df setDateFormat:@"yyyy-MM"];
-            NSDate *date1 = [df dateFromString:key1];
-            NSDate *date2 = [df dateFromString:key2];
+            NSDate *date1 = [key1 dateFromyyyyMMString];
+            NSDate *date2 = [key2 dateFromyyyyMMString];
             
             if([date1 compare:date2] == NSOrderedDescending){
                 return false;
@@ -194,28 +203,6 @@
     }];
 }
 
-- (void) scrollViewDidScroll:(UIScrollView *)scrollView {
-    CGPoint currentOffset = scrollView.contentOffset;
-    NSTimeInterval currentTime = [NSDate timeIntervalSinceReferenceDate];
-    
-    NSTimeInterval timeDiff = currentTime - lastOffsetCapture;
-    if(timeDiff > 0.1) {
-        CGFloat distance = currentOffset.y - lastOffset.y;
-        //The multiply by 10, / 1000 isn't really necessary.......
-        CGFloat scrollSpeedNotAbs = (distance * 10) / 1000; //in pixels per millisecond
-        
-        CGFloat scrollSpeed = fabsf(scrollSpeedNotAbs);
-        if (scrollSpeed > 2) {
-            isScrollingFast = YES;
-        } else {
-            isScrollingFast = NO;
-        }
-        
-        lastOffset = currentOffset;
-        lastOffsetCapture = currentTime;
-    }
-}
-
 -(NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView{
     return sections.count;
 }
@@ -225,10 +212,10 @@
     
     NSString *sectionTitle = sortedSectionsTitles[indexPath.section];
     
+    NSDate *date = [sectionTitle dateFromyyyyMMString];
+    
     NSDateFormatter *df = [NSDateFormatter new];
     [df setLocale: [[NSLocale alloc] initWithLocaleIdentifier:@"ru_RU"]];
-    [df setDateFormat:@"yyyy-MM"];
-    NSDate *date = [df dateFromString:sectionTitle];
     [df setDateFormat:@"LLLL"];
     NSString *month = [df stringFromDate:date];
     
@@ -283,6 +270,8 @@
         cell = [_uivPhotos dequeueReusableCellWithReuseIdentifier:@"PhotoCollectionViewCell" forIndexPath:indexPath];
     }
     
+    [cell.pbUploadProgress setProgress:storyDay.uploadProgress];
+    
     UIImage *image = [imageCache objectForKey:[NSString stringWithFormat:@"%ld-%ld", (long)indexPath.section, (long)indexPath.row]];
     
     if(!isScrollingFast && image == nil){
@@ -333,13 +322,16 @@
     [visibleImages removeObjectForKey:[NSString stringWithFormat:@"%ld-%ld", (long)indexPath.section, (long)indexPath.row]];
 }
 
--(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
-    isScrollingFast = false;
-    [_uivPhotos reloadItemsAtIndexPaths:[visibleImages allValues]];
+- (void)showImagePicker {
+  UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+        picker.delegate = self;
+        picker.allowsEditing = NO;
+        picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        
+        [self presentViewController:picker animated:YES completion:NULL];
 }
 
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
-    //[collectionView deselectItemAtIndexPath:indexPath animated:YES];
     
     selectedIndexPath = indexPath;
     selectedCell = [_uivPhotos cellForItemAtIndexPath:indexPath];
@@ -354,16 +346,63 @@
     if([selectedCell isKindOfClass:[CalendarCollectionViewCell class]]){
         CalendarCollectionViewCell *cell = (CalendarCollectionViewCell*)selectedCell;
         [cell changeSelectedColor:YES];
-        UIImagePickerController *picker = [[UIImagePickerController alloc] init];
-        picker.delegate = self;
-        picker.allowsEditing = NO;
-        picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-        
-        [self presentViewController:picker animated:YES completion:NULL];
+        [self showImagePicker];
     }
 }
 
+-(void)handleLongPress:(UILongPressGestureRecognizer *)gestureRecognizer
+{
+    if (gestureRecognizer.state != UIGestureRecognizerStateBegan) {
+        return;
+    }
+    CGPoint p = [gestureRecognizer locationInView:self.uivPhotos];
+    
+    NSIndexPath *indexPath = [self.uivPhotos indexPathForItemAtPoint:p];
+    if (indexPath == nil){
+        NSLog(@"couldn't find index path");
+    } else {
+        selectedIndexPath = indexPath;
+        selectedCell = [self.uivPhotos cellForItemAtIndexPath:indexPath];
+        StoryItemCollectionViewCell *cell = (StoryItemCollectionViewCell*)selectedCell;
+        [cell changeSelectedColor:YES];
+        UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:@"Выберите действие" message:NULL preferredStyle:UIAlertControllerStyleActionSheet];
+        [actionSheet addAction:[UIAlertAction actionWithTitle:@"Заменить" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            [self showImagePicker];
+        }]];
+        [actionSheet addAction:[UIAlertAction actionWithTitle:@"Отмена" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+            [cell changeSelectedColor:NO];
+            [actionSheet dismissViewControllerAnimated:YES completion:NULL];
+        }]];
+        [self presentViewController:actionSheet animated:YES completion:NULL];
+    }
+}
 
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    CGPoint currentOffset = scrollView.contentOffset;
+    NSTimeInterval currentTime = [NSDate timeIntervalSinceReferenceDate];
+    
+    NSTimeInterval timeDiff = currentTime - lastOffsetCapture;
+    if(timeDiff > 0.1) {
+        CGFloat distance = currentOffset.y - lastOffset.y;
+        //The multiply by 10, / 1000 isn't really necessary.......
+        CGFloat scrollSpeedNotAbs = (distance * 10) / 1000; //in pixels per millisecond
+        
+        CGFloat scrollSpeed = fabsf(scrollSpeedNotAbs);
+        if (scrollSpeed > 2) {
+            isScrollingFast = YES;
+        } else {
+            isScrollingFast = NO;
+        }
+        
+        lastOffset = currentOffset;
+        lastOffsetCapture = currentTime;
+    }
+}
+
+-(void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
+    isScrollingFast = false;
+    [_uivPhotos reloadItemsAtIndexPaths:[visibleImages allValues]];
+}
 
 - (void)uploadImage:(UIImage *)pickedImage forDate:(NSString *)date selectedIndexPathCopy:(NSIndexPath *)selectedIndexPathCopy {
     
@@ -413,13 +452,11 @@
 
 #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if([segue.identifier isEqualToString:@"SEGUE_SHOW_IMAGE"]){
         PhotoCollectionViewCell *cell = (PhotoCollectionViewCell*)selectedCell;
         [segue.destinationViewController setValue:cell.StoryDay.image forKey:@"Image"];
     }
 }
-
 
 @end

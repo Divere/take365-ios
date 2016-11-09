@@ -139,7 +139,7 @@
         
         NSDate *dateStart = [[storyInfo.progress.dateStart dateFromyyyyMMddString] setZeroTime];
         NSDate *dateEnd = [[storyInfo.progress.dateEnd dateFromyyyyMMddString] setZeroTime];
-        NSDate *today = [[NSDate new] setZeroTime];
+        NSDate *today = [NSDate date];
         
         StoryDay *firstDay = [StoryDay new];
         firstDay.day = [dateStart toyyyyMMddString];

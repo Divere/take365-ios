@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ApiViewController.h"
+#import "Take365ViewController.h"
 
-@interface CameraViewController : ApiViewController
+@interface CameraViewController : Take365ViewController
 
 @property IBOutlet UIStackView *svDate;
 @property IBOutlet UILabel *lblMonth;

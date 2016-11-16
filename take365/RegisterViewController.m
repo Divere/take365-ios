@@ -17,7 +17,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.clearsSelectionOnViewWillAppear = YES;
+    //self.clearsSelectionOnViewWillAppear = YES;
     
     self.title = @"Регистрация";
     self.navigationController.title = @"Регистрация";
@@ -37,27 +37,17 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     switch (indexPath.section) {
         case 3:
-            tableView.allowsSelection = NO;
             [self.TakeApi registerWithUsername:_tfLogin.text Email:_tfEmail.text Password:_tfPassword.text AndResultBlock:^(RegisterResult *result, NSString *error) {
-                if(error == NULL){
-                    [self.TakeApi loginWithUsername:_tfLogin.text AndPassword:_tfPassword.text AndResultBlock:^(LoginResult *result, NSString *error) {
-                        if(error == NULL){
-                            [[NSUserDefaults standardUserDefaults] setObject:result.token forKey:@"accessToken"];
-                            [[NSUserDefaults standardUserDefaults] synchronize];
-                            [self performSegueWithIdentifier:@"SEGUE_LOGIN_COMPLETED" sender:self];
-                        }else{
-                            UIAlertView *uav = [[UIAlertView new] initWithTitle:@"Ошибка входа" message:error delegate:nil cancelButtonTitle:@"Закрыть" otherButtonTitles:nil, nil];
-                            [uav show];
-                        }
-                    }];
-                }else{
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        tableView.allowsSelection = YES;
-                    });
-                    
-                    UIAlertView *uav = [[UIAlertView new] initWithTitle:@"Ошибка регистрации" message:error delegate:nil cancelButtonTitle:@"Закрыть" otherButtonTitles:nil, nil];
-                    [uav show];
-                }
+                [self.TakeApi loginWithUsername:_tfLogin.text AndPassword:_tfPassword.text AndResultBlock:^(LoginResult *result, NSString *error) {
+                    if(error == NULL){
+                        [[NSUserDefaults standardUserDefaults] setObject:result.token forKey:@"accessToken"];
+                        [[NSUserDefaults standardUserDefaults] synchronize];
+                        [self performSegueWithIdentifier:@"SEGUE_LOGIN_COMPLETED" sender:self];
+                    }else{
+                        UIAlertView *uav = [[UIAlertView new] initWithTitle:@"Ошибка входа" message:error delegate:nil cancelButtonTitle:@"Закрыть" otherButtonTitles:nil, nil];
+                        [uav show];
+                    }
+                }];
             }];
             break;
     }

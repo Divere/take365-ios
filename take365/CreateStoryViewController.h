@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ApiTableViewController.h"
+#import "Take365TableViewController.h"
 
-@interface CreateStoryViewController : ApiTableViewController
+@interface CreateStoryViewController : Take365TableViewController
 
 @property (weak, nonatomic) IBOutlet UITextField *tfTitle;
 @property (weak, nonatomic) IBOutlet UITextField *tfDescription;

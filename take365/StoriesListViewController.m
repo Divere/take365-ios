@@ -22,9 +22,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [_tableView setDataSource:self];
-    [_tableView setDelegate:self];
-    _tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    [self.tableView setDataSource:self];
+    [self.tableView setDelegate:self];
+    self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     self.title = @"Мои истории";
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     
@@ -55,7 +55,7 @@
     [self.TakeApi getStoryListWithResultBlock:^(NSArray<StoryModel> *result, NSString *error) {
         if(error == nil){
             stories = result;
-            [_tableView reloadData];
+            [self.tableView reloadData];
         }
     }];
 }
@@ -123,7 +123,7 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     if([cell.reuseIdentifier isEqualToString:@"StoryCell"]){
-        _SelectedStory = [stories objectAtIndex:_tableView.indexPathForSelectedRow.row];
+        _SelectedStory = [stories objectAtIndex:self.tableView.indexPathForSelectedRow.row];
 //        if(indexPath.row == 1){
 //            _SelectedStory.id = 162;
 //        }

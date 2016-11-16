@@ -30,8 +30,6 @@ const NSString *URL = @"https://take365.org";
         
         if(response.result != NULL && resultBlock != NULL){
             resultBlock(response.result, NULL);
-        }else if(response.errors != NULL && resultBlock != NULL){
-            resultBlock(NULL, [response.errors objectAtIndex:0][@"value"]);
         }
     }];
 }
@@ -205,15 +203,23 @@ const NSString *URL = @"https://take365.org";
     NSError *deserializeError;
     
     BaseResponse *baseResponse = [[BaseResponse alloc] initWithDictionary:json error:&deserializeError];
-    if(baseResponse.errors != NULL){
-        if([[baseResponse.errors objectAtIndex:0] isKindOfClass:[NSDictionary class]]){
-            NSString *error = [baseResponse.errors objectAtIndex:0][@"code"];
+
+    if(baseResponse.errors != NULL && [baseResponse.errors count] > 0){
+        if(((ErrorModel*)[baseResponse.errors objectAtIndex:0]).code != NULL){
+            NSString *error = ((ErrorModel*)[baseResponse.errors objectAtIndex:0]).code;
             if([error isEqualToString:@"AUTH_BAD_TOKEN"]){
                 if(_EventInvalidAuthToken){
                     _EventInvalidAuthToken();
                 }
+                return false;
             }
         }
+        
+        if(_EventApiErrorOccured){
+            ErrorModel *err = [baseResponse.errors objectAtIndex:0];
+            _EventApiErrorOccured(err.value);
+        }
+        
         return false;
     }
     

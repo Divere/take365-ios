@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4D09E43B1DDD0F3C002493BA /* ErrorModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D09E43A1DDD0F3C002493BA /* ErrorModel.m */; };
+		4D09E43E1DDD0F70002493BA /* ErrorResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D09E43D1DDD0F70002493BA /* ErrorResponse.m */; };
+		4D327B511DDD2142005D15D0 /* Take365TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D327B501DDD2142005D15D0 /* Take365TableViewController.m */; };
+		4D327B541DDD23ED005D15D0 /* UIViewController+Api.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D327B531DDD23ED005D15D0 /* UIViewController+Api.m */; };
 		4D6A3F811DB56F42001F0666 /* CalendarCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D6A3F801DB56F42001F0666 /* CalendarCollectionViewCell.m */; };
 		4D6C023B1DB5678200D8D735 /* StoryDay.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D6C023A1DB5678200D8D735 /* StoryDay.m */; };
 		4DA1F3211DC943EC00E3EE6A /* Model.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DA1F3201DC943EC00E3EE6A /* Model.m */; };
@@ -58,13 +62,20 @@
 		7AC63BF01C591F7200EE678C /* UIImage+fixOrientation.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AC63BEF1C591F7200EE678C /* UIImage+fixOrientation.m */; };
 		7AC63BF31C5A475600EE678C /* NavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AC63BF21C5A475600EE678C /* NavigationViewController.m */; };
 		7AC63BF91C5A58C000EE678C /* MonthCollectionReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AC63BF81C5A58C000EE678C /* MonthCollectionReusableView.m */; };
-		7AD74E5C1D228196005E5A23 /* ApiViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AD74E5B1D228196005E5A23 /* ApiViewController.m */; };
-		7AD74E5F1D2281A7005E5A23 /* ApiTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AD74E5E1D2281A7005E5A23 /* ApiTableViewController.m */; };
+		7AD74E5C1D228196005E5A23 /* Take365ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AD74E5B1D228196005E5A23 /* Take365ViewController.m */; };
 		BD74BBFA197CF961D41AC15F /* Pods_take365.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6992E3FF14F8C05F380F9796 /* Pods_take365.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		3883C1079158A85A78BD9E7F /* Pods-take365.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-take365.debug.xcconfig"; path = "Pods/Target Support Files/Pods-take365/Pods-take365.debug.xcconfig"; sourceTree = "<group>"; };
+		4D09E4391DDD0F3C002493BA /* ErrorModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ErrorModel.h; sourceTree = "<group>"; };
+		4D09E43A1DDD0F3C002493BA /* ErrorModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ErrorModel.m; sourceTree = "<group>"; };
+		4D09E43C1DDD0F70002493BA /* ErrorResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ErrorResponse.h; sourceTree = "<group>"; };
+		4D09E43D1DDD0F70002493BA /* ErrorResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ErrorResponse.m; sourceTree = "<group>"; };
+		4D327B4F1DDD2142005D15D0 /* Take365TableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Take365TableViewController.h; sourceTree = "<group>"; };
+		4D327B501DDD2142005D15D0 /* Take365TableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Take365TableViewController.m; sourceTree = "<group>"; };
+		4D327B521DDD23ED005D15D0 /* UIViewController+Api.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Api.h"; sourceTree = "<group>"; };
+		4D327B531DDD23ED005D15D0 /* UIViewController+Api.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIViewController+Api.m"; sourceTree = "<group>"; };
 		4D6A3F7F1DB56F42001F0666 /* CalendarCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarCollectionViewCell.h; sourceTree = "<group>"; };
 		4D6A3F801DB56F42001F0666 /* CalendarCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarCollectionViewCell.m; sourceTree = "<group>"; };
 		4D6C02391DB5678200D8D735 /* StoryDay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoryDay.h; sourceTree = "<group>"; };
@@ -165,10 +176,8 @@
 		7AC63BF21C5A475600EE678C /* NavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigationViewController.m; sourceTree = "<group>"; };
 		7AC63BF71C5A58C000EE678C /* MonthCollectionReusableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MonthCollectionReusableView.h; sourceTree = "<group>"; };
 		7AC63BF81C5A58C000EE678C /* MonthCollectionReusableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MonthCollectionReusableView.m; sourceTree = "<group>"; };
-		7AD74E5A1D228196005E5A23 /* ApiViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApiViewController.h; sourceTree = "<group>"; };
-		7AD74E5B1D228196005E5A23 /* ApiViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApiViewController.m; sourceTree = "<group>"; };
-		7AD74E5D1D2281A7005E5A23 /* ApiTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApiTableViewController.h; sourceTree = "<group>"; };
-		7AD74E5E1D2281A7005E5A23 /* ApiTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApiTableViewController.m; sourceTree = "<group>"; };
+		7AD74E5A1D228196005E5A23 /* Take365ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Take365ViewController.h; sourceTree = "<group>"; };
+		7AD74E5B1D228196005E5A23 /* Take365ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Take365ViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -275,6 +284,8 @@
 				7A39A3411C0DE99000A8A51C /* StoryImageImagesModel.m */,
 				4DA1F31F1DC943EC00E3EE6A /* Model.h */,
 				4DA1F3201DC943EC00E3EE6A /* Model.m */,
+				4D09E4391DDD0F3C002493BA /* ErrorModel.h */,
+				4D09E43A1DDD0F3C002493BA /* ErrorModel.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -304,6 +315,8 @@
 				7A39A2FD1C0DAC6500A8A51C /* LoginResponse */,
 				7A55F6081D21747E009A3D32 /* BaseResponse.h */,
 				7A55F6091D21747E009A3D32 /* BaseResponse.m */,
+				4D09E43C1DDD0F70002493BA /* ErrorResponse.h */,
+				4D09E43D1DDD0F70002493BA /* ErrorResponse.m */,
 			);
 			name = Response;
 			sourceTree = "<group>";
@@ -363,8 +376,6 @@
 			children = (
 				7AA7B5191C75DACD003609CC /* Extensions */,
 				7A39A2F21C0D92A800A8A51C /* Network */,
-				7AC63BEE1C591F7200EE678C /* UIImage+fixOrientation.h */,
-				7AC63BEF1C591F7200EE678C /* UIImage+fixOrientation.m */,
 			);
 			path = Engine;
 			sourceTree = "<group>";
@@ -392,12 +403,12 @@
 				7A1FEB551C6104260020030A /* MoreViewController.m */,
 				7A0336D31C6C8DE70022E42B /* RegisterViewController.h */,
 				7A0336D41C6C8DE70022E42B /* RegisterViewController.m */,
-				7AD74E5A1D228196005E5A23 /* ApiViewController.h */,
-				7AD74E5B1D228196005E5A23 /* ApiViewController.m */,
-				7AD74E5D1D2281A7005E5A23 /* ApiTableViewController.h */,
-				7AD74E5E1D2281A7005E5A23 /* ApiTableViewController.m */,
+				7AD74E5A1D228196005E5A23 /* Take365ViewController.h */,
+				7AD74E5B1D228196005E5A23 /* Take365ViewController.m */,
 				4DFAFD8A1DBF480000AE88BF /* SearchViewController.h */,
 				4DFAFD8B1DBF480000AE88BF /* SearchViewController.m */,
+				4D327B4F1DDD2142005D15D0 /* Take365TableViewController.h */,
+				4D327B501DDD2142005D15D0 /* Take365TableViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -451,6 +462,10 @@
 				4DB7EF2E1DD2541D004F983B /* NSDate+Extensions.m */,
 				4DB7EF301DD283CD004F983B /* NSString+Extensions.h */,
 				4DB7EF311DD283CD004F983B /* NSString+Extensions.m */,
+				7AC63BEE1C591F7200EE678C /* UIImage+fixOrientation.h */,
+				7AC63BEF1C591F7200EE678C /* UIImage+fixOrientation.m */,
+				4D327B521DDD23ED005D15D0 /* UIViewController+Api.h */,
+				4D327B531DDD23ED005D15D0 /* UIViewController+Api.m */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -600,7 +615,9 @@
 				7A7D11851C6DFD4100150792 /* RegisterResult.m in Sources */,
 				4DA1F3211DC943EC00E3EE6A /* Model.m in Sources */,
 				7AC2E7551C5A71BB0060DF4C /* ShowImageViewController.m in Sources */,
+				4D09E43E1DDD0F70002493BA /* ErrorResponse.m in Sources */,
 				7A39A3001C0DAC7000A8A51C /* LoginResponse.m in Sources */,
+				4D327B541DDD23ED005D15D0 /* UIViewController+Api.m in Sources */,
 				7A39A3201C0DD14300A8A51C /* StoryModel.m in Sources */,
 				7AC63BF01C591F7200EE678C /* UIImage+fixOrientation.m in Sources */,
 				7A13D8831BDE49CE00E1CB98 /* CameraViewController.m in Sources */,
@@ -608,7 +625,6 @@
 				7A39A3231C0DD15B00A8A51C /* AuthorModel.m in Sources */,
 				7AC63BF91C5A58C000EE678C /* MonthCollectionReusableView.m in Sources */,
 				4D6C023B1DB5678200D8D735 /* StoryDay.m in Sources */,
-				7AD74E5F1D2281A7005E5A23 /* ApiTableViewController.m in Sources */,
 				7A39A30C1C0DC0D600A8A51C /* BaseAuthiticatedRequest.m in Sources */,
 				7A7D118F1C6E0EC200150792 /* UploadImageResult.m in Sources */,
 				7A1FEB561C6104260020030A /* MoreViewController.m in Sources */,
@@ -616,10 +632,12 @@
 				7AA7B51C1C75DB40003609CC /* NoHistorySegue.m in Sources */,
 				7A39A32C1C0DD75800A8A51C /* StoryCellTableViewCell.m in Sources */,
 				7A39A31D1C0DD07100A8A51C /* StoryListResponse.m in Sources */,
+				4D09E43B1DDD0F3C002493BA /* ErrorModel.m in Sources */,
 				7AC63BF31C5A475600EE678C /* NavigationViewController.m in Sources */,
 				7A7D11821C6DFD2E00150792 /* RegisterResponse.m in Sources */,
 				7A39A3031C0DAC7E00A8A51C /* LoginResult.m in Sources */,
 				7A2566A41C53C2A800D28DCA /* CreateStoryViewController.m in Sources */,
+				4D327B511DDD2142005D15D0 /* Take365TableViewController.m in Sources */,
 				7A13D87D1BDE49CE00E1CB98 /* AppDelegate.m in Sources */,
 				7A55F60A1D21747E009A3D32 /* BaseResponse.m in Sources */,
 				7A39A32F1C0DDFF900A8A51C /* StoryViewController.m in Sources */,
@@ -630,7 +648,7 @@
 				7A0336D81C6C91A00022E42B /* RegisterRequest.m in Sources */,
 				7A39A3121C0DC19700A8A51C /* WriteStoryRequest.m in Sources */,
 				7A39A3391C0DE8B700A8A51C /* StoryResult.m in Sources */,
-				7AD74E5C1D228196005E5A23 /* ApiViewController.m in Sources */,
+				7AD74E5C1D228196005E5A23 /* Take365ViewController.m in Sources */,
 				7A13D87A1BDE49CE00E1CB98 /* main.m in Sources */,
 				4DFAFD8C1DBF480000AE88BF /* SearchViewController.m in Sources */,
 				7A13D8991BDFCF3F00E1CB98 /* LoginViewController.m in Sources */,

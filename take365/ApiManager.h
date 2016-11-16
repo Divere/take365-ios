@@ -33,6 +33,7 @@ typedef enum : NSUInteger {
 @property (nonatomic) UIImage *imageForUpload;
 
 @property (strong, nonatomic) void (^EventInvalidAuthToken)();
+@property (strong, nonatomic) void (^EventApiErrorOccured)(NSString *message);
 
 -(void)registerWithUsername:(NSString *)username Email:(NSString *)email Password:(NSString *)password AndResultBlock:(void (^)(RegisterResult *result, NSString *error))resultBlock;
 -(void)loginWithUsername:(NSString *)username AndPassword:(NSString *)password AndResultBlock:(void (^)(LoginResult *result, NSString *error))resultBlock;

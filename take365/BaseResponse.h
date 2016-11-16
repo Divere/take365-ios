@@ -7,9 +7,13 @@
 //
 
 #import "Model.h"
+#import "ErrorModel.h"
+
+@protocol ErrorModel
+@end
 
 @interface BaseResponse : Model
 
-@property (nonatomic) NSMutableArray *errors;
+@property (nonatomic) NSArray<ErrorModel> *errors;
 
 @end

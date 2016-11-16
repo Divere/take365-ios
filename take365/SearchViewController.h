@@ -6,8 +6,8 @@
 //  Copyright © 2016 take365. All rights reserved.
 //
 
-#import "ApiTableViewController.h"
+#import "Take365TableViewController.h"
 
-@interface SearchViewController : ApiTableViewController
+@interface SearchViewController : Take365TableViewController
 
 @end

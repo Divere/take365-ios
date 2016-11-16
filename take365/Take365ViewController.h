@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "AppDelegate.h"
+#import "UIViewController+Api.h"
 
-@interface ApiViewController : UIViewController
+@interface Take365ViewController : UIViewController
 
 @property (nonatomic) ApiManager *TakeApi;
 

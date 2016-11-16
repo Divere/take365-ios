@@ -8,9 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "StoryModel.h"
-#import "ApiViewController.h"
+#import "Take365ViewController.h"
 
-@interface StoriesListViewController : ApiViewController<UITableViewDataSource, UITableViewDelegate>
+@interface StoriesListViewController : Take365ViewController<UITableViewDelegate, UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 

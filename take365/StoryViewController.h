@@ -8,9 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "ApiManager.h"
-#import "ApiViewController.h"
+#import "Take365ViewController.h"
 
-@interface StoryViewController : ApiViewController
+@interface StoryViewController : Take365ViewController
 
 @property (nonatomic) StoryModel *Story;
 

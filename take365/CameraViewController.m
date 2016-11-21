@@ -25,6 +25,7 @@
     CALayer *rootLayer;
     
     UIImage *image;
+    BOOL photoTaken;
     
     UIDeviceOrientation currentOrientation;
     CGFloat currentRotation;
@@ -54,6 +55,10 @@
      addObserver:self selector:@selector(orientationChanged:)
      name:UIDeviceOrientationDidChangeNotification
      object:[UIDevice currentDevice]];
+}
+
+-(BOOL)shouldAutorotate {
+    return FALSE;
 }
 
 - (void) orientationChanged:(NSNotification *)note
@@ -105,9 +110,11 @@
 }
 
 - (IBAction)btnCancel_Click:(id)sender {
+    photoTaken = FALSE;
+    
     if(image == NULL) {
         self.TakeApi.imageForUpload = NULL;
-        [self dismissViewControllerAnimated:YES completion:NULL];
+        [self dismissViewControllerAnimated:TRUE completion:NULL];
     }
     
     image = NULL;
@@ -123,10 +130,22 @@
 
 - (IBAction)btnCapture_Clicked:(id)sender {
     
+    if(photoTaken && image == NULL) {
+        return;
+    }
+    
     if(image != NULL) {
         self.TakeApi.imageForUpload = image;
         [self dismissViewControllerAnimated:YES completion:NULL];
+        return;
     }
+    
+    photoTaken = TRUE;
+    [self.btnMakeShot setTitle:@"обработка" forState:UIControlStateNormal];
+    self.btnMakeShotWidthConstraint.constant = 100;
+    [UIView animateWithDuration:0.5f animations:^{
+        [self.view layoutIfNeeded];
+    }];
     
     AVCaptureConnection *connection = [stillImageOutput connectionWithMediaType:AVMediaTypeVideo];
     AVCaptureVideoPreviewLayer *pl = (AVCaptureVideoPreviewLayer *)previewLayer;
@@ -158,10 +177,6 @@
         
         self.uivPhotoView.image = image;
         [self.btnMakeShot setTitle:@"продолжить" forState:UIControlStateNormal];
-        self.btnMakeShotWidthConstraint.constant = 100;
-        [UIView animateWithDuration:0.5f animations:^{
-            [self.view layoutIfNeeded];
-        }];
     }];
 }
 

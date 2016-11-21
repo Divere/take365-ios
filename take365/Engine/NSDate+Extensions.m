@@ -24,18 +24,16 @@
     return [[NSCalendar currentCalendar] dateByAddingComponents:dateComponents toDate:[calendar dateFromComponents:components] options:0];
 }
 
-+ (NSDate *)getToday {
-    NSDate *date = [NSDate new];
-    NSUInteger flags = NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit;
-    NSCalendar *currentCalendar = [NSCalendar currentCalendar];
-    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:currentCalendar.calendarIdentifier];
-    calendar.timeZone = [NSTimeZone timeZoneForSecondsFromGMT:0];
-    NSDateComponents* components = [calendar components:flags fromDate:date];
++ (NSDate *) GetLocalDate {
     
-    NSDateComponents *dateComponents = [NSDateComponents new];
-    dateComponents.day = 1;
+    NSDateComponents *dayComponent = [[NSDateComponents alloc] init];
+    NSCalendar *theCalendar = [NSCalendar currentCalendar];
+    theCalendar.timeZone = [NSTimeZone timeZoneWithName:@"GMT"];
+    dayComponent = [[NSCalendar currentCalendar] components:NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:[NSDate date]];
     
-    return [calendar dateFromComponents:components];
+    NSDate *localDate = [theCalendar dateFromComponents:dayComponent];
+    
+    return localDate;
 }
 
 - (NSString*)toyyyyMMString {

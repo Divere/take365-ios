@@ -33,15 +33,16 @@
 }
 
 - (IBAction)btnLoginClicked:(id)sender {
+    [self dismissKeyboard];
     [self showProgressDialogWithMessage:@"Входим..."];
     [self.TakeApi loginWithUsername:_tfLogin.text AndPassword:_tfPassword.text AndResultBlock:^(LoginResult *result, NSString *error) {
-//        if(error == NULL){
-//            [self hideProgressDialogWithCompletion:^{
-//                [[NSUserDefaults standardUserDefaults] setObject:result.token forKey:@"accessToken"];
-//                [[NSUserDefaults standardUserDefaults] synchronize];
-//                [self performSegueWithIdentifier:@"SEGUE_LOGIN_COMPLETED" sender:self];
-//            }];
-//        }
+        if(error == NULL){
+            [self hideProgressDialogWithCompletion:^{
+                [[NSUserDefaults standardUserDefaults] setObject:result.token forKey:@"accessToken"];
+                [[NSUserDefaults standardUserDefaults] synchronize];
+                [self performSegueWithIdentifier:@"SEGUE_LOGIN_COMPLETED" sender:self];
+            }];
+        }
     }];
 }
 

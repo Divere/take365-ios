@@ -14,4 +14,6 @@
 
 @interface PMBaseViewController : Take365ViewController<UITextFieldDelegate>
 
+-(void)dismissKeyboard;
+
 @end

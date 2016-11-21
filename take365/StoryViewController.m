@@ -69,7 +69,7 @@
     
     UILongPressGestureRecognizer *lpgr = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
     lpgr.delegate = self;
-    lpgr.delaysTouchesBegan = YES;
+    lpgr.delaysTouchesBegan = TRUE;
     [self.uivPhotos addGestureRecognizer:lpgr];
     [self refreshStoryData];
 }
@@ -118,7 +118,6 @@
     imagesByDays = [NSMutableDictionary new];
     days = [NSMutableArray new];
     daysByDates = [NSMutableDictionary new];
-    
     [self.TakeApi getStoryWithId:_Story.id WithResultBlock:^(StoryResult *result, NSString *error) {
         if(error != NULL){
             return;
@@ -139,7 +138,7 @@
         
         NSDate *dateStart = [[storyInfo.progress.dateStart dateFromyyyyMMddString] setZeroTime];
         NSDate *dateEnd = [[storyInfo.progress.dateEnd dateFromyyyyMMddString] setZeroTime];
-        NSDate *today = [NSDate date];
+        NSDate *today = [NSDate GetLocalDate];
         
         StoryDay *firstDay = [StoryDay new];
         firstDay.day = [dateStart toyyyyMMddString];
@@ -325,7 +324,7 @@
 - (void)showImagePicker {
   UIImagePickerController *picker = [[UIImagePickerController alloc] init];
         picker.delegate = self;
-        picker.allowsEditing = NO;
+        picker.allowsEditing = FALSE;
         picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
         
         [self presentViewController:picker animated:YES completion:NULL];
@@ -389,9 +388,9 @@
         
         CGFloat scrollSpeed = fabsf(scrollSpeedNotAbs);
         if (scrollSpeed > 2) {
-            isScrollingFast = YES;
+            isScrollingFast = TRUE;
         } else {
-            isScrollingFast = NO;
+            isScrollingFast = FALSE;
         }
         
         lastOffset = currentOffset;
@@ -407,7 +406,6 @@
 - (void)uploadImage:(UIImage *)pickedImage forDate:(NSString *)date selectedIndexPathCopy:(NSIndexPath *)selectedIndexPathCopy {
     
     NSData *image = UIImageJPEGRepresentation(pickedImage, 1.0f);
-    
     [self.TakeApi uploadImage:image ForStory:storyInfo.id ForDate:date WithProgressBlock:^(float progress) {
         StoryItemCollectionViewCell *uploadingCell = (StoryItemCollectionViewCell*)[_uivPhotos cellForItemAtIndexPath:selectedIndexPathCopy];
         if(uploadingCell){

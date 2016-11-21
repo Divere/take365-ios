@@ -13,6 +13,6 @@
 - (NSString*)toyyyyMMString;
 - (NSString *)toyyyyMMddString;
 - (NSDate*)setZeroTime;
-+ (NSDate*)getToday;
++ (NSDate*)GetLocalDate;
 
 @end

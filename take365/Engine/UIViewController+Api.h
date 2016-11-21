@@ -11,10 +11,10 @@
 
 @interface UIViewController (Api)
 
-@property (nonatomic) UIAlertController* alertController;
-@property (nonatomic) Take365Service *TakeApi;
+@property (nonatomic) UIAlertController* _Nullable alertController;
+@property (nonatomic) Take365Service * _Nullable TakeApi;
 
-- (Take365Service*)getTake365Api;
+- (Take365Service* _Nullable)getTake365Api;
 - (void)showProgressDialogWithMessage:(NSString*)message;
 -(void)hideProgressDialogWithCompletion: (void (^ __nullable)(void))completion;
 

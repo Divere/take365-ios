@@ -61,7 +61,6 @@
 		7AADA2811C567DC20067B7C0 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7AADA2801C567DC20067B7C0 /* CoreVideo.framework */; };
 		7AC2E7551C5A71BB0060DF4C /* ShowImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AC2E7541C5A71BB0060DF4C /* ShowImageViewController.m */; };
 		7AC63BF01C591F7200EE678C /* UIImage+fixOrientation.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AC63BEF1C591F7200EE678C /* UIImage+fixOrientation.m */; };
-		7AC63BF31C5A475600EE678C /* NavigationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AC63BF21C5A475600EE678C /* NavigationViewController.m */; };
 		7AC63BF91C5A58C000EE678C /* MonthCollectionReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AC63BF81C5A58C000EE678C /* MonthCollectionReusableView.m */; };
 		7AD74E5C1D228196005E5A23 /* Take365ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7AD74E5B1D228196005E5A23 /* Take365ViewController.m */; };
 		BD74BBFA197CF961D41AC15F /* Pods_take365.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6992E3FF14F8C05F380F9796 /* Pods_take365.framework */; };
@@ -175,8 +174,6 @@
 		7AC2E7541C5A71BB0060DF4C /* ShowImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowImageViewController.m; sourceTree = "<group>"; };
 		7AC63BEE1C591F7200EE678C /* UIImage+fixOrientation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+fixOrientation.h"; sourceTree = "<group>"; };
 		7AC63BEF1C591F7200EE678C /* UIImage+fixOrientation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+fixOrientation.m"; sourceTree = "<group>"; };
-		7AC63BF11C5A475600EE678C /* NavigationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationViewController.h; sourceTree = "<group>"; };
-		7AC63BF21C5A475600EE678C /* NavigationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigationViewController.m; sourceTree = "<group>"; };
 		7AC63BF71C5A58C000EE678C /* MonthCollectionReusableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MonthCollectionReusableView.h; sourceTree = "<group>"; };
 		7AC63BF81C5A58C000EE678C /* MonthCollectionReusableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MonthCollectionReusableView.m; sourceTree = "<group>"; };
 		7AD74E5A1D228196005E5A23 /* Take365ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Take365ViewController.h; sourceTree = "<group>"; };
@@ -398,8 +395,6 @@
 				7A39A32E1C0DDFF900A8A51C /* StoryViewController.m */,
 				7A2566A21C53C2A800D28DCA /* CreateStoryViewController.h */,
 				7A2566A31C53C2A800D28DCA /* CreateStoryViewController.m */,
-				7AC63BF11C5A475600EE678C /* NavigationViewController.h */,
-				7AC63BF21C5A475600EE678C /* NavigationViewController.m */,
 				7AC2E7531C5A71BB0060DF4C /* ShowImageViewController.h */,
 				7AC2E7541C5A71BB0060DF4C /* ShowImageViewController.m */,
 				7A1FEB541C6104260020030A /* MoreViewController.h */,
@@ -639,7 +634,6 @@
 				7A39A32C1C0DD75800A8A51C /* StoryCellTableViewCell.m in Sources */,
 				7A39A31D1C0DD07100A8A51C /* StoryListResponse.m in Sources */,
 				4D09E43B1DDD0F3C002493BA /* ErrorModel.m in Sources */,
-				7AC63BF31C5A475600EE678C /* NavigationViewController.m in Sources */,
 				7A7D11821C6DFD2E00150792 /* RegisterResponse.m in Sources */,
 				7A39A3031C0DAC7E00A8A51C /* LoginResult.m in Sources */,
 				7A2566A41C53C2A800D28DCA /* CreateStoryViewController.m in Sources */,

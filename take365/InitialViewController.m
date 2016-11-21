@@ -22,8 +22,9 @@
 -(void)viewDidAppear:(BOOL)animated {
     NSString *accessToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"accessToken"];
     if(accessToken != NULL){
+        __weak InitialViewController *s = self;
         self.TakeApi.EventInvalidAuthToken = ^() {
-            [self performSegueWithIdentifier:@"AUTOLOGIN_FAILED" sender:self];
+            [s performSegueWithIdentifier:@"AUTOLOGIN_FAILED" sender:s];
         };
         self.TakeApi.AccessToken = accessToken;
         [self.TakeApi loginWithAccessTokenAndResultBlock:^(LoginResult *result, NSString *error) {

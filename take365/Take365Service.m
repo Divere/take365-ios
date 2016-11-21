@@ -65,10 +65,17 @@ const NSString *URL = @"https://take365.org";
 }
 
 -(void)loginWithAccessTokenAndResultBlock:(void (^)(LoginResult *result, NSString *error))resultBlock {
-    [JSONHTTPClient getJSONFromURLWithString:METHOD([NSString stringWithFormat:@"api/auth/reuse-token?accessToken=%@", _AccessToken]) completion:^(id json, JSONModelError *err) {
-        
+    
+    BaseAuthiticatedRequest *request = [BaseAuthiticatedRequest new];
+    request.accessToken = _AccessToken;
+    
+    [JSONHTTPClient postJSONFromURLWithString:METHOD(@"api/auth/reuse-token") bodyString:[request toJSONString] completion:^(id json, JSONModelError *err) {
         [self handleAuthResponse:json err_p:&err resultBlock:resultBlock];
     }];
+}
+
+-(void)logout {
+    [JSONHTTPClient postJSONFromURLWithString:METHOD(@"api/auth/logout") params:NULL completion:NULL];
 }
 
 -(void)getStoryWithId:(int)storyId WithResultBlock:(void (^)(StoryResult *result, NSString *error))resultBlock{

@@ -44,6 +44,7 @@
     
     switch ([indexPath row]) {
         case 0:
+            [self.TakeApi logout];
             [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"accessToken"];
             [[NSUserDefaults standardUserDefaults] synchronize];
             [self performSegueWithIdentifier:@"SEGUE_LOGOUT" sender:self];

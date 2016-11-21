@@ -9,7 +9,7 @@
 #import "LoginViewController.h"
 #import "AppDelegate.h"
 
-@interface LoginViewController ()
+@interface LoginViewController () <UINavigationControllerDelegate>
 
 @end
 
@@ -23,8 +23,16 @@
 
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
-    
     [[self navigationController] setNavigationBarHidden:YES animated:YES];
+    self.navigationController.delegate = self;
+}
+
+-(void)viewDidDisappear:(BOOL)animated {
+    self.navigationController.delegate = NULL;
+}
+
+-(UIInterfaceOrientationMask)navigationControllerSupportedInterfaceOrientations:(UINavigationController *)navigationController {
+    return UIInterfaceOrientationMaskPortrait;
 }
 
 - (void)didReceiveMemoryWarning {

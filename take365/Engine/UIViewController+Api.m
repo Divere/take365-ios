@@ -90,7 +90,7 @@ static Take365Service *takeApi;
 
 -(void)hideProgressDialogWithCompletion: (void (^ __nullable)(void))completion {
     if(self.alertController && [self.alertController isBeingPresented]) {
-        [self.alertController dismissViewControllerAnimated:NULL completion:completion];
+        [self.alertController dismissViewControllerAnimated:NO completion:completion];
     }
 }
 

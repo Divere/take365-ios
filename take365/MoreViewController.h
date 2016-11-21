@@ -6,8 +6,8 @@
 //  Copyright © 2016 take365. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "Take365TableViewController.h"
 
-@interface MoreViewController : UITableViewController
+@interface MoreViewController : Take365TableViewController
 
 @end

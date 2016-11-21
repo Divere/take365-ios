@@ -21,8 +21,8 @@
 #import "ErrorResponse.h"
 
 typedef enum : NSUInteger {
-    StoryPrivateLevelPrivate = 1,
-    StoryPrivateLevelPublic = 0
+    StoryPrivateLevelPrivate = 0,
+    StoryPrivateLevelPublic = 1
 } StoryPrivateLevel;
 
 @interface Take365Service : NSObject

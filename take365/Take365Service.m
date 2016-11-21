@@ -10,7 +10,7 @@
 #import "JSONModelLib.h"
 #import "AFNetworking.h"
 
-const NSString *URL = @"https://take365.org";
+const NSString *URL = @"http://take365.org";
 
 @implementation Take365Service
 
@@ -120,7 +120,7 @@ const NSString *URL = @"https://take365.org";
     
     WriteStoryRequest *r = [WriteStoryRequest new];
     r.title = title;
-    r.status = privateLevel;
+    r.status = privateLevel == StoryPrivateLevelPublic ? 0 : 1;
     r.descr = description;
     r.accessToken = _AccessToken;
     

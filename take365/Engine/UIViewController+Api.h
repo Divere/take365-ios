@@ -11,8 +11,9 @@
 
 @interface UIViewController (Api)
 
-- (ApiManager*)getTake365Api;
+@property (nonatomic) UIAlertController* alertController;
 
+- (ApiManager*)getTake365Api;
 - (void)showProgressDialogWithMessage:(NSString*)message;
 
 @end

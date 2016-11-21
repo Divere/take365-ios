@@ -43,9 +43,6 @@
                         [[NSUserDefaults standardUserDefaults] setObject:result.token forKey:@"accessToken"];
                         [[NSUserDefaults standardUserDefaults] synchronize];
                         [self performSegueWithIdentifier:@"SEGUE_LOGIN_COMPLETED" sender:self];
-                    }else{
-                        UIAlertView *uav = [[UIAlertView new] initWithTitle:@"Ошибка входа" message:error delegate:nil cancelButtonTitle:@"Закрыть" otherButtonTitles:nil, nil];
-                        [uav show];
                     }
                 }];
             }];

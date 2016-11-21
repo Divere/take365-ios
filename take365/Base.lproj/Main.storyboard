@@ -1073,6 +1073,7 @@
                         <outlet property="tfEmail" destination="37T-Zg-Dh5" id="Nsk-lw-rW0"/>
                         <outlet property="tfLogin" destination="ubY-36-gyV" id="L9H-hP-w9n"/>
                         <outlet property="tfPassword" destination="fmW-Id-wrX" id="w3p-PY-t4x"/>
+                        <segue destination="J4S-oO-4K6" kind="presentation" identifier="SEGUE_LOGIN_COMPLETED" modalTransitionStyle="flipHorizontal" id="QSd-0w-gPk"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="APh-dm-cxO" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1136,6 +1137,7 @@
         <image name="Снимок экрана 2015-10-27 в 10.42.25" width="700" height="770"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="QSd-0w-gPk"/>
         <segue reference="L1l-c1-OLN"/>
     </inferredMetricsTieBreakers>
 </document>

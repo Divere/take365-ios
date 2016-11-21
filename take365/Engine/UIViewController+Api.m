@@ -7,11 +7,25 @@
 //
 
 #import "UIViewController+Api.h"
+#import <objc/runtime.h>
+
+static void * alertControllerPropertyKey = &alertControllerPropertyKey;
+static ApiManager *takeApi;
 
 @implementation UIViewController (Api)
 
+-(void)setAlertController:(UIAlertController *)alertController {
+    objc_setAssociatedObject(self, alertControllerPropertyKey, alertController, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+-(UIAlertController*)alertController {
+    return objc_getAssociatedObject(self, alertControllerPropertyKey);
+}
+
 - (ApiManager*)getTake365Api {
-    ApiManager *takeApi = [AppDelegate getInstance].api;
+    if(takeApi == NULL) {
+        takeApi = [ApiManager new];
+    }
     
     takeApi.EventInvalidAuthToken = ^(){
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"accessToken"];
@@ -30,32 +44,44 @@
     };
     
     takeApi.EventApiErrorOccured = ^(NSString *message) {
-        UIAlertController* alert = [UIAlertController alertControllerWithTitle:@""
-                                                                       message:message
-                                                                preferredStyle:UIAlertControllerStyleAlert];
         
-        UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"Продолжить" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
-            [alert dismissViewControllerAnimated:YES completion:NULL];
-        }];
+        if(self.alertController != NULL && [self.alertController isBeingPresented]) {
+            [self.alertController dismissViewControllerAnimated:NO completion:^{
+                [self showMessageDialogWithMessage:message];
+            }];
+            return;
+        }
         
-        [alert addAction:defaultAction];
-        [self presentViewController:alert animated:YES completion:nil];
+        [self showMessageDialogWithMessage:message];
     };
     
     return takeApi;
 }
 
+-(void)showMessageDialogWithMessage:(NSString*) message {
+    self.alertController = [UIAlertController alertControllerWithTitle:@""
+                                                               message:message
+                                                        preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"Продолжить" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+        [self.alertController dismissViewControllerAnimated:YES completion:NULL];
+    }];
+    
+    [self.alertController addAction:defaultAction];
+    [self presentViewController:self.alertController animated:YES completion:nil];
+}
+
 -(void)showProgressDialogWithMessage:(NSString *)message {
-    UIAlertController* alert = [UIAlertController alertControllerWithTitle:@""
+    self.alertController = [UIAlertController alertControllerWithTitle:@""
                                                                    message:message
                                                             preferredStyle:UIAlertControllerStyleAlert];
     
-    UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"Продолжить" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
-        [alert dismissViewControllerAnimated:YES completion:NULL];
-    }];
-    
-    [alert addAction:defaultAction];
-    [self presentViewController:alert animated:YES completion:nil];
+//    UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"Продолжить" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
+//        [self.alertController dismissViewControllerAnimated:YES completion:NULL];
+//    }];
+//    
+//    [self.alertController addAction:defaultAction];
+    [self presentViewController:self.alertController animated:YES completion:nil];
 }
 
 @end

@@ -21,9 +21,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    api = [AppDelegate getInstance].api;
-    //self.title = @"Вход";
-    //self.navigationController.title = @"Вход";
+    api = [self getTake365Api];
     [[self navigationController] setNavigationBarHidden:YES animated:NO];
 }
 
@@ -49,15 +47,12 @@
 }
 
 - (IBAction)btnLoginClicked:(id)sender {
-    
-    [[AppDelegate getInstance].api loginWithUsername:_tfLogin.text AndPassword:_tfPassword.text AndResultBlock:^(LoginResult *result, NSString *error) {
+    [self showProgressDialogWithMessage:@"Входим..."];
+    [[self getTake365Api] loginWithUsername:_tfLogin.text AndPassword:_tfPassword.text AndResultBlock:^(LoginResult *result, NSString *error) {
         if(error == NULL){
             [[NSUserDefaults standardUserDefaults] setObject:result.token forKey:@"accessToken"];
             [[NSUserDefaults standardUserDefaults] synchronize];
             [self performSegueWithIdentifier:@"SEGUE_LOGIN_COMPLETED" sender:self];
-        }else{
-            UIAlertView *uav = [[UIAlertView new] initWithTitle:@"Ошибка входа" message:error delegate:nil cancelButtonTitle:@"Закрыть" otherButtonTitles:nil, nil];
-            [uav show];
         }
     }];
 }

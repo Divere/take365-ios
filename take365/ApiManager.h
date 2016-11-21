@@ -20,8 +20,8 @@
 #import "WriteStoryRequest.h"
 
 typedef enum : NSUInteger {
-    StoryPrivateLevelPrivate = 0,
-    StoryPrivateLevelPublic = 1
+    StoryPrivateLevelPrivate = 1,
+    StoryPrivateLevelPublic = 0
 } StoryPrivateLevel;
 
 @interface ApiManager : NSObject

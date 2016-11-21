@@ -40,7 +40,7 @@
     fab.fabDelegate = self;
     [self.view addSubview:fab];
     
-    self.TakeApi = [AppDelegate getInstance].api;
+    self.TakeApi = [self getTake365Api];
     if(self.TakeApi.Stories != NULL){
         stories = self.TakeApi.Stories;
     }

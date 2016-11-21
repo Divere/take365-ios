@@ -35,23 +35,23 @@ const NSString *URL = @"https://take365.org";
 }
 
 - (void)handleAuthResponse:(id)json err_p:(JSONModelError **)err_p resultBlock:(void (^)(LoginResult *, NSString *))resultBlock {
-  if(![self handleBaseResponse:json]){
-            return;
+    if(![self handleBaseResponse:json]){
+        return;
+    }
+    
+    LoginResponse *response = [[LoginResponse alloc] initWithDictionary:json error:&(*err_p)];
+    
+    if(response.result != NULL){
+        if(response.result.token != NULL){
+            _AccessToken = response.result.token;
         }
-        
-        LoginResponse *response = [[LoginResponse alloc] initWithDictionary:json error:&(*err_p)];
-        
-        if(response.result != NULL){
-            if(response.result.token != NULL){
-                _AccessToken = response.result.token;
-            }
-            _CurrentUser = response.result;
-            if(resultBlock != NULL){
-                resultBlock(response.result, NULL);
-            }
-        }else if(response.errors != NULL){
-            resultBlock(NULL, [response.errors objectAtIndex:0][@"value"]);
+        _CurrentUser = response.result;
+        if(resultBlock != NULL){
+            resultBlock(response.result, NULL);
         }
+    }else if(response.errors != NULL){
+        resultBlock(NULL, [response.errors objectAtIndex:0][@"value"]);
+    }
 }
 
 -(void)loginWithUsername:(NSString *)username AndPassword:(NSString *)password AndResultBlock:(void (^)(LoginResult* result, NSString *error))resultBlock{
@@ -60,7 +60,6 @@ const NSString *URL = @"https://take365.org";
     request.password = password;
     
     [JSONHTTPClient postJSONFromURLWithString:METHOD(@"api/auth/login") bodyString:[request toJSONString] completion:^(id json, JSONModelError *err) {
-        
         [self handleAuthResponse:json err_p:&err resultBlock:resultBlock];
     }];
 }
@@ -203,7 +202,7 @@ const NSString *URL = @"https://take365.org";
     NSError *deserializeError;
     
     BaseResponse *baseResponse = [[BaseResponse alloc] initWithDictionary:json error:&deserializeError];
-
+    
     if(baseResponse.errors != NULL && [baseResponse.errors count] > 0){
         if(((ErrorModel*)[baseResponse.errors objectAtIndex:0]).code != NULL){
             NSString *error = ((ErrorModel*)[baseResponse.errors objectAtIndex:0]).code;

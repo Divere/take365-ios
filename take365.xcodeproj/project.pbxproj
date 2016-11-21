@@ -32,7 +32,7 @@
 		7A13D8A11BE0A92400E1CB98 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A13D8A01BE0A92400E1CB98 /* AVFoundation.framework */; };
 		7A1FEB561C6104260020030A /* MoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A1FEB551C6104260020030A /* MoreViewController.m */; };
 		7A2566A41C53C2A800D28DCA /* CreateStoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A2566A31C53C2A800D28DCA /* CreateStoryViewController.m */; };
-		7A39A2F61C0D92D300A8A51C /* ApiManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A39A2F51C0D92D300A8A51C /* ApiManager.m */; };
+		7A39A2F61C0D92D300A8A51C /* Take365Service.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A39A2F51C0D92D300A8A51C /* Take365Service.m */; };
 		7A39A2FC1C0DABF900A8A51C /* LoginRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A39A2FB1C0DABF900A8A51C /* LoginRequest.m */; };
 		7A39A3001C0DAC7000A8A51C /* LoginResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A39A2FF1C0DAC7000A8A51C /* LoginResponse.m */; };
 		7A39A3031C0DAC7E00A8A51C /* LoginResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A39A3021C0DAC7E00A8A51C /* LoginResult.m */; };
@@ -117,8 +117,8 @@
 		7A1FEB551C6104260020030A /* MoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreViewController.m; sourceTree = "<group>"; };
 		7A2566A21C53C2A800D28DCA /* CreateStoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateStoryViewController.h; sourceTree = "<group>"; };
 		7A2566A31C53C2A800D28DCA /* CreateStoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateStoryViewController.m; sourceTree = "<group>"; };
-		7A39A2F41C0D92D300A8A51C /* ApiManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApiManager.h; sourceTree = "<group>"; };
-		7A39A2F51C0D92D300A8A51C /* ApiManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ApiManager.m; sourceTree = "<group>"; };
+		7A39A2F41C0D92D300A8A51C /* Take365Service.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Take365Service.h; sourceTree = "<group>"; };
+		7A39A2F51C0D92D300A8A51C /* Take365Service.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Take365Service.m; sourceTree = "<group>"; };
 		7A39A2FA1C0DABF900A8A51C /* LoginRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginRequest.h; sourceTree = "<group>"; };
 		7A39A2FB1C0DABF900A8A51C /* LoginRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginRequest.m; sourceTree = "<group>"; };
 		7A39A2FE1C0DAC7000A8A51C /* LoginResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginResponse.h; sourceTree = "<group>"; };
@@ -260,8 +260,8 @@
 			isa = PBXGroup;
 			children = (
 				7A39A2F71C0DABE300A8A51C /* Models */,
-				7A39A2F41C0D92D300A8A51C /* ApiManager.h */,
-				7A39A2F51C0D92D300A8A51C /* ApiManager.m */,
+				7A39A2F41C0D92D300A8A51C /* Take365Service.h */,
+				7A39A2F51C0D92D300A8A51C /* Take365Service.m */,
 			);
 			name = Network;
 			path = ..;
@@ -606,7 +606,7 @@
 				7A39A3151C0DC70800A8A51C /* StoriesListViewController.m in Sources */,
 				4DB7EF2C1DD23A5E004F983B /* StoryItemCollectionViewCell.m in Sources */,
 				4DB7EF321DD283CD004F983B /* NSString+Extensions.m in Sources */,
-				7A39A2F61C0D92D300A8A51C /* ApiManager.m in Sources */,
+				7A39A2F61C0D92D300A8A51C /* Take365Service.m in Sources */,
 				7A39A33F1C0DE90800A8A51C /* StoryImageThumbModel.m in Sources */,
 				7A0336D51C6C8DE70022E42B /* RegisterViewController.m in Sources */,
 				7A13D89C1BDFD28000E1CB98 /* YHRoundBorderedButton.m in Sources */,

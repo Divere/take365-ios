@@ -18,13 +18,14 @@
 #import "StoryListResponse.h"
 #import "StoryResponse.h"
 #import "WriteStoryRequest.h"
+#import "ErrorResponse.h"
 
 typedef enum : NSUInteger {
     StoryPrivateLevelPrivate = 1,
     StoryPrivateLevelPublic = 0
 } StoryPrivateLevel;
 
-@interface ApiManager : NSObject
+@interface Take365Service : NSObject
 
 @property (nonatomic) LoginResult *CurrentUser;
 @property (nonatomic) NSString *AccessToken;

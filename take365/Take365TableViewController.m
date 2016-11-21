@@ -10,14 +10,4 @@
 
 @implementation Take365TableViewController
 
-- (instancetype)initWithCoder:(NSCoder *)coder
-{
-    self = [super initWithCoder:coder];
-    if (self) {
-        _TakeApi = [self getTake365Api];
-    }
-    
-    return self;
-}
-
 @end

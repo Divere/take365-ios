@@ -12,6 +12,4 @@
 
 @interface Take365ViewController : UIViewController
 
-@property (nonatomic) ApiManager *TakeApi;
-
 @end

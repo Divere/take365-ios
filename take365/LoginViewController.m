@@ -14,14 +14,10 @@
 @end
 
 @implementation LoginViewController
-{
-    ApiManager *api;
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    api = [self getTake365Api];
     [[self navigationController] setNavigationBarHidden:YES animated:NO];
 }
 
@@ -32,8 +28,8 @@
     
     NSString *accessToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"accessToken"];
     if(accessToken != NULL){
-        api.AccessToken = accessToken;
-        [api loginWithAccessTokenAndResultBlock:^(LoginResult *result, NSString *error) {
+        self.TakeApi.AccessToken = accessToken;
+        [self.TakeApi loginWithAccessTokenAndResultBlock:^(LoginResult *result, NSString *error) {
             if(!error){
                  [self performSegueWithIdentifier:@"SEGUE_LOGIN_COMPLETED" sender:self];
             }
@@ -50,9 +46,11 @@
     [self showProgressDialogWithMessage:@"Входим..."];
     [[self getTake365Api] loginWithUsername:_tfLogin.text AndPassword:_tfPassword.text AndResultBlock:^(LoginResult *result, NSString *error) {
         if(error == NULL){
-            [[NSUserDefaults standardUserDefaults] setObject:result.token forKey:@"accessToken"];
-            [[NSUserDefaults standardUserDefaults] synchronize];
-            [self performSegueWithIdentifier:@"SEGUE_LOGIN_COMPLETED" sender:self];
+            [self hideProgressDialogWithCompletion:^{
+                [[NSUserDefaults standardUserDefaults] setObject:result.token forKey:@"accessToken"];
+                [[NSUserDefaults standardUserDefaults] synchronize];
+                [self performSegueWithIdentifier:@"SEGUE_LOGIN_COMPLETED" sender:self];
+            }];
         }
     }];
 }

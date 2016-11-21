@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "JSONModelLib.h"
-#import "ApiManager.h"
+#import "Take365Service.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 

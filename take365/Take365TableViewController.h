@@ -11,6 +11,4 @@
 
 @interface Take365TableViewController : UITableViewController
 
-@property (nonatomic) ApiManager *TakeApi;
-
 @end

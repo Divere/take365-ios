@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "ApiManager.h"
 #import "Take365ViewController.h"
 
 @interface StoryViewController : Take365ViewController

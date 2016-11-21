@@ -6,13 +6,13 @@
 //  Copyright © 2015 take365. All rights reserved.
 //
 
-#import "ApiManager.h"
+#import "Take365Service.h"
 #import "JSONModelLib.h"
 #import "AFNetworking.h"
 
 const NSString *URL = @"https://take365.org";
 
-@implementation ApiManager
+@implementation Take365Service
 
 -(void)registerWithUsername:(NSString *)username Email:(NSString *)email Password:(NSString *)password AndResultBlock:(void (^)(RegisterResult *, NSString *))resultBlock{
     RegisterRequest *r = [RegisterRequest new];
@@ -203,23 +203,37 @@ const NSString *URL = @"https://take365.org";
     
     BaseResponse *baseResponse = [[BaseResponse alloc] initWithDictionary:json error:&deserializeError];
     
-    if(baseResponse.errors != NULL && [baseResponse.errors count] > 0){
-        if(((ErrorModel*)[baseResponse.errors objectAtIndex:0]).code != NULL){
-            NSString *error = ((ErrorModel*)[baseResponse.errors objectAtIndex:0]).code;
-            if([error isEqualToString:@"AUTH_BAD_TOKEN"]){
-                if(_EventInvalidAuthToken){
-                    _EventInvalidAuthToken();
+    //all shit below because of ugly, non templated error responses from api
+    
+    if(baseResponse.errors){
+        if([baseResponse.errors count] > 0) {
+            if(((ErrorModel*)[baseResponse.errors objectAtIndex:0]).code != NULL){
+                NSString *error = ((ErrorModel*)[baseResponse.errors objectAtIndex:0]).code;
+                if([error isEqualToString:@"AUTH_BAD_TOKEN"]){
+                    if(_EventInvalidAuthToken){
+                        _EventInvalidAuthToken();
+                    }
+                    return false;
                 }
-                return false;
             }
+            
+            if(_EventApiErrorOccured){
+                ErrorModel *err = [baseResponse.errors objectAtIndex:0];
+                _EventApiErrorOccured(err.value);
+            }
+            
+            return false;
         }
         
-        if(_EventApiErrorOccured){
-            ErrorModel *err = [baseResponse.errors objectAtIndex:0];
-            _EventApiErrorOccured(err.value);
+        ErrorResponse *errorReponse = [[ErrorResponse alloc] initWithDictionary:json error:&deserializeError];
+        if([errorReponse.errors count] > 0) {
+            if(_EventApiErrorOccured){
+                NSString *err = [errorReponse.errors objectAtIndex:0];
+                _EventApiErrorOccured(err);
+            }
+            
+            return false;
         }
-        
-        return false;
     }
     
     return true;

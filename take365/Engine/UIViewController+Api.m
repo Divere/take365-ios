@@ -10,9 +10,18 @@
 #import <objc/runtime.h>
 
 static void * alertControllerPropertyKey = &alertControllerPropertyKey;
-static ApiManager *takeApi;
+static void * takeApiPropertyKey = &takeApiPropertyKey;
+static Take365Service *takeApi;
 
 @implementation UIViewController (Api)
+
+-(void)setTakeApi:(Take365Service *)TakeApi {
+    takeApi = TakeApi;
+}
+
+-(Take365Service*)TakeApi {
+    return takeApi;
+}
 
 -(void)setAlertController:(UIAlertController *)alertController {
     objc_setAssociatedObject(self, alertControllerPropertyKey, alertController, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
@@ -22,9 +31,9 @@ static ApiManager *takeApi;
     return objc_getAssociatedObject(self, alertControllerPropertyKey);
 }
 
-- (ApiManager*)getTake365Api {
+- (Take365Service*)getTake365Api {
     if(takeApi == NULL) {
-        takeApi = [ApiManager new];
+        takeApi = [Take365Service new];
     }
     
     takeApi.EventInvalidAuthToken = ^(){
@@ -76,12 +85,13 @@ static ApiManager *takeApi;
                                                                    message:message
                                                             preferredStyle:UIAlertControllerStyleAlert];
     
-//    UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:@"Продолжить" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action) {
-//        [self.alertController dismissViewControllerAnimated:YES completion:NULL];
-//    }];
-//    
-//    [self.alertController addAction:defaultAction];
     [self presentViewController:self.alertController animated:YES completion:nil];
+}
+
+-(void)hideProgressDialogWithCompletion: (void (^ __nullable)(void))completion {
+    if(self.alertController && [self.alertController isBeingPresented]) {
+        [self.alertController dismissViewControllerAnimated:NULL completion:completion];
+    }
 }
 
 @end

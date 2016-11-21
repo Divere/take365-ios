@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		4D09E43B1DDD0F3C002493BA /* ErrorModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D09E43A1DDD0F3C002493BA /* ErrorModel.m */; };
 		4D09E43E1DDD0F70002493BA /* ErrorResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D09E43D1DDD0F70002493BA /* ErrorResponse.m */; };
+		4D16AC8A1DE39D72002DF780 /* InitialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D16AC891DE39D72002DF780 /* InitialViewController.m */; };
 		4D327B511DDD2142005D15D0 /* Take365TableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D327B501DDD2142005D15D0 /* Take365TableViewController.m */; };
 		4D327B541DDD23ED005D15D0 /* UIViewController+Api.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D327B531DDD23ED005D15D0 /* UIViewController+Api.m */; };
 		4D6A3F811DB56F42001F0666 /* CalendarCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D6A3F801DB56F42001F0666 /* CalendarCollectionViewCell.m */; };
@@ -72,6 +73,8 @@
 		4D09E43A1DDD0F3C002493BA /* ErrorModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ErrorModel.m; sourceTree = "<group>"; };
 		4D09E43C1DDD0F70002493BA /* ErrorResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ErrorResponse.h; sourceTree = "<group>"; };
 		4D09E43D1DDD0F70002493BA /* ErrorResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ErrorResponse.m; sourceTree = "<group>"; };
+		4D16AC881DE39D72002DF780 /* InitialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InitialViewController.h; sourceTree = "<group>"; };
+		4D16AC891DE39D72002DF780 /* InitialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InitialViewController.m; sourceTree = "<group>"; };
 		4D327B4F1DDD2142005D15D0 /* Take365TableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Take365TableViewController.h; sourceTree = "<group>"; };
 		4D327B501DDD2142005D15D0 /* Take365TableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Take365TableViewController.m; sourceTree = "<group>"; };
 		4D327B521DDD23ED005D15D0 /* UIViewController+Api.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIViewController+Api.h"; sourceTree = "<group>"; };
@@ -409,6 +412,8 @@
 				4DFAFD8B1DBF480000AE88BF /* SearchViewController.m */,
 				4D327B4F1DDD2142005D15D0 /* Take365TableViewController.h */,
 				4D327B501DDD2142005D15D0 /* Take365TableViewController.m */,
+				4D16AC881DE39D72002DF780 /* InitialViewController.h */,
+				4D16AC891DE39D72002DF780 /* InitialViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -617,6 +622,7 @@
 				7AC2E7551C5A71BB0060DF4C /* ShowImageViewController.m in Sources */,
 				4D09E43E1DDD0F70002493BA /* ErrorResponse.m in Sources */,
 				7A39A3001C0DAC7000A8A51C /* LoginResponse.m in Sources */,
+				4D16AC8A1DE39D72002DF780 /* InitialViewController.m in Sources */,
 				4D327B541DDD23ED005D15D0 /* UIViewController+Api.m in Sources */,
 				7A39A3201C0DD14300A8A51C /* StoryModel.m in Sources */,
 				7AC63BF01C591F7200EE678C /* UIImage+fixOrientation.m in Sources */,

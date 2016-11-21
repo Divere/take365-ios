@@ -20,7 +20,7 @@ static Take365Service *takeApi;
 }
 
 -(Take365Service*)TakeApi {
-    return takeApi;
+    return [self getTake365Api];
 }
 
 -(void)setAlertController:(UIAlertController *)alertController {

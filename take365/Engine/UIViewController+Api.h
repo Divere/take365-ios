@@ -15,7 +15,7 @@
 @property (nonatomic) Take365Service * _Nullable TakeApi;
 
 - (Take365Service* _Nullable)getTake365Api;
-- (void)showProgressDialogWithMessage:(NSString*)message;
--(void)hideProgressDialogWithCompletion: (void (^ __nullable)(void))completion;
+- (void)showProgressDialogWithMessage:(NSString* _Nonnull)message;
+- (void)hideProgressDialogWithCompletion: (void (^ __nullable)(void))completion;
 
 @end

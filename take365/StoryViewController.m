@@ -14,6 +14,7 @@
 #import "StoryDay.h"
 #import "NSDate+Extensions.h"
 #import "NSString+Extensions.h"
+#import "NSIndexPath+Extensions.h"
 
 @import KCFloatingActionButton;
 
@@ -245,7 +246,7 @@
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
     
-    [visibleImages setObject:indexPath forKey:[NSString stringWithFormat:@"%ld-%ld", (long)indexPath.section, (long)indexPath.row]];
+    [visibleImages setObject:indexPath forKey:[indexPath toKeyString]];
     
     NSString *key = sortedSectionsTitles[indexPath.section];
     NSMutableArray *sectionImages = [sections objectForKey:key];
@@ -271,7 +272,7 @@
     
     [cell.pbUploadProgress setProgress:storyDay.uploadProgress];
     
-    UIImage *image = [imageCache objectForKey:[NSString stringWithFormat:@"%ld-%ld", (long)indexPath.section, (long)indexPath.row]];
+    UIImage *image = [imageCache objectForKey:[indexPath toKeyString]];
     
     if(!isScrollingFast && image == nil){
         [cell.ivPhoto setHidden:true];
@@ -290,7 +291,7 @@
                 }
                 
                 if(downloadedImage != NULL){
-                    [imageCache setObject:downloadedImage forKey:[NSString stringWithFormat:@"%ld-%ld", (long)cellPath.section, (long)cellPath.row]];
+                    [imageCache setObject:downloadedImage forKey:[cellPath toKeyString]];
                     dispatch_async(dispatch_get_main_queue(), ^{
                         [_uivPhotos reloadItemsAtIndexPaths:@[cellPath]];
                     });
@@ -318,7 +319,7 @@
 }
 
 -(void)collectionView:(UICollectionView *)collectionView didEndDisplayingCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath{
-    [visibleImages removeObjectForKey:[NSString stringWithFormat:@"%ld-%ld", (long)indexPath.section, (long)indexPath.row]];
+    [visibleImages removeObjectForKey:[indexPath toKeyString]];
 }
 
 - (void)showImagePicker {
@@ -419,8 +420,7 @@
                 uploadingCell.StoryDay.uploadProgress = 0;
                 [uploadingCell.pbUploadProgress setProgress:0];
             }
-            NSString *key = [NSString stringWithFormat:@"%ld-%ld", (long)selectedIndexPathCopy.section, (long)selectedIndexPathCopy.row];
-            [imageCache removeObjectForKey:key];
+            [imageCache removeObjectForKey:[selectedIndexPathCopy toKeyString]];
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self refreshStoryData];
             });

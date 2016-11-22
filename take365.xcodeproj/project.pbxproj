@@ -18,6 +18,7 @@
 		4DB7EF2C1DD23A5E004F983B /* StoryItemCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DB7EF2B1DD23A5E004F983B /* StoryItemCollectionViewCell.m */; };
 		4DB7EF2F1DD2541D004F983B /* NSDate+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DB7EF2E1DD2541D004F983B /* NSDate+Extensions.m */; };
 		4DB7EF321DD283CD004F983B /* NSString+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DB7EF311DD283CD004F983B /* NSString+Extensions.m */; };
+		4DD518601DE4F3120001AFFE /* NSIndexPath+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DD5185F1DE4F3120001AFFE /* NSIndexPath+Extensions.m */; };
 		4DFAFD8C1DBF480000AE88BF /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4DFAFD8B1DBF480000AE88BF /* SearchViewController.m */; };
 		7A0336D51C6C8DE70022E42B /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A0336D41C6C8DE70022E42B /* RegisterViewController.m */; };
 		7A0336D81C6C91A00022E42B /* RegisterRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 7A0336D71C6C91A00022E42B /* RegisterRequest.m */; };
@@ -90,6 +91,8 @@
 		4DB7EF2E1DD2541D004F983B /* NSDate+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+Extensions.m"; sourceTree = "<group>"; };
 		4DB7EF301DD283CD004F983B /* NSString+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Extensions.h"; sourceTree = "<group>"; };
 		4DB7EF311DD283CD004F983B /* NSString+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Extensions.m"; sourceTree = "<group>"; };
+		4DD5185E1DE4F3120001AFFE /* NSIndexPath+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSIndexPath+Extensions.h"; sourceTree = "<group>"; };
+		4DD5185F1DE4F3120001AFFE /* NSIndexPath+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSIndexPath+Extensions.m"; sourceTree = "<group>"; };
 		4DFAFD8A1DBF480000AE88BF /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
 		4DFAFD8B1DBF480000AE88BF /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
 		590675EBCAE1AD34A88D8607 /* Pods-take365.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-take365.release.xcconfig"; path = "Pods/Target Support Files/Pods-take365/Pods-take365.release.xcconfig"; sourceTree = "<group>"; };
@@ -466,6 +469,8 @@
 				7AC63BEF1C591F7200EE678C /* UIImage+fixOrientation.m */,
 				4D327B521DDD23ED005D15D0 /* UIViewController+Api.h */,
 				4D327B531DDD23ED005D15D0 /* UIViewController+Api.m */,
+				4DD5185E1DE4F3120001AFFE /* NSIndexPath+Extensions.h */,
+				4DD5185F1DE4F3120001AFFE /* NSIndexPath+Extensions.m */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -638,6 +643,7 @@
 				7A39A3031C0DAC7E00A8A51C /* LoginResult.m in Sources */,
 				7A2566A41C53C2A800D28DCA /* CreateStoryViewController.m in Sources */,
 				4D327B511DDD2142005D15D0 /* Take365TableViewController.m in Sources */,
+				4DD518601DE4F3120001AFFE /* NSIndexPath+Extensions.m in Sources */,
 				7A13D87D1BDE49CE00E1CB98 /* AppDelegate.m in Sources */,
 				7A55F60A1D21747E009A3D32 /* BaseResponse.m in Sources */,
 				7A39A32F1C0DDFF900A8A51C /* StoryViewController.m in Sources */,

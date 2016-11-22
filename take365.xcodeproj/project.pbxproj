@@ -241,6 +241,7 @@
 				7A4342EF1C076C5400F74BE8 /* Views */,
 				7A4342EE1C076C3800F74BE8 /* Storyboards */,
 				7A4342ED1C076C3100F74BE8 /* Controllers */,
+				7AA7B5191C75DACD003609CC /* Extensions */,
 				7A4342C81C076C1900F74BE8 /* Engine */,
 				7A13D87B1BDE49CE00E1CB98 /* AppDelegate.h */,
 				7A13D87C1BDE49CE00E1CB98 /* AppDelegate.m */,
@@ -377,7 +378,6 @@
 		7A4342C81C076C1900F74BE8 /* Engine */ = {
 			isa = PBXGroup;
 			children = (
-				7AA7B5191C75DACD003609CC /* Extensions */,
 				7A39A2F21C0D92A800A8A51C /* Network */,
 			);
 			path = Engine;
@@ -473,6 +473,7 @@
 				4DD5185F1DE4F3120001AFFE /* NSIndexPath+Extensions.m */,
 			);
 			name = Extensions;
+			path = Engine;
 			sourceTree = "<group>";
 		};
 		C2BBD3DEB1F4478218177801 /* Frameworks */ = {

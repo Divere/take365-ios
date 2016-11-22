@@ -12,7 +12,7 @@
 
 - (NSDate *)setZeroTime {
     NSDate *date = self;
-    NSUInteger flags = NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit;
+    NSUInteger flags = NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay;
     NSCalendar *currentCalendar = [NSCalendar currentCalendar];
     NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:currentCalendar.calendarIdentifier];
     calendar.timeZone = [NSTimeZone timeZoneForSecondsFromGMT:0];

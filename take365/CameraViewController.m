@@ -92,6 +92,8 @@
                 currentRotation = -M_PI_2;
             }
                 break;
+                default:
+                break;
         }
         [UIView animateWithDuration:0.5f animations:^{
             [_btnMakeShot setTransform:CGAffineTransformRotate(_btnMakeShot.transform, currentRotation)];
@@ -159,6 +161,7 @@
         CGImageRef myImage = [self imageFromSampleBuffer:imageDataSampleBuffer];
         
         switch (currentOrientation) {
+            default:
             case UIDeviceOrientationPortrait:
                 image = [[UIImage alloc] initWithCGImage:myImage scale:1.0f orientation:UIImageOrientationRight];
                 break;

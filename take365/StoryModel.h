@@ -7,15 +7,13 @@
 //
 
 #import "Model.h"
-#import "AuthorModel.h"
 #import "StoryProgressModel.h"
 
-@protocol AuthorModel
-@end
+@class AuthorModel;
 
 @interface StoryModel : Model
 
-@property (nonatomic) NSArray<AuthorModel> *authors;
+@property (nonatomic) NSArray<AuthorModel*> *authors;
 @property (nonatomic) int id;
 @property (nonatomic) StoryProgressModel *progress;
 @property (nonatomic) int status;

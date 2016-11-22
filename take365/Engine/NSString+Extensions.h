@@ -12,6 +12,5 @@
 
 - (NSDate*)dateFromyyyyMMString;
 - (NSDate*)dateFromyyyyMMddString;
-- (NSString*)stringInyyyyMMddFormat;
 
 @end

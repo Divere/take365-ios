@@ -15,6 +15,7 @@
 #import "NSDate+Extensions.h"
 #import "NSString+Extensions.h"
 #import "NSIndexPath+Extensions.h"
+#import "AuthorModel.h"
 
 @import KCFloatingActionButton;
 
@@ -387,7 +388,7 @@
         //The multiply by 10, / 1000 isn't really necessary.......
         CGFloat scrollSpeedNotAbs = (distance * 10) / 1000; //in pixels per millisecond
         
-        CGFloat scrollSpeed = fabsf(scrollSpeedNotAbs);
+        CGFloat scrollSpeed = fabs(scrollSpeedNotAbs);
         if (scrollSpeed > 2) {
             isScrollingFast = TRUE;
         } else {

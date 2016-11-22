@@ -7,9 +7,9 @@
 //
 
 #import "JSONModel.h"
-#import "AuthorModel.h"
 #import "StoryImageImagesModel.h"
 #import "StoryProgressModel.h"
+#import "AuthorModel.h"
 
 @protocol AuthorModel
 @end
